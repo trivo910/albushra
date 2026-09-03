@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
+use Mews\Purifier\Facades\Purifier;
 
 class Page extends Model
 {
@@ -46,5 +47,10 @@ class Page extends Model
     public function getRouteKeyName(): string
     {
         return 'slug';
+    }
+
+    public function setContentAttribute(?string $value): void
+    {
+        $this->attributes['content'] = $value === null ? null : Purifier::clean($value, 'content');
     }
 }

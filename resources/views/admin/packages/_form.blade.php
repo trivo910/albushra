@@ -96,7 +96,7 @@
                         <img src="{{ \Illuminate\Support\Facades\Storage::url($image->image_path) }}" alt=""
                              class="h-20 w-full object-cover rounded" style="border-radius: var(--radius-sm); border: 1px solid var(--color-border);">
                         <form action="{{ route('admin.package-images.destroy', $image) }}" method="POST"
-                              onsubmit="return confirm('Remove this image?');" class="absolute top-1 right-1">
+                              data-confirm="Remove this image?" class="absolute top-1 right-1">
                             @csrf
                             @method('DELETE')
                             <button type="submit"
@@ -159,7 +159,7 @@
 
 @push('scripts')
     <script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script>
-    <script>
+    <script nonce="{{ request()->attributes->get('cspNonce') }}">
         ClassicEditor.create(document.querySelector('#description-editor')).catch(console.error);
 
         function initRepeatableList(container) {

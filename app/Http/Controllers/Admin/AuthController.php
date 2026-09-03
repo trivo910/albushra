@@ -18,8 +18,8 @@ class AuthController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $credentials = $request->validate([
-            'email' => ['required', 'email'],
-            'password' => ['required', 'string'],
+            'email' => ['required', 'email:rfc', 'max:255'],
+            'password' => ['required', 'string', 'max:255'],
         ]);
 
         if (! Auth::guard('admin')->attempt($credentials, $request->boolean('remember'))) {

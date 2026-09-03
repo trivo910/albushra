@@ -29,6 +29,7 @@
 
                 <form method="POST" action="{{ route('contact.store') }}" class="space-y-4">
                     @csrf
+                    @include('partials.honeypot')
                     <div>
                         <input type="text" name="name" value="{{ old('name') }}" placeholder="Your Name*" required class="field-input-p">
                     </div>

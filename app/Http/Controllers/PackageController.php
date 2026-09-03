@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Concerns\GuardsAgainstSpamBots;
 use App\Http\Requests\StoreEnquiryRequest;
 use App\Models\Enquiry;
 use App\Models\Package;
@@ -10,6 +11,8 @@ use Illuminate\View\View;
 
 class PackageController extends Controller
 {
+    use GuardsAgainstSpamBots;
+
     public function index(): View
     {
         return $this->listing(null);
@@ -51,11 +54,13 @@ class PackageController extends Controller
 
     public function enquire(StoreEnquiryRequest $request, Package $package): RedirectResponse
     {
-        Enquiry::create($request->validated() + [
-            'package_id' => $package->id,
-            'type' => 'booking',
-            'status' => 'new',
-        ]);
+        if (! $this->isSpamSubmission($request)) {
+            Enquiry::create($request->validated() + [
+                'package_id' => $package->id,
+                'type' => 'booking',
+                'status' => 'new',
+            ]);
+        }
 
         return back()->with('success', 'Thank you! Your enquiry has been received — our team will contact you shortly.');
     }

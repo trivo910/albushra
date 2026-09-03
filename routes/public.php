@@ -16,7 +16,7 @@ Route::get('/', HomeController::class)->name('home');
 Route::get('/packages', [PackageController::class, 'index'])->name('packages.index');
 Route::get('/hajj', [PackageController::class, 'hajj'])->name('packages.hajj');
 Route::get('/st-tour/{package:slug}', [PackageController::class, 'show'])->name('packages.show');
-Route::post('/st-tour/{package:slug}/enquire', [PackageController::class, 'enquire'])->name('packages.enquire');
+Route::post('/st-tour/{package:slug}/enquire', [PackageController::class, 'enquire'])->name('packages.enquire')->middleware('throttle:public-form');
 
 Route::get('/blog', [BlogController::class, 'index'])->name('blog.index');
 Route::get('/blog/{blog:slug}', [BlogController::class, 'show'])->name('blog.show');
@@ -25,7 +25,7 @@ Route::get('/faqs', [FaqController::class, 'index'])->name('faqs.index');
 Route::get('/gallery', [GalleryController::class, 'index'])->name('gallery.index');
 
 Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
-Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
+Route::post('/contact', [ContactController::class, 'store'])->name('contact.store')->middleware('throttle:public-form');
 
 Route::get('/sitemap.xml', [SitemapController::class, 'index'])->name('sitemap');
 Route::get('/robots.txt', function () {

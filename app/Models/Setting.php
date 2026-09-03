@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Support\MapEmbedSanitizer;
 use Illuminate\Database\Eloquent\Model;
 
 class Setting extends Model
@@ -32,5 +33,10 @@ class Setting extends Model
     public static function current(): self
     {
         return static::firstOrCreate(['id' => 1]);
+    }
+
+    public function setMapEmbedAttribute(?string $value): void
+    {
+        $this->attributes['map_embed'] = MapEmbedSanitizer::sanitize($value);
     }
 }

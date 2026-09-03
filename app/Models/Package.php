@@ -2,10 +2,12 @@
 
 namespace App\Models;
 
+use App\Support\MapEmbedSanitizer;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Str;
+use Mews\Purifier\Facades\Purifier;
 
 class Package extends Model
 {
@@ -77,5 +79,15 @@ class Package extends Model
     public function getRouteKeyName(): string
     {
         return 'slug';
+    }
+
+    public function setDescriptionAttribute(?string $value): void
+    {
+        $this->attributes['description'] = $value === null ? null : Purifier::clean($value, 'content');
+    }
+
+    public function setMapEmbedAttribute(?string $value): void
+    {
+        $this->attributes['map_embed'] = MapEmbedSanitizer::sanitize($value);
     }
 }

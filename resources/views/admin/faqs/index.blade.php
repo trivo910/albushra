@@ -47,7 +47,7 @@
                                 <td class="text-right whitespace-nowrap">
                                     <a href="{{ route('admin.faqs.edit', $faq) }}" class="btn-link-muted">Edit</a>
                                     <form action="{{ route('admin.faqs.destroy', $faq) }}" method="POST" class="inline"
-                                          onsubmit="return confirm('Delete this FAQ?');">
+                                          data-confirm="Delete this FAQ?">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn-link-danger ml-3">Delete</button>

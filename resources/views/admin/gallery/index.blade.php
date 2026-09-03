@@ -45,7 +45,7 @@
                             </form>
                         </div>
                         <form action="{{ route('admin.gallery.destroy', $image) }}" method="POST"
-                              onsubmit="return confirm('Delete this image?');">
+                              data-confirm="Delete this image?">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn-link-danger text-xs">Delete</button>

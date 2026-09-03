@@ -40,7 +40,7 @@
                                 <td class="text-right whitespace-nowrap">
                                     <a href="{{ route('admin.blogs.edit', $blog) }}" class="btn-link-muted">Edit</a>
                                     <form action="{{ route('admin.blogs.destroy', $blog) }}" method="POST" class="inline"
-                                          onsubmit="return confirm('Delete this blog post?');">
+                                          data-confirm="Delete this blog post?">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn-link-danger ml-3">Delete</button>

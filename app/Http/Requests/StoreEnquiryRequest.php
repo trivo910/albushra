@@ -14,9 +14,12 @@ class StoreEnquiryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'email', 'max:255'],
-            'phone' => ['nullable', 'string', 'max:50'],
+            // The no-CR/LF checks are defense-in-depth against header-injection
+            // style payloads, independent of any single-field validator's own
+            // handling of control characters.
+            'name' => ['required', 'string', 'max:255', 'regex:/^[^\r\n]+$/'],
+            'email' => ['required', 'email:rfc', 'max:255', 'regex:/^[^\r\n]+$/'],
+            'phone' => ['nullable', 'string', 'max:50', 'regex:/^[^\r\n]*$/'],
             'message' => ['nullable', 'string', 'max:2000'],
         ];
     }

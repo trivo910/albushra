@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::middleware('admin.guest')->group(function () {
         Route::get('login', [AuthController::class, 'create'])->name('login');
-        Route::post('login', [AuthController::class, 'store'])->name('login.store');
+        Route::post('login', [AuthController::class, 'store'])->name('login.store')->middleware('throttle:admin-login');
     });
 
     Route::middleware('admin.auth')->group(function () {

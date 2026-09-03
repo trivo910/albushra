@@ -49,7 +49,7 @@
                                 <td class="text-right whitespace-nowrap">
                                     <a href="{{ route('admin.packages.edit', $package) }}" class="btn-link-muted">Edit</a>
                                     <form action="{{ route('admin.packages.destroy', $package) }}" method="POST" class="inline"
-                                          onsubmit="return confirm('Delete this package?');">
+                                          data-confirm="Delete this package?">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn-link-danger ml-3">Delete</button>
