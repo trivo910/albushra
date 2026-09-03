@@ -28,6 +28,12 @@ class UpdateSettingRequest extends FormRequest
             'whatsapp_greeting' => ['nullable', 'string'],
             'ga_code' => ['nullable', 'string', 'max:255'],
             'gtm_code' => ['nullable', 'string', 'max:255'],
+            'hero_image_1' => ['nullable', 'image', 'max:4096'],
+            'hero_image_2' => ['nullable', 'image', 'max:4096'],
+            'hero_image_3' => ['nullable', 'image', 'max:4096'],
+            'meta_title' => ['nullable', 'string', 'max:255'],
+            'meta_description' => ['nullable', 'string', 'max:255'],
+            'map_embed' => ['nullable', 'string'],
         ];
     }
 }

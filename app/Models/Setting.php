@@ -21,6 +21,12 @@ class Setting extends Model
         'whatsapp_greeting',
         'ga_code',
         'gtm_code',
+        'hero_image_1',
+        'hero_image_2',
+        'hero_image_3',
+        'meta_title',
+        'meta_description',
+        'map_embed',
     ];
 
     public static function current(): self

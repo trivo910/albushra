@@ -3,7 +3,7 @@
 @section('title', 'General Settings')
 
 @section('content')
-    <form method="POST" action="{{ route('admin.settings.update') }}" class="panel p-6 max-w-3xl">
+    <form method="POST" action="{{ route('admin.settings.update') }}" enctype="multipart/form-data" class="panel p-6 max-w-3xl">
         @csrf
         @method('PUT')
 
@@ -85,6 +85,43 @@
                     <input type="text" name="gtm_code" value="{{ old('gtm_code', $setting->gtm_code) }}" class="field-input">
                 </div>
             </div>
+        </div>
+
+        <div class="form-section">
+            <div class="form-section-title">Homepage hero slider</div>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                @foreach ([1, 2, 3] as $i)
+                    <div>
+                        <label class="field-label">Slide {{ $i }}</label>
+                        @if ($setting->{'hero_image_'.$i})
+                            <img src="{{ \Illuminate\Support\Facades\Storage::url($setting->{'hero_image_'.$i}) }}" alt=""
+                                 class="h-24 w-full object-cover mb-2" style="border-radius: var(--radius-sm); border: 1px solid var(--color-border);">
+                        @endif
+                        <input type="file" name="hero_image_{{ $i }}" accept="image/*" class="text-sm">
+                    </div>
+                @endforeach
+            </div>
+        </div>
+
+        <div class="form-section">
+            <div class="form-section-title">SEO defaults</div>
+            <div class="field-hint mb-3">Used as a fallback when a page, package, or blog post doesn't set its own meta title/description.</div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                    <label class="field-label">Default meta title</label>
+                    <input type="text" name="meta_title" value="{{ old('meta_title', $setting->meta_title) }}" class="field-input">
+                </div>
+                <div>
+                    <label class="field-label">Default meta description</label>
+                    <input type="text" name="meta_description" value="{{ old('meta_description', $setting->meta_description) }}" class="field-input">
+                </div>
+            </div>
+        </div>
+
+        <div class="form-section">
+            <div class="form-section-title">Contact page map</div>
+            <label class="field-label">Map embed (iframe / HTML)</label>
+            <textarea name="map_embed" rows="3" class="field-input field-input-mono">{{ old('map_embed', $setting->map_embed) }}</textarea>
         </div>
 
         <div class="form-section">

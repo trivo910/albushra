@@ -13,8 +13,19 @@ export default {
         extend: {
             fontFamily: {
                 sans: ['Inter', ...defaultTheme.fontFamily.sans],
+                poppins: ['Poppins', ...defaultTheme.fontFamily.sans],
             },
             colors: {
+                brand: {
+                    DEFAULT: 'var(--p-primary)',
+                    shadow: 'var(--p-primary-shadow)',
+                    soft: 'var(--p-primary-soft)',
+                },
+                navy: 'var(--p-navy)',
+                pgrey: {
+                    DEFAULT: 'var(--p-grey)',
+                    light: 'var(--p-light-grey)',
+                },
                 bg: 'var(--color-bg)',
                 surface: {
                     DEFAULT: 'var(--color-surface)',
