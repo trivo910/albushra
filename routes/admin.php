@@ -3,6 +3,8 @@
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\PackageController;
+use App\Http\Controllers\Admin\PackageImageController;
 use App\Http\Controllers\Admin\SettingController;
 use Illuminate\Support\Facades\Route;
 
@@ -20,5 +22,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::put('settings', [SettingController::class, 'update'])->name('settings.update');
 
         Route::resource('blogs', BlogController::class)->except(['show']);
+
+        Route::resource('packages', PackageController::class)->except(['show']);
+        Route::delete('package-images/{image}', [PackageImageController::class, 'destroy'])->name('package-images.destroy');
     });
 });
