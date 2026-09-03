@@ -3,70 +3,75 @@
     @method('PUT')
 @endif
 
-<div class="bg-white rounded-lg shadow p-6 space-y-6 max-w-4xl">
-    <div>
-        <label class="block text-sm font-medium mb-1">Title</label>
-        <input type="text" name="title" value="{{ old('title', $blog->title) }}" required
-               class="w-full rounded border-gray-300 focus:border-gray-500 focus:ring-gray-500">
-    </div>
+<div class="panel p-6 max-w-4xl">
 
-    @if ($blog->exists)
+    <div class="form-section">
+        <div class="form-section-title">Basic info</div>
         <div>
-            <label class="block text-sm font-medium mb-1">Slug</label>
-            <input type="text" name="slug" value="{{ old('slug', $blog->slug) }}" required
-                   class="w-full rounded border-gray-300 focus:border-gray-500 focus:ring-gray-500">
+            <label class="field-label">Title</label>
+            <input type="text" name="title" value="{{ old('title', $blog->title) }}" required class="field-input">
         </div>
-    @endif
 
-    <div>
-        <label class="block text-sm font-medium mb-1">Featured Image</label>
-        @if ($blog->featured_image)
-            <img src="{{ \Illuminate\Support\Facades\Storage::url($blog->featured_image) }}" alt="" class="h-24 rounded mb-2 object-cover">
+        @if ($blog->exists)
+            <div class="mt-4">
+                <label class="field-label">Slug</label>
+                <input type="text" name="slug" value="{{ old('slug', $blog->slug) }}" required class="field-input">
+            </div>
         @endif
-        <input type="file" name="featured_image" accept="image/*"
-               class="w-full text-sm">
-    </div>
 
-    <div>
-        <label class="block text-sm font-medium mb-1">Content</label>
-        <textarea name="content" id="content-editor" rows="10"
-                  class="w-full rounded border-gray-300 focus:border-gray-500 focus:ring-gray-500">{{ old('content', $blog->content) }}</textarea>
-    </div>
-
-    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        <div>
-            <label class="block text-sm font-medium mb-1">Status</label>
-            <select name="status" class="w-full rounded border-gray-300 focus:border-gray-500 focus:ring-gray-500">
-                <option value="draft" @selected(old('status', $blog->status) === 'draft')>Draft</option>
-                <option value="published" @selected(old('status', $blog->status) === 'published')>Published</option>
-            </select>
-        </div>
-        <div>
-            <label class="block text-sm font-medium mb-1">Published At</label>
-            <input type="datetime-local" name="published_at"
-                   value="{{ old('published_at', optional($blog->published_at)->format('Y-m-d\TH:i')) }}"
-                   class="w-full rounded border-gray-300 focus:border-gray-500 focus:ring-gray-500">
+        <div class="mt-4">
+            <label class="field-label">Featured image</label>
+            @if ($blog->featured_image)
+                <img src="{{ \Illuminate\Support\Facades\Storage::url($blog->featured_image) }}" alt=""
+                     class="h-24 mb-2 object-cover" style="border-radius: var(--radius-sm); border: 1px solid var(--color-border);">
+            @endif
+            <input type="file" name="featured_image" accept="image/*" class="text-sm">
         </div>
     </div>
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        <div>
-            <label class="block text-sm font-medium mb-1">Meta Title</label>
-            <input type="text" name="meta_title" value="{{ old('meta_title', $blog->meta_title) }}"
-                   class="w-full rounded border-gray-300 focus:border-gray-500 focus:ring-gray-500">
-        </div>
-        <div>
-            <label class="block text-sm font-medium mb-1">Meta Description</label>
-            <input type="text" name="meta_description" value="{{ old('meta_description', $blog->meta_description) }}"
-                   class="w-full rounded border-gray-300 focus:border-gray-500 focus:ring-gray-500">
+    <div class="form-section">
+        <div class="form-section-title">Content</div>
+        <textarea name="content" id="content-editor" rows="10" class="field-input">{{ old('content', $blog->content) }}</textarea>
+    </div>
+
+    <div class="form-section">
+        <div class="form-section-title">Publishing</div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+                <label class="field-label">Status</label>
+                <select name="status" class="field-input">
+                    <option value="draft" @selected(old('status', $blog->status) === 'draft')>Draft</option>
+                    <option value="published" @selected(old('status', $blog->status) === 'published')>Published</option>
+                </select>
+            </div>
+            <div>
+                <label class="field-label">Published at</label>
+                <input type="datetime-local" name="published_at"
+                       value="{{ old('published_at', optional($blog->published_at)->format('Y-m-d\TH:i')) }}"
+                       class="field-input">
+            </div>
         </div>
     </div>
 
-    <div>
-        <button type="submit" class="bg-gray-900 text-white rounded px-5 py-2 text-sm font-medium hover:bg-gray-800">
-            {{ $blog->exists ? 'Update Post' : 'Create Post' }}
+    <div class="form-section">
+        <div class="form-section-title">SEO</div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+                <label class="field-label">Meta title</label>
+                <input type="text" name="meta_title" value="{{ old('meta_title', $blog->meta_title) }}" class="field-input">
+            </div>
+            <div>
+                <label class="field-label">Meta description</label>
+                <input type="text" name="meta_description" value="{{ old('meta_description', $blog->meta_description) }}" class="field-input">
+            </div>
+        </div>
+    </div>
+
+    <div class="form-section flex items-center">
+        <button type="submit" class="btn btn-primary">
+            {{ $blog->exists ? 'Save changes' : 'Publish post' }}
         </button>
-        <a href="{{ route('admin.blogs.index') }}" class="ml-2 text-sm text-gray-600 hover:text-gray-900">Cancel</a>
+        <a href="{{ route('admin.blogs.index') }}" class="btn-link-muted ml-4">Cancel</a>
     </div>
 </div>
 

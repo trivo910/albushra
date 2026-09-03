@@ -2,19 +2,29 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Admin\Concerns\SortsTable;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StorePackageRequest;
 use App\Http\Requests\Admin\UpdatePackageRequest;
 use App\Models\Package;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class PackageController extends Controller
 {
-    public function index(): View
+    use SortsTable;
+
+    public function index(Request $request): View
     {
+        $query = Package::query();
+
+        $sortState = $this->applySort($query, $request, ['title', 'category', 'price', 'rating', 'status'], 'created_at');
+
         return view('admin.packages.index', [
-            'packages' => Package::latest()->paginate(15),
+            'packages' => $query->paginate(15)->withQueryString(),
+            'sort' => $sortState['sort'],
+            'direction' => $sortState['direction'],
         ]);
     }
 

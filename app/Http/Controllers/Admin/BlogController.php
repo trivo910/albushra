@@ -2,20 +2,30 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Admin\Concerns\SortsTable;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreBlogRequest;
 use App\Http\Requests\Admin\UpdateBlogRequest;
 use App\Models\Blog;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
 class BlogController extends Controller
 {
-    public function index(): View
+    use SortsTable;
+
+    public function index(Request $request): View
     {
+        $query = Blog::query();
+
+        $sortState = $this->applySort($query, $request, ['title', 'status', 'published_at'], 'created_at');
+
         return view('admin.blogs.index', [
-            'blogs' => Blog::latest()->paginate(15),
+            'blogs' => $query->paginate(15)->withQueryString(),
+            'sort' => $sortState['sort'],
+            'direction' => $sortState['direction'],
         ]);
     }
 

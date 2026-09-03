@@ -1,3 +1,224 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+    --color-bg: #f2f1ed;
+    --color-surface: #ffffff;
+    --color-surface-muted: #f8f7f4;
+    --color-border: #e1dfda;
+    --color-border-strong: #cdcbc4;
+    --color-text: #22262b;
+    --color-text-muted: #676b72;
+    --color-text-faint: #9a9da3;
+
+    --color-accent: #24405c;
+    --color-accent-hover: #1a3047;
+    --color-accent-soft: #e8edf2;
+
+    --color-danger: #b3261e;
+    --color-danger-soft: #fbeae9;
+
+    --status-published-bg: #e3f3e9;
+    --status-published-text: #1e7a46;
+    --status-draft-bg: #f5eee0;
+    --status-draft-text: #8a6116;
+    --status-new-bg: #fbeedd;
+    --status-new-text: #96591a;
+    --status-contacted-bg: #e4f0ef;
+    --status-contacted-text: #1f7a6c;
+    --status-closed-bg: #ecebe6;
+    --status-closed-text: #6b6f76;
+
+    --sidebar-bg: #1b222b;
+    --sidebar-bg-active: rgba(255, 255, 255, 0.07);
+    --sidebar-text: #b6bdc6;
+    --sidebar-text-muted: #767e88;
+    --sidebar-text-active: #ffffff;
+    --sidebar-accent: #7fa3c2;
+    --sidebar-border: rgba(255, 255, 255, 0.08);
+
+    --radius-sm: 4px;
+    --radius-md: 7px;
+}
+
+body {
+    background: var(--color-bg);
+    color: var(--color-text);
+}
+
+@layer components {
+    /* Buttons */
+    .btn {
+        @apply inline-flex items-center justify-center gap-1.5 rounded px-3.5 py-2 text-sm font-medium transition-colors duration-100;
+        border-radius: var(--radius-sm);
+    }
+    .btn-primary {
+        background: var(--color-accent);
+        color: #ffffff;
+    }
+    .btn-primary:hover {
+        background: var(--color-accent-hover);
+    }
+    .btn-secondary {
+        background: var(--color-surface);
+        color: var(--color-text);
+        border: 1px solid var(--color-border-strong);
+    }
+    .btn-secondary:hover {
+        background: var(--color-surface-muted);
+    }
+    .btn-link-muted {
+        @apply text-sm;
+        color: var(--color-text-muted);
+    }
+    .btn-link-muted:hover {
+        color: var(--color-text);
+    }
+    .btn-link-danger {
+        @apply text-sm;
+        color: var(--color-danger);
+    }
+    .btn-link-danger:hover {
+        text-decoration: underline;
+    }
+
+    /* Form fields */
+    .field-label {
+        @apply block text-sm font-medium mb-1.5;
+        color: var(--color-text);
+    }
+    .field-hint {
+        @apply text-xs mt-1.5;
+        color: var(--color-text-faint);
+    }
+    .field-input {
+        @apply w-full text-sm px-3 py-2;
+        background: var(--color-surface);
+        color: var(--color-text);
+        border: 1px solid var(--color-border-strong);
+        border-radius: var(--radius-sm);
+    }
+    .field-input:focus {
+        outline: none;
+        border-color: var(--color-accent);
+        box-shadow: 0 0 0 3px var(--color-accent-soft);
+    }
+    .field-input[readonly] {
+        background: var(--color-surface-muted);
+        color: var(--color-text-muted);
+        cursor: not-allowed;
+    }
+    .field-input-mono {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        font-size: 0.8125rem;
+    }
+
+    /* Section card used for forms */
+    .panel {
+        background: var(--color-surface);
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-md);
+    }
+    .form-section + .form-section {
+        border-top: 1px solid var(--color-border);
+        margin-top: 1.75rem;
+        padding-top: 1.75rem;
+    }
+    .form-section-title {
+        @apply text-sm font-semibold mb-4;
+        color: var(--color-text);
+    }
+
+    /* Tables */
+    .data-table {
+        width: 100%;
+        font-size: 0.875rem;
+        border-collapse: collapse;
+    }
+    .data-table thead th {
+        text-align: left;
+        padding: 0.7rem 1.25rem;
+        font-weight: 500;
+        font-size: 0.8125rem;
+        color: var(--color-text-muted);
+        background: var(--color-surface-muted);
+        border-bottom: 1px solid var(--color-border);
+        white-space: nowrap;
+    }
+    .data-table tbody td {
+        padding: 0.85rem 1.25rem;
+        border-bottom: 1px solid var(--color-border);
+        color: var(--color-text);
+        vertical-align: middle;
+    }
+    .data-table tbody tr:last-child td {
+        border-bottom: none;
+    }
+    .data-table tbody tr:hover {
+        background: var(--color-surface-muted);
+    }
+    .sort-link {
+        @apply inline-flex items-center gap-1;
+        color: inherit;
+    }
+    .sort-link:hover {
+        color: var(--color-text);
+    }
+
+    /* Badges */
+    .badge {
+        @apply inline-flex items-center px-2 py-0.5 text-xs font-medium;
+        border-radius: 999px;
+    }
+    .badge-published { background: var(--status-published-bg); color: var(--status-published-text); }
+    .badge-draft { background: var(--status-draft-bg); color: var(--status-draft-text); }
+    .badge-new { background: var(--status-new-bg); color: var(--status-new-text); }
+    .badge-contacted { background: var(--status-contacted-bg); color: var(--status-contacted-text); }
+    .badge-closed { background: var(--status-closed-bg); color: var(--status-closed-text); }
+    .badge-neutral { background: var(--color-surface-muted); color: var(--color-text-muted); border: 1px solid var(--color-border); }
+
+    /* Alerts */
+    .alert-success {
+        background: var(--status-published-bg);
+        color: var(--status-published-text);
+        border: 1px solid var(--status-published-text);
+        border-color: color-mix(in srgb, var(--status-published-text) 30%, transparent);
+    }
+    .alert-error {
+        background: var(--color-danger-soft);
+        color: var(--color-danger);
+        border: 1px solid color-mix(in srgb, var(--color-danger) 30%, transparent);
+    }
+
+    /* Empty state */
+    .empty-state {
+        @apply text-center py-12 px-6;
+        color: var(--color-text-muted);
+    }
+    .empty-state-title {
+        @apply text-sm font-medium mb-1;
+        color: var(--color-text);
+    }
+    .empty-state-hint {
+        @apply text-sm;
+        color: var(--color-text-faint);
+    }
+
+    /* Filter tabs */
+    .filter-tab {
+        @apply px-3 py-1.5 text-sm rounded;
+        border-radius: var(--radius-sm);
+        color: var(--color-text-muted);
+        border: 1px solid var(--color-border);
+        background: var(--color-surface);
+    }
+    .filter-tab:hover {
+        color: var(--color-text);
+    }
+    .filter-tab-active {
+        background: var(--color-accent);
+        color: #ffffff;
+        border-color: var(--color-accent);
+    }
+}
