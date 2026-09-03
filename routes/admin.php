@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\EnquiryController;
 use App\Http\Controllers\Admin\FaqController;
 use App\Http\Controllers\Admin\GalleryController;
+use App\Http\Controllers\Admin\HeroSlideController;
 use App\Http\Controllers\Admin\PackageController;
 use App\Http\Controllers\Admin\PackageImageController;
 use App\Http\Controllers\Admin\PageController;
@@ -24,6 +25,12 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         Route::get('settings', [SettingController::class, 'edit'])->name('settings.edit');
         Route::put('settings', [SettingController::class, 'update'])->name('settings.update');
+
+        Route::get('hero-slides', [HeroSlideController::class, 'index'])->name('hero-slides.index');
+        Route::post('hero-slides', [HeroSlideController::class, 'store'])->name('hero-slides.store');
+        Route::delete('hero-slides/{heroSlide}', [HeroSlideController::class, 'destroy'])->name('hero-slides.destroy');
+        Route::post('hero-slides/{heroSlide}/move-up', [HeroSlideController::class, 'moveUp'])->name('hero-slides.move-up');
+        Route::post('hero-slides/{heroSlide}/move-down', [HeroSlideController::class, 'moveDown'])->name('hero-slides.move-down');
 
         Route::resource('blogs', BlogController::class)->except(['show']);
 

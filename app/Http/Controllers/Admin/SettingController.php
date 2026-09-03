@@ -19,21 +19,7 @@ class SettingController extends Controller
 
     public function update(UpdateSettingRequest $request): RedirectResponse
     {
-        $setting = Setting::current();
-        $data = $request->validated();
-
-        foreach (['hero_image_1', 'hero_image_2', 'hero_image_3'] as $field) {
-            if ($request->hasFile($field)) {
-                if ($setting->{$field}) {
-                    \Illuminate\Support\Facades\Storage::disk('public')->delete($setting->{$field});
-                }
-                $data[$field] = $request->file($field)->store('settings', 'public');
-            } else {
-                unset($data[$field]);
-            }
-        }
-
-        $setting->update($data);
+        Setting::current()->update($request->validated());
 
         return redirect()->route('admin.settings.edit')->with('success', 'Settings updated successfully.');
     }

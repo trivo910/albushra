@@ -23,6 +23,7 @@
                             ['route' => 'admin.dashboard', 'pattern' => 'admin.dashboard', 'label' => 'Dashboard'],
                         ],
                         'Content' => [
+                            ['route' => 'admin.hero-slides.index', 'pattern' => 'admin.hero-slides.*', 'label' => 'Hero Slider'],
                             ['route' => 'admin.packages.index', 'pattern' => 'admin.packages.*', 'label' => 'Packages'],
                             ['route' => 'admin.blogs.index', 'pattern' => 'admin.blogs.*', 'label' => 'Blog'],
                             ['route' => 'admin.pages.index', 'pattern' => 'admin.pages.*', 'label' => 'Pages'],
