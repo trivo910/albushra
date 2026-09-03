@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\EnquiryController;
 use App\Http\Controllers\Admin\FaqController;
+use App\Http\Controllers\Admin\GalleryController;
 use App\Http\Controllers\Admin\PackageController;
 use App\Http\Controllers\Admin\PackageImageController;
 use App\Http\Controllers\Admin\PageController;
@@ -36,5 +37,11 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::post('faqs/{faq}/move-down', [FaqController::class, 'moveDown'])->name('faqs.move-down');
 
         Route::resource('enquiries', EnquiryController::class)->only(['index', 'show', 'update']);
+
+        Route::get('gallery', [GalleryController::class, 'index'])->name('gallery.index');
+        Route::post('gallery', [GalleryController::class, 'store'])->name('gallery.store');
+        Route::delete('gallery/{image}', [GalleryController::class, 'destroy'])->name('gallery.destroy');
+        Route::post('gallery/{image}/move-up', [GalleryController::class, 'moveUp'])->name('gallery.move-up');
+        Route::post('gallery/{image}/move-down', [GalleryController::class, 'moveDown'])->name('gallery.move-down');
     });
 });
