@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\PackageController;
 use App\Http\Controllers\Admin\PackageImageController;
+use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\SettingController;
 use Illuminate\Support\Facades\Route;
 
@@ -25,5 +26,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         Route::resource('packages', PackageController::class)->except(['show']);
         Route::delete('package-images/{image}', [PackageImageController::class, 'destroy'])->name('package-images.destroy');
+
+        Route::resource('pages', PageController::class)->except(['show']);
     });
 });
