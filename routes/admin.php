@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\FaqController;
 use App\Http\Controllers\Admin\PackageController;
 use App\Http\Controllers\Admin\PackageImageController;
 use App\Http\Controllers\Admin\PageController;
@@ -28,5 +29,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::delete('package-images/{image}', [PackageImageController::class, 'destroy'])->name('package-images.destroy');
 
         Route::resource('pages', PageController::class)->except(['show']);
+
+        Route::resource('faqs', FaqController::class)->except(['show']);
+        Route::post('faqs/{faq}/move-up', [FaqController::class, 'moveUp'])->name('faqs.move-up');
+        Route::post('faqs/{faq}/move-down', [FaqController::class, 'moveDown'])->name('faqs.move-down');
     });
 });
