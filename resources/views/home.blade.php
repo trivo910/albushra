@@ -11,7 +11,6 @@
             @forelse ($heroSlides as $i => $slide)
                 <div data-slide class="absolute inset-0 transition-opacity duration-700 {{ $i === 0 ? 'opacity-100' : 'opacity-0' }}">
                     <img src="{{ \Illuminate\Support\Facades\Storage::url($slide->image_path) }}" alt="{{ $slide->caption ?: ($settings->site_name ?? config('app.name')) }}" class="w-full h-full object-cover">
-                    <div class="absolute inset-0" style="background: linear-gradient(0deg, rgba(26,43,72,0.45), rgba(26,43,72,0.1));"></div>
                 </div>
             @empty
                 <div data-slide class="absolute inset-0 opacity-100" style="background: linear-gradient(135deg, var(--p-navy), #2c4267);"></div>
@@ -19,17 +18,17 @@
 
             <div class="absolute inset-0 flex items-center">
                 <div class="container-p">
-                    <p class="eyebrow text-white" style="color: #fbd0c4;">Welcome to {{ $settings->site_name ?? config('app.name') }}</p>
-                    <h1 class="font-poppins text-3xl sm:text-5xl font-bold text-white max-w-xl leading-tight mb-6">
+                    <!-- <p class="eyebrow text-white" style="color: #fbd0c4;">Welcome to {{ $settings->site_name ?? config('app.name') }}</p> -->
+                    <!-- <h1 class="font-poppins text-3xl sm:text-5xl font-bold text-white max-w-xl leading-tight mb-6">
                         Our Hajj and Umrah Packages Are The Perfect Journey of Faith
-                    </h1>
-                    <a href="{{ route('packages.index') }}" class="btn-brand">Explore Packages</a>
+                    </h1> -->
+                    
                 </div>
             </div>
 
             @if ($heroSlides->count() > 1)
                 <div data-carousel-dots class="absolute bottom-5 left-1/2 -translate-x-1/2 flex items-center gap-2"></div>
-            @endif
+            @endif 
         </div>
     </section>
 
