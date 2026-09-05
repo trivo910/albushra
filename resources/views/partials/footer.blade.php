@@ -11,8 +11,7 @@
         <div>
             <a href="{{ route('home') }}" class="inline-flex items-center mb-3" aria-label="{{ $__settings->site_name ?? config('app.name') }}">
                 @if ($__hasLogo)
-                    <img src="{{ $__logoUrl }}" alt="{{ $__settings->site_name ?? config('app.name') }}" class="h-14 w-auto rounded-md p-1" style="background: #ffffff;">
-                    <span class="sr-only">{{ $__settings->site_name ?? config('app.name') }}</span>
+                    <img src="{{ $__logoUrl }}" alt="{{ $__settings->site_name ?? config('app.name') }}" class="h-20 w-auto" style="filter: brightness(0) invert(1);">
                 @else
                     <div class="text-lg font-bold text-white">{{ $__settings->site_name ?? config('app.name') }}</div>
                 @endif

@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\HeroSlideController;
 use App\Http\Controllers\Admin\PackageController;
 use App\Http\Controllers\Admin\PackageImageController;
 use App\Http\Controllers\Admin\PageController;
+use App\Http\Controllers\Admin\ReviewController;
 use App\Http\Controllers\Admin\SettingController;
 use Illuminate\Support\Facades\Route;
 
@@ -32,11 +33,13 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::post('hero-slides/{heroSlide}/move-up', [HeroSlideController::class, 'moveUp'])->name('hero-slides.move-up');
         Route::post('hero-slides/{heroSlide}/move-down', [HeroSlideController::class, 'moveDown'])->name('hero-slides.move-down');
 
+        Route::post('blogs/seo-preview', [BlogController::class, 'seoPreview'])->name('blogs.seo-preview');
         Route::resource('blogs', BlogController::class)->except(['show']);
 
         Route::resource('packages', PackageController::class)->except(['show']);
         Route::delete('package-images/{image}', [PackageImageController::class, 'destroy'])->name('package-images.destroy');
 
+        Route::post('pages/seo-preview', [PageController::class, 'seoPreview'])->name('pages.seo-preview');
         Route::resource('pages', PageController::class)->except(['show']);
 
         Route::resource('faqs', FaqController::class)->except(['show']);
@@ -44,6 +47,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::post('faqs/{faq}/move-down', [FaqController::class, 'moveDown'])->name('faqs.move-down');
 
         Route::resource('enquiries', EnquiryController::class)->only(['index', 'show', 'update']);
+
+        Route::resource('reviews', ReviewController::class)->only(['index', 'destroy']);
+        Route::post('reviews/bulk-destroy', [ReviewController::class, 'bulkDestroy'])->name('reviews.bulk-destroy');
 
         Route::get('gallery', [GalleryController::class, 'index'])->name('gallery.index');
         Route::post('gallery', [GalleryController::class, 'store'])->name('gallery.store');

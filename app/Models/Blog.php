@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Services\SeoAnalyzer;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
@@ -15,11 +16,15 @@ class Blog extends Model
         'title',
         'slug',
         'featured_image',
+        'featured_image_alt',
         'content',
         'status',
         'published_at',
         'meta_title',
         'meta_description',
+        'focus_keyword',
+        'seo_score',
+        'seo_score_label',
     ];
 
     protected $casts = [
@@ -30,10 +35,22 @@ class Blog extends Model
     {
         parent::boot();
 
-        static::creating(function (Blog $blog) {
+        static::saving(function (Blog $blog) {
             if (empty($blog->slug)) {
                 $blog->slug = static::generateUniqueSlug($blog->title);
             }
+
+            $analysis = app(SeoAnalyzer::class)->analyze([
+                'focus_keyword' => $blog->focus_keyword,
+                'title' => $blog->title,
+                'meta_title' => $blog->meta_title,
+                'meta_description' => $blog->meta_description,
+                'slug' => $blog->slug,
+                'content' => $blog->content,
+            ]);
+
+            $blog->seo_score = $analysis['score'];
+            $blog->seo_score_label = $analysis['label'];
         });
     }
 

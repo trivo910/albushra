@@ -52,7 +52,7 @@
 
     <div class="form-section">
         <div class="form-section-title">Pricing &amp; duration</div>
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
                 <label class="field-label">Price</label>
                 <input type="number" step="0.01" name="price" value="{{ old('price', $package->price) }}" class="field-input">
@@ -60,10 +60,6 @@
             <div>
                 <label class="field-label">Duration</label>
                 <input type="text" name="duration" value="{{ old('duration', $package->duration) }}" placeholder="e.g. 10 Days / 9 Nights" class="field-input">
-            </div>
-            <div>
-                <label class="field-label">Rating (0–5)</label>
-                <input type="number" step="0.1" min="0" max="5" name="rating" value="{{ old('rating', $package->rating) }}" class="field-input">
             </div>
         </div>
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-4">
@@ -102,6 +98,12 @@
             @endif
             <input type="file" name="thumbnail" accept="image/*" class="text-sm">
             <div class="field-hint">JPG or PNG, up to 4MB. Replace the current thumbnail by uploading a new one.</div>
+
+            <div class="mt-3">
+                <label class="field-label">Thumbnail alt text</label>
+                <input type="text" name="thumbnail_alt" value="{{ old('thumbnail_alt', $package->thumbnail_alt) }}" class="field-input">
+                <p class="field-hint">Describe the image for screen readers and search engines, e.g. "5-star hotel near Masjid al-Haram".</p>
+            </div>
         </div>
 
         {{-- Gallery --}}
@@ -110,7 +112,7 @@
                 <label class="field-label">Gallery Images</label>
                 <div class="grid grid-cols-3 sm:grid-cols-6 gap-3 mt-2">
                     @foreach ($package->images as $image)
-                        <div class="relative">
+                        <div class="relative" data-delete-wrapper>
                             <img src="{{ \Illuminate\Support\Facades\Storage::url($image->image_path) }}" alt=""
                                  class="h-20 w-full object-cover rounded" style="border-radius: var(--radius-sm); border: 1px solid var(--color-border);">
                             <button type="button"

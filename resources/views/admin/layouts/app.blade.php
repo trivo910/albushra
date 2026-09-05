@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title', 'Dashboard') — Admin | {{ config('app.name') }}</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,7 +14,16 @@
     <div class="min-h-screen flex">
         <aside class="w-60 shrink-0 flex flex-col" style="background: var(--sidebar-bg);">
             <div class="px-5 h-16 flex items-center border-b" style="border-color: var(--sidebar-border);">
-                <span class="text-[15px] font-semibold" style="color: var(--sidebar-text-active);">{{ config('app.name') }}</span>
+                @php
+                    $__adminLogoUrl = \App\Models\Setting::current()->site_logo
+                        ? \Illuminate\Support\Facades\Storage::url(\App\Models\Setting::current()->site_logo)
+                        : (file_exists(public_path('images/al-bushra-logo.png')) ? asset('images/al-bushra-logo.png') : null);
+                @endphp
+                @if ($__adminLogoUrl)
+                    <img src="{{ $__adminLogoUrl }}" alt="{{ config('app.name') }}" class="h-10 w-auto" style="filter: brightness(0) invert(1);">
+                @else
+                    <span class="text-[15px] font-semibold" style="color: var(--sidebar-text-active);">{{ config('app.name') }}</span>
+                @endif
             </div>
 
             <nav class="flex-1 px-3 py-5 space-y-5 text-sm overflow-y-auto">
@@ -32,6 +42,7 @@
                         ],
                         'Operations' => [
                             ['route' => 'admin.enquiries.index', 'pattern' => 'admin.enquiries.*', 'label' => 'Enquiries'],
+                            ['route' => 'admin.reviews.index', 'pattern' => 'admin.reviews.*', 'label' => 'Reviews'],
                         ],
                         'Settings' => [
                             ['route' => 'admin.settings.edit', 'pattern' => 'admin.settings.*', 'label' => 'General Settings'],

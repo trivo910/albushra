@@ -42,7 +42,7 @@ class PackageController extends Controller
         abort_unless($package->status === 'published', 404);
 
         return view('packages.show', [
-            'package' => $package->load('images'),
+            'package' => $package->load(['images', 'approvedReviews' => fn ($q) => $q->latest()]),
             'related' => Package::with('images')->where('status', 'published')
                 ->where('category', $package->category)
                 ->where('id', '!=', $package->id)

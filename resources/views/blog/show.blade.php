@@ -25,7 +25,7 @@
         <h1 class="font-poppins text-2xl sm:text-3xl font-bold mb-6" style="color: var(--p-navy);">{{ $blog->title }}</h1>
 
         @if ($blog->featured_image)
-            <img src="{{ \Illuminate\Support\Facades\Storage::url($blog->featured_image) }}" alt="{{ $blog->title }}" class="w-full h-auto rounded-xl mb-8">
+            <img src="{{ \Illuminate\Support\Facades\Storage::url($blog->featured_image) }}" alt="{{ $blog->featured_image_alt ?: $blog->title }}" class="w-full h-auto rounded-xl mb-8">
         @endif
 
         <div class="prose-p text-sm leading-relaxed mb-10" style="color: var(--p-grey);">
@@ -56,7 +56,7 @@
                         <a href="{{ route('blog.show', $item) }}" class="card-p group">
                             <div class="h-32 overflow-hidden" style="background: var(--p-light-grey);">
                                 @if ($item->featured_image)
-                                    <img src="{{ \Illuminate\Support\Facades\Storage::url($item->featured_image) }}" alt="{{ $item->title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                                    <img src="{{ \Illuminate\Support\Facades\Storage::url($item->featured_image) }}" alt="{{ $item->featured_image_alt ?: $item->title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
                                 @endif
                             </div>
                             <div class="p-4">

@@ -12,11 +12,10 @@
     $__hasLogo = !empty($__logoUrl);
 @endphp
 <header class="sticky top-0 z-40 bg-white" style="box-shadow: 0 2px 12px rgba(26,43,72,0.06);">
-    <div class="container-p flex items-center justify-between h-20">
+    <div class="container-p flex items-center justify-between h-20 gap-10">
         <a href="{{ route('home') }}" class="shrink-0 inline-flex items-center" aria-label="{{ $__settings->site_name ?? config('app.name') }}">
             @if ($__hasLogo)
-                <img src="{{ $__logoUrl }}" alt="{{ $__settings->site_name ?? config('app.name') }}" class="h-14 w-auto">
-                <span class="sr-only">{{ $__settings->site_name ?? config('app.name') }}</span>
+                <img src="{{ $__logoUrl }}" alt="{{ $__settings->site_name ?? config('app.name') }}" class="h-20 w-auto">
             @else
                 <span class="font-poppins text-xl font-bold" style="color: var(--p-navy);">
                     {{ $__settings->site_name ?? config('app.name') }}
@@ -24,8 +23,8 @@
             @endif
         </a>
 
-        <nav class="hidden lg:flex items-center gap-7 font-poppins text-sm font-medium" style="color: var(--p-navy);">
-            <a href="{{ route('home') }}" class="hover:opacity-70 {{ request()->routeIs('home') ? 'font-semibold' : '' }}">Home</a>
+        <nav class="hidden lg:flex items-center gap-10 font-poppins text-[15px] font-medium uppercase tracking-wide" style="color: var(--p-navy);">
+            <a href="{{ route('home') }}" class="hover:opacity-70" style="{{ request()->routeIs('home') ? 'color: var(--p-primary);' : '' }}">Home</a>
             <a href="{{ route('pages.show', 'about-us') }}" class="hover:opacity-70">About Us</a>
             <div class="relative group" data-dropdown>
                 <button type="button" data-dropdown-toggle class="flex items-center gap-1 hover:opacity-70">
@@ -47,7 +46,7 @@
             <a href="{{ route('contact.index') }}" class="hover:opacity-70">Contact Us</a>
         </nav>
 
-        <div class="hidden lg:flex items-center gap-4 font-poppins text-sm font-medium shrink-0">
+        <div class="hidden lg:flex items-center gap-6 font-poppins text-[15px] font-medium shrink-0 tracking-wide">
             @auth
                 <span style="color: var(--p-grey);">Hi, {{ Str::before(auth()->user()->name, ' ') }}</span>
                 <form method="POST" action="{{ route('logout') }}">
@@ -56,7 +55,7 @@
                 </form>
             @else
                 <a href="{{ route('login') }}" class="hover:opacity-70" style="color: var(--p-navy);">Login</a>
-                <a href="{{ route('register') }}" class="btn-brand !py-2 !px-5">Sign Up</a>
+                <a href="{{ route('register') }}" class="hover:opacity-70" style="color: var(--p-navy);">Sign Up</a>
             @endauth
         </div>
 
@@ -65,19 +64,19 @@
         </button>
     </div>
 
-    <nav data-nav-menu class="hidden lg:hidden border-t font-poppins text-sm font-medium" style="border-color: var(--p-light-grey);">
+    <nav data-nav-menu class="hidden lg:hidden border-t font-poppins text-[15px] font-medium uppercase tracking-wide" style="border-color: var(--p-light-grey);">
         <div class="container-p py-3 flex flex-col gap-1">
             <a href="{{ route('home') }}" class="py-2">Home</a>
             <a href="{{ route('pages.show', 'about-us') }}" class="py-2">About Us</a>
             <a href="{{ route('packages.index') }}" class="py-2">Packages</a>
             @foreach ($__packageCategories as $__cat)
-                <a href="{{ route('packages.category', $__cat) }}" class="py-2 pl-4 font-semibold" style="color: var(--p-navy);">— {{ ucfirst($__cat) }}</a>
+                <a href="{{ route('packages.category', $__cat) }}" class="py-2 pl-4 font-semibold normal-case" style="color: var(--p-navy);">— {{ ucfirst($__cat) }}</a>
             @endforeach
             <a href="{{ route('faqs.index') }}" class="py-2">FAQs</a>
             <a href="{{ route('blog.index') }}" class="py-2">Blog</a>
             <a href="{{ route('gallery.index') }}" class="py-2">Gallery</a>
             <a href="{{ route('contact.index') }}" class="py-2">Contact Us</a>
-            <div class="flex items-center gap-4 pt-3 mt-2 border-t" style="border-color: var(--p-light-grey);">
+            <div class="flex items-center gap-6 pt-3 mt-2 border-t normal-case" style="border-color: var(--p-light-grey);">
                 @auth
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
@@ -85,7 +84,7 @@
                     </form>
                 @else
                     <a href="{{ route('login') }}">Login</a>
-                    <a href="{{ route('register') }}" class="btn-brand !py-2 !px-5">Sign Up</a>
+                    <a href="{{ route('register') }}">Sign Up</a>
                 @endauth
             </div>
         </div>

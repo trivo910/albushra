@@ -27,8 +27,10 @@ class Package extends Model
         'excluded',
         'map_embed',
         'rating',
+        'rating_count',
         'is_featured',
         'thumbnail',
+        'thumbnail_alt',
         'status',
         'meta_title',
         'meta_description',
@@ -39,7 +41,8 @@ class Package extends Model
         'excluded' => 'array',
         'is_featured' => 'boolean',
         'price' => 'decimal:2',
-        'rating' => 'decimal:1',
+        'rating' => 'decimal:2',
+        'rating_count' => 'integer',
     ];
 
     protected static function boot(): void
@@ -75,6 +78,26 @@ class Package extends Model
     public function enquiries(): HasMany
     {
         return $this->hasMany(Enquiry::class);
+    }
+
+    public function reviews(): HasMany
+    {
+        return $this->hasMany(Review::class);
+    }
+
+    public function approvedReviews(): HasMany
+    {
+        return $this->reviews()->approved();
+    }
+
+    public function recalculateRating(): void
+    {
+        $stats = $this->approvedReviews()->selectRaw('AVG(rating) as avg_rating, COUNT(*) as count')->first();
+
+        $this->updateQuietly([
+            'rating' => $stats->avg_rating ?? 0,
+            'rating_count' => $stats->count ?? 0,
+        ]);
     }
 
     public function getRouteKeyName(): string

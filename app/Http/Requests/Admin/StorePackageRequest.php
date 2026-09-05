@@ -27,7 +27,6 @@ class StorePackageRequest extends FormRequest
             'excluded' => ['nullable', 'array'],
             'excluded.*' => ['nullable', 'string', 'max:255'],
             'map_embed' => ['nullable', 'string'],
-            'rating' => ['nullable', 'numeric', 'min:0', 'max:5'],
             'is_featured' => ['nullable', 'boolean'],
             'status' => ['required', 'in:draft,published'],
             'meta_title' => ['nullable', 'string', 'max:255'],
@@ -35,6 +34,7 @@ class StorePackageRequest extends FormRequest
             'images' => ['nullable', 'array'],
             'images.*' => ['image', 'mimes:jpg,jpeg,png,webp', 'max:4096'],
             'thumbnail' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:4096'],
+            'thumbnail_alt' => ['nullable', 'string', 'max:255'],
         ];
     }
 }

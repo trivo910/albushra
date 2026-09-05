@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreBlogRequest;
 use App\Http\Requests\Admin\UpdateBlogRequest;
 use App\Models\Blog;
+use App\Services\SeoAnalyzer;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -70,6 +72,20 @@ class BlogController extends Controller
         $blog->update($data);
 
         return redirect()->route('admin.blogs.index')->with('success', 'Blog post updated successfully.');
+    }
+
+    public function seoPreview(Request $request, SeoAnalyzer $seoAnalyzer): JsonResponse
+    {
+        $data = $request->validate([
+            'focus_keyword' => ['nullable', 'string', 'max:255'],
+            'title' => ['nullable', 'string', 'max:255'],
+            'slug' => ['nullable', 'string', 'max:255'],
+            'meta_title' => ['nullable', 'string', 'max:255'],
+            'meta_description' => ['nullable', 'string', 'max:255'],
+            'content' => ['nullable', 'string'],
+        ]);
+
+        return response()->json($seoAnalyzer->analyze($data));
     }
 
     public function destroy(Blog $blog): RedirectResponse
