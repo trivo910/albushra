@@ -33,17 +33,31 @@
     </section>
 
     {{-- Intro --}}
-    <section class="py-16 sm:py-20">
+
+    <div class="home-grid">
+
+        <div class="home-grid-1">
+            <img src="{{ \Illuminate\Support\Facades\Storage::url('home/28-600x1067.png') }}" alt="Intro Image">
+            <img src="{{ \Illuminate\Support\Facades\Storage::url('home/29-600x854.png') }}" alt="Intro Image">
+
+        </div>
+
+        <div class="home-grid-2">
+        <section class="py-16 sm:py-20">
         <div class="container-p max-w-3xl text-center mx-auto">
-            <p class="eyebrow">Welcome To {{ $settings->site_name ?? config('app.name') }}</p>
+            <p class="eyebrow">Welcome To Al Bushra</p>
             <h2 class="section-title">Our Hajj And Umrah Packages Are The Perfect Choice</h2>
-            <p class="text-base leading-relaxed" style="color: var(--p-grey);">
+            <p class="text-base leading-relaxed">
                 Al Bushra Tours &amp; Travels — your trusted companion on the most sacred journeys of your life. We are honored to
                 assist you in performing Hajj and Umrah with complete peace of mind, comfort, and faith. Every journey is handled
                 with sincerity, care, and attention to detail, so you can focus solely on your worship.
             </p>
         </div>
     </section>
+</div>
+
+    </div>
+
 
     {{-- Featured Hajj Packages --}}
     <section class="py-10 sm:py-14" style="background: var(--p-light-grey);">
@@ -189,3 +203,211 @@
         </div>
     </section>
 @endsection
+
+
+<style>
+    /* ================================
+   HOME INTRO SECTION
+================================ */
+
+.home-grid {
+    display: grid;
+    grid-template-columns: 1.15fr 1fr;
+    /* align-items: center; */
+    /* gap: 40px; */
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 70px 30px;
+}
+
+/* ================================
+   IMAGE AREA
+================================ */
+
+.home-grid-1 {
+    display: flex;
+    align-items: flex-end;
+    gap: 55px;
+    align-items: right;
+}
+
+/* Common image styling */
+.home-grid-1 img {
+    display: block;
+    width: 100%;
+    object-fit: cover;
+    /* border-radius: 0 90px 12px 12px; */
+    position: relative;
+    /* box-shadow: 10px 10px 0 #4b146b; */
+}
+
+/* First Image - home-1 */
+.home-grid-1 img:first-child {
+    width: 40%;
+    height: 560px;
+    object-position: center;
+    border-radius: 150px 150px 12px 12px;
+    box-shadow: -10px 10px 0 #4b146b;
+}
+
+/* Second Image - home-2 */
+.home-grid-1 img:nth-child(2) {
+    width: 40%;
+    height: 450px;
+    object-position: center;
+    margin-bottom: 0;
+    border-radius: 12px 150px 12px 12px;
+    box-shadow: -10px 10px 0 #4b146b;
+}
+
+
+/* ================================
+   TEXT AREA
+================================ */
+
+.home-grid-2 {
+    display: flex;
+    align-items: flex-end;
+    gap: 0px;
+    align-items: left;
+}
+
+.home-grid-2 section {
+    padding: 0 !important;
+}
+
+.home-grid-2 .container-p {
+    max-width: 650px;
+    margin: 0;
+    text-align: left;
+}
+
+/* Welcome text */
+.home-grid-2 .eyebrow {
+    color: #24b8a8;
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 25px;
+}
+
+/* Main heading */
+.home-grid-2 .section-title {
+    font-family: "Poppins", Sans-serif;
+    font-size: 36px;
+    font-weight: 600;
+    line-height: 45px;
+    letter-spacing: -0.8px;
+    color: #1A2B48;
+}
+
+/* Description */
+.home-grid-2 p.text-base {
+    color: #172f52 !important;
+    font-size: 16px;
+    line-height: 1.55;
+    margin: 0;
+    text-align: justify;
+}
+
+
+/* ================================
+   TABLET
+================================ */
+
+@media (max-width: 1100px) {
+
+    .home-grid {
+        grid-template-columns: 1fr;
+        gap: 60px;
+    }
+
+    .home-grid-1 {
+        max-width: 850px;
+        margin: 0 auto;
+    }
+
+    .home-grid-2 .container-p {
+        max-width: 850px;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    .home-grid-2 .section-title {
+        font-size: 42px;
+    }
+
+    .home-grid-2 p.text-base {
+        text-align: center;
+    }
+}
+
+
+/* ================================
+   MOBILE
+================================ */
+
+@media (max-width: 700px) {
+
+    .home-grid {
+        display: block;
+        padding: 50px 20px;
+    }
+
+    .home-grid-1 {
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+        gap: 18px;
+        width: 100%;
+        margin: 0 auto 60px;
+    }
+
+    .home-grid-1 img {
+        width: calc(50% - 9px);
+        height: auto;
+        max-width: none;
+    }
+
+    .home-grid-1 img:first-child {
+        width: calc(50% - 9px);
+    }
+
+    .home-grid-1 img:nth-child(2) {
+        width: calc(50% - 9px);
+    }
+
+    .home-grid-2 {
+        width: 100%;
+        text-align: center;
+    }
+
+}
+
+
+/* ================================
+   SMALL MOBILE
+================================ */
+
+@media (max-width: 480px) {
+
+    .home-grid-1 {
+        gap: 18px;
+    }
+
+    .home-grid-1 img:first-child {
+        height: 350px;
+    }
+
+    .home-grid-1 img:nth-child(2) {
+        height: 280px;
+    }
+
+    .home-grid-2 .section-title {
+        font-size: 29px;
+    }
+
+    .home-grid-2 .eyebrow {
+        font-size: 21px;
+    }
+}
+</style>
