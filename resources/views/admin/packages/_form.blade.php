@@ -89,28 +89,46 @@
     <div class="form-section">
         <div class="form-section-title">Images</div>
 
+        {{-- Thumbnail --}}
+        <div class="mb-6 p-4 rounded-lg" style="background: var(--color-surface-raised);">
+            <label class="field-label">Package Thumbnail</label>
+            <p class="text-xs mb-3" style="color: var(--color-text-muted);">Single image shown on package cards and social sharing previews.</p>
+            @if ($package->thumbnail)
+                <div class="mb-3">
+                    <img src="{{ \Illuminate\Support\Facades\Storage::url($package->thumbnail) }}" alt="Current thumbnail"
+                         class="h-32 w-auto object-cover rounded" style="border: 1px solid var(--color-border);">
+                    <p class="text-xs mt-1" style="color: var(--color-text-muted);">Current thumbnail</p>
+                </div>
+            @endif
+            <input type="file" name="thumbnail" accept="image/*" class="text-sm">
+            <div class="field-hint">JPG or PNG, up to 4MB. Replace the current thumbnail by uploading a new one.</div>
+        </div>
+
+        {{-- Gallery --}}
         @if ($package->exists && $package->images->isNotEmpty())
-            <div class="grid grid-cols-3 sm:grid-cols-6 gap-3 mb-4">
-                @foreach ($package->images as $image)
-                    <div class="relative">
-                        <img src="{{ \Illuminate\Support\Facades\Storage::url($image->image_path) }}" alt=""
-                             class="h-20 w-full object-cover rounded" style="border-radius: var(--radius-sm); border: 1px solid var(--color-border);">
-                        <form action="{{ route('admin.package-images.destroy', $image) }}" method="POST"
-                              data-confirm="Remove this image?" class="absolute top-1 right-1">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit"
-                                    class="text-white text-xs rounded-full w-5 h-5 flex items-center justify-center"
+            <div class="mb-4">
+                <label class="field-label">Gallery Images</label>
+                <div class="grid grid-cols-3 sm:grid-cols-6 gap-3 mt-2">
+                    @foreach ($package->images as $image)
+                        <div class="relative">
+                            <img src="{{ \Illuminate\Support\Facades\Storage::url($image->image_path) }}" alt=""
+                                 class="h-20 w-full object-cover rounded" style="border-radius: var(--radius-sm); border: 1px solid var(--color-border);">
+                            <button type="button"
+                                    data-delete-url="{{ route('admin.package-images.destroy', $image) }}"
+                                    data-delete-token="{{ csrf_token() }}"
+                                    data-delete-confirm="Remove this image?"
+                                    aria-label="Remove image"
+                                    class="text-white text-xs rounded-full w-5 h-5 flex items-center justify-center absolute top-1 right-1 disabled:opacity-50"
                                     style="background: var(--color-danger);">
                                 &times;
                             </button>
-                        </form>
-                    </div>
-                @endforeach
+                        </div>
+                    @endforeach
+                </div>
             </div>
         @endif
 
-        <label class="field-label">Add gallery images</label>
+        <label class="field-label">Add Gallery Images</label>
         <input type="file" name="images[]" accept="image/*" multiple class="text-sm">
         <div class="field-hint">JPG or PNG, up to 4MB each. New images are appended to the gallery above.</div>
     </div>

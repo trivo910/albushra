@@ -3,16 +3,29 @@
 @section('title', 'General Settings')
 
 @section('content')
-    <form method="POST" action="{{ route('admin.settings.update') }}" class="panel p-6 max-w-3xl">
+    <form method="POST" action="{{ route('admin.settings.update') }}" enctype="multipart/form-data" class="panel p-6 max-w-3xl">
         @csrf
         @method('PUT')
 
         <div class="form-section">
-            <div class="form-section-title">General</div>
+            <div class="form-section-title">Branding</div>
+            <div class="field-hint mb-3">Upload the site logo. It appears in the public header and footer. Recommended: a transparent PNG or SVG, at least 240px wide.</div>
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                     <label class="field-label">Site name</label>
                     <input type="text" name="site_name" value="{{ old('site_name', $setting->site_name) }}" class="field-input">
+                </div>
+                <div>
+                    <label class="field-label">Site logo</label>
+                    <input type="file" name="site_logo" accept="image/*" class="text-sm">
+                    @if ($setting->site_logo)
+                        <div class="mt-3 flex items-center gap-3">
+                            <img src="{{ \Illuminate\Support\Facades\Storage::url($setting->site_logo) }}" alt="Current site logo" class="h-12 w-auto rounded border" style="border-color: var(--color-border); background: #fff;">
+                            <span class="text-xs" style="color: var(--color-text-muted);">{{ $setting->site_logo }}</span>
+                        </div>
+                    @else
+                        <div class="mt-2 text-xs" style="color: var(--color-text-muted);">No logo uploaded yet.</div>
+                    @endif
                 </div>
                 <div>
                     <label class="field-label">Email</label>

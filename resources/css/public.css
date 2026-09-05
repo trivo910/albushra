@@ -142,3 +142,12 @@ body {
         @apply rounded-xl my-4;
     }
 }
+
+@layer utilities {
+    /* Show the desktop dropdown when the parent is "open" (mobile click) */
+    @media (max-width: 1023.98px) {
+        [data-dropdown].is-open > div {
+            display: block;
+        }
+    }
+}

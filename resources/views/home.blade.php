@@ -67,7 +67,7 @@
                     <p class="eyebrow">Our Hajj Packages</p>
                     <h2 class="section-title !mb-0">Our Special Hajj Packages</h2>
                 </div>
-                <a href="{{ route('packages.hajj') }}" class="btn-brand-outline">View All Hajj Packages</a>
+                <a href="{{ route('packages.category', 'hajj') }}" class="btn-brand-outline">View All Hajj Packages</a>
             </div>
 
             @if ($hajjPackages->isEmpty())

@@ -24,6 +24,15 @@
                    placeholder="{{ $page->exists ? '' : 'auto-generated from title if left blank' }}"
                    class="field-input">
         </div>
+
+        <div class="mt-4">
+            <label class="field-label">Featured image</label>
+            @if ($page->featured_image)
+                <img src="{{ \Illuminate\Support\Facades\Storage::url($page->featured_image) }}" alt=""
+                     class="h-24 mb-2 object-cover" style="border-radius: var(--radius-sm); border: 1px solid var(--color-border);">
+            @endif
+            <input type="file" name="featured_image" accept="image/*" class="text-sm">
+        </div>
     </div>
 
     <div class="form-section">

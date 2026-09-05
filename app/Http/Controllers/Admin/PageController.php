@@ -7,6 +7,7 @@ use App\Http\Requests\Admin\StorePageRequest;
 use App\Http\Requests\Admin\UpdatePageRequest;
 use App\Models\Page;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
 class PageController extends Controller
@@ -27,7 +28,13 @@ class PageController extends Controller
 
     public function store(StorePageRequest $request): RedirectResponse
     {
-        Page::create($request->validated());
+        $data = $request->validated();
+
+        if ($request->hasFile('featured_image')) {
+            $data['featured_image'] = $request->file('featured_image')->store('pages', 'public');
+        }
+
+        Page::create($data);
 
         return redirect()->route('admin.pages.index')->with('success', 'Page created successfully.');
     }
@@ -41,13 +48,26 @@ class PageController extends Controller
 
     public function update(UpdatePageRequest $request, Page $page): RedirectResponse
     {
-        $page->update($request->validated());
+        $data = $request->validated();
+
+        if ($request->hasFile('featured_image')) {
+            if ($page->featured_image) {
+                Storage::disk('public')->delete($page->featured_image);
+            }
+            $data['featured_image'] = $request->file('featured_image')->store('pages', 'public');
+        }
+
+        $page->update($data);
 
         return redirect()->route('admin.pages.index')->with('success', 'Page updated successfully.');
     }
 
     public function destroy(Page $page): RedirectResponse
     {
+        if ($page->featured_image) {
+            Storage::disk('public')->delete($page->featured_image);
+        }
+
         $page->delete();
 
         return redirect()->route('admin.pages.index')->with('success', 'Page deleted successfully.');
