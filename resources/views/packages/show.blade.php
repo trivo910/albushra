@@ -13,7 +13,7 @@
         <div class="container-p py-3 text-sm" style="color: var(--p-grey);">
             <a href="{{ route('home') }}" class="hover:opacity-70">Home</a>
             <span class="mx-1">/</span>
-            <a href="{{ $package->category === 'hajj' ? route('packages.hajj') : route('packages.index') }}" class="hover:opacity-70 capitalize">{{ $package->category }}</a>
+            <a href="{{ route('packages.category', $package->category) }}" class="hover:opacity-70 capitalize">{{ $package->category }}</a>
             <span class="mx-1">/</span>
             <span style="color: var(--p-navy);">{{ $package->title }}</span>
         </div>
