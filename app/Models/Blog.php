@@ -16,6 +16,7 @@ class Blog extends Model
         'title',
         'slug',
         'featured_image',
+        'featured_image_alt',
         'content',
         'status',
         'published_at',

@@ -22,10 +22,16 @@
         <div class="mt-4">
             <label class="field-label">Featured image</label>
             @if ($blog->featured_image)
-                <img src="{{ \Illuminate\Support\Facades\Storage::url($blog->featured_image) }}" alt=""
+                <img src="{{ \Illuminate\Support\Facades\Storage::url($blog->featured_image) }}" alt="{{ $blog->featured_image_alt }}"
                      class="h-24 mb-2 object-cover" style="border-radius: var(--radius-sm); border: 1px solid var(--color-border);">
             @endif
             <input type="file" name="featured_image" accept="image/*" class="text-sm">
+
+            <div class="mt-3">
+                <label class="field-label">Featured image alt text</label>
+                <input type="text" name="featured_image_alt" value="{{ old('featured_image_alt', $blog->featured_image_alt) }}" class="field-input">
+                <p class="field-hint">Describe the image for screen readers and search engines.</p>
+            </div>
         </div>
     </div>
 

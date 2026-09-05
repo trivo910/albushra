@@ -35,6 +35,7 @@ class UpdatePackageRequest extends FormRequest
             'images' => ['nullable', 'array'],
             'images.*' => ['image', 'mimes:jpg,jpeg,png,webp', 'max:4096'],
             'thumbnail' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:4096'],
+            'thumbnail_alt' => ['nullable', 'string', 'max:255'],
         ];
     }
 }

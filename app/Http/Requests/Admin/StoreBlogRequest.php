@@ -16,6 +16,7 @@ class StoreBlogRequest extends FormRequest
         return [
             'title' => ['required', 'string', 'max:255'],
             'featured_image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:4096'],
+            'featured_image_alt' => ['nullable', 'string', 'max:255'],
             'content' => ['nullable', 'string'],
             'status' => ['required', 'in:draft,published'],
             'published_at' => ['nullable', 'date'],

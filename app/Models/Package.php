@@ -30,6 +30,7 @@ class Package extends Model
         'rating_count',
         'is_featured',
         'thumbnail',
+        'thumbnail_alt',
         'status',
         'meta_title',
         'meta_description',

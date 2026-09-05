@@ -98,6 +98,12 @@
             @endif
             <input type="file" name="thumbnail" accept="image/*" class="text-sm">
             <div class="field-hint">JPG or PNG, up to 4MB. Replace the current thumbnail by uploading a new one.</div>
+
+            <div class="mt-3">
+                <label class="field-label">Thumbnail alt text</label>
+                <input type="text" name="thumbnail_alt" value="{{ old('thumbnail_alt', $package->thumbnail_alt) }}" class="field-input">
+                <p class="field-hint">Describe the image for screen readers and search engines, e.g. "5-star hotel near Masjid al-Haram".</p>
+            </div>
         </div>
 
         {{-- Gallery --}}

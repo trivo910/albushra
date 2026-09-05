@@ -17,6 +17,7 @@ class UpdateBlogRequest extends FormRequest
             'title' => ['required', 'string', 'max:255'],
             'slug' => ['required', 'string', 'max:255', 'alpha_dash', 'unique:blogs,slug,'.$this->route('blog')->id],
             'featured_image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:4096'],
+            'featured_image_alt' => ['nullable', 'string', 'max:255'],
             'content' => ['nullable', 'string'],
             'status' => ['required', 'in:draft,published'],
             'published_at' => ['nullable', 'date'],
