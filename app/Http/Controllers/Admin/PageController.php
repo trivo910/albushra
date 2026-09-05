@@ -6,7 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StorePageRequest;
 use App\Http\Requests\Admin\UpdatePageRequest;
 use App\Models\Page;
+use App\Services\SeoAnalyzer;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
@@ -60,6 +63,20 @@ class PageController extends Controller
         $page->update($data);
 
         return redirect()->route('admin.pages.index')->with('success', 'Page updated successfully.');
+    }
+
+    public function seoPreview(Request $request, SeoAnalyzer $seoAnalyzer): JsonResponse
+    {
+        $data = $request->validate([
+            'focus_keyword' => ['nullable', 'string', 'max:255'],
+            'title' => ['nullable', 'string', 'max:255'],
+            'slug' => ['nullable', 'string', 'max:255'],
+            'meta_title' => ['nullable', 'string', 'max:255'],
+            'meta_description' => ['nullable', 'string', 'max:255'],
+            'content' => ['nullable', 'string'],
+        ]);
+
+        return response()->json($seoAnalyzer->analyze($data));
     }
 
     public function destroy(Page $page): RedirectResponse

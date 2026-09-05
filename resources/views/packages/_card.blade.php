@@ -4,7 +4,7 @@
 <div class="card-p flex flex-col">
     <a href="{{ route('packages.show', $package) }}" class="block h-48 overflow-hidden shrink-0">
         @if ($thumbPath)
-            <img src="{{ \Illuminate\Support\Facades\Storage::url($thumbPath) }}" alt="{{ $package->title }}" class="w-full h-full object-cover">
+            <img src="{{ \Illuminate\Support\Facades\Storage::url($thumbPath) }}" alt="{{ $package->thumbnail_alt ?: $package->title }}" class="w-full h-full object-cover">
         @else
             <div class="w-full h-full flex items-center justify-center" style="background: var(--p-light-grey);">
                 <span class="text-xs" style="color: var(--p-grey);">{{ $package->title }}</span>

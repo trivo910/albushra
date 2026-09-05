@@ -177,6 +177,7 @@ body {
     .badge-contacted { background: var(--status-contacted-bg); color: var(--status-contacted-text); }
     .badge-closed { background: var(--status-closed-bg); color: var(--status-closed-text); }
     .badge-neutral { background: var(--color-surface-muted); color: var(--color-text-muted); border: 1px solid var(--color-border); }
+    .badge-danger { background: var(--color-danger-soft); color: var(--color-danger); }
 
     /* Alerts */
     .alert-success {

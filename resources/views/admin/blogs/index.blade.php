@@ -22,6 +22,7 @@
                         <tr>
                             @include('admin.partials.sortable-th', ['field' => 'title', 'label' => 'Title'])
                             @include('admin.partials.sortable-th', ['field' => 'status', 'label' => 'Status'])
+                            <th>SEO</th>
                             @include('admin.partials.sortable-th', ['field' => 'published_at', 'label' => 'Published'])
                             <th class="text-right">Actions</th>
                         </tr>
@@ -35,6 +36,20 @@
                                 </td>
                                 <td>
                                     <span class="badge badge-{{ $blog->status }}">{{ ucfirst($blog->status) }}</span>
+                                </td>
+                                <td>
+                                    @if ($blog->seo_score_label && $blog->seo_score_label !== 'none')
+                                        @php
+                                            $seoBadgeClass = match ($blog->seo_score_label) {
+                                                'good' => 'badge-published',
+                                                'ok' => 'badge-draft',
+                                                default => 'badge-danger',
+                                            };
+                                        @endphp
+                                        <span class="badge {{ $seoBadgeClass }}">{{ $blog->seo_score }}/100</span>
+                                    @else
+                                        <span class="text-xs" style="color: var(--color-text-faint);">—</span>
+                                    @endif
                                 </td>
                                 <td style="color: var(--color-text-muted);">{{ $blog->published_at?->format('d M Y') ?? '—' }}</td>
                                 <td class="text-right whitespace-nowrap">
