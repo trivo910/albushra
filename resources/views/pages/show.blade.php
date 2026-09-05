@@ -14,6 +14,15 @@
         </div>
     </section>
 
+    @if ($page->featured_image)
+        <div class="container-p max-w-4xl mx-auto mt-8 sm:mt-10">
+            <img src="{{ \Illuminate\Support\Facades\Storage::url($page->featured_image) }}"
+                 alt="{{ $page->title }}"
+                 class="w-full h-auto object-cover"
+                 style="border-radius: var(--radius-md); border: 1px solid var(--color-border);">
+        </div>
+    @endif
+
     <section class="py-12 sm:py-16">
         <div class="container-p max-w-3xl mx-auto prose-p text-sm leading-relaxed" style="color: var(--p-grey);">
             {!! $page->content !!}

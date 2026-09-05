@@ -1,11 +1,22 @@
 @php
     $__settings = \App\Models\Setting::current();
     $__trending = \App\Models\Package::where('status', 'published')->latest()->limit(6)->get();
+    $__logoUrl = $__settings->site_logo
+        ? \Illuminate\Support\Facades\Storage::url($__settings->site_logo)
+        : (file_exists(public_path('images/al-bushra-logo.png')) ? asset('images/al-bushra-logo.png') : null);
+    $__hasLogo = !empty($__logoUrl);
 @endphp
 <footer class="font-poppins" style="background: var(--p-navy); color: #c7d0dc;">
     <div class="container-p py-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
         <div>
-            <div class="text-lg font-bold text-white mb-3">{{ $__settings->site_name ?? config('app.name') }}</div>
+            <a href="{{ route('home') }}" class="inline-flex items-center mb-3" aria-label="{{ $__settings->site_name ?? config('app.name') }}">
+                @if ($__hasLogo)
+                    <img src="{{ $__logoUrl }}" alt="{{ $__settings->site_name ?? config('app.name') }}" class="h-14 w-auto rounded-md p-1" style="background: #ffffff;">
+                    <span class="sr-only">{{ $__settings->site_name ?? config('app.name') }}</span>
+                @else
+                    <div class="text-lg font-bold text-white">{{ $__settings->site_name ?? config('app.name') }}</div>
+                @endif
+            </a>
             <p class="text-sm leading-relaxed mb-5" style="color: #93a0b3;">
                 Your trusted companion on the most sacred journeys of your life — Hajj and Umrah, handled with sincerity and care.
             </p>

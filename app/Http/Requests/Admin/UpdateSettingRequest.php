@@ -15,6 +15,7 @@ class UpdateSettingRequest extends FormRequest
     {
         return [
             'site_name' => ['nullable', 'string', 'max:255'],
+            'site_logo' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp,svg', 'max:2048'],
             'phone' => ['nullable', 'string', 'max:50'],
             'phone_secondary' => ['nullable', 'string', 'max:50'],
             'email' => ['nullable', 'email', 'max:255'],

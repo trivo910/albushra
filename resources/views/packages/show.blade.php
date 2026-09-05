@@ -36,10 +36,10 @@
 
         {{-- Gallery --}}
         @if ($package->images->isNotEmpty())
-            <div data-lightbox-trigger class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-10">
+            <div data-lightbox-trigger class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-10" style="grid-auto-rows: minmax(120px, 1fr);">
                 @foreach ($package->images as $i => $image)
                     <a href="{{ \Illuminate\Support\Facades\Storage::url($image->image_path) }}"
-                       class="{{ $i === 0 ? 'col-span-2 row-span-2' : '' }} block rounded-xl overflow-hidden {{ $i === 0 ? 'h-64 sm:h-full' : 'h-32' }}">
+                       class="{{ $i === 0 ? 'col-span-2 row-span-2' : '' }} block rounded-xl overflow-hidden">
                         <img src="{{ \Illuminate\Support\Facades\Storage::url($image->image_path) }}" alt="{{ $package->title }}" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300">
                     </a>
                 @endforeach

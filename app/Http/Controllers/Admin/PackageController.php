@@ -9,6 +9,7 @@ use App\Http\Requests\Admin\UpdatePackageRequest;
 use App\Models\Package;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
 class PackageController extends Controller
@@ -41,6 +42,7 @@ class PackageController extends Controller
 
         $package = Package::create($data);
 
+        $this->storeThumbnail($request, $package);
         $this->storeImages($request, $package);
 
         return redirect()->route('admin.packages.index')->with('success', 'Package created successfully.');
@@ -59,6 +61,7 @@ class PackageController extends Controller
 
         $package->update($data);
 
+        $this->storeThumbnail($request, $package);
         $this->storeImages($request, $package);
 
         return redirect()->route('admin.packages.index')->with('success', 'Package updated successfully.');
@@ -66,8 +69,12 @@ class PackageController extends Controller
 
     public function destroy(Package $package): RedirectResponse
     {
+        if ($package->thumbnail) {
+            Storage::disk('public')->delete($package->thumbnail);
+        }
+
         foreach ($package->images as $image) {
-            \Illuminate\Support\Facades\Storage::disk('public')->delete($image->image_path);
+            Storage::disk('public')->delete($image->image_path);
         }
 
         $package->delete();
@@ -86,7 +93,7 @@ class PackageController extends Controller
             $data['rating'] = 0;
         }
 
-        unset($data['images']);
+        unset($data['images'], $data['thumbnail']);
 
         return $data;
     }
@@ -105,5 +112,20 @@ class PackageController extends Controller
                 'sort_order' => $nextSort++,
             ]);
         }
+    }
+
+    private function storeThumbnail(StorePackageRequest|UpdatePackageRequest $request, Package $package): void
+    {
+        if (! $request->hasFile('thumbnail')) {
+            return;
+        }
+
+        // Remove the previous thumbnail file (if any) before storing the new one
+        if ($package->thumbnail) {
+            Storage::disk('public')->delete($package->thumbnail);
+        }
+
+        $package->thumbnail = $request->file('thumbnail')->store('packages', 'public');
+        $package->save();
     }
 }

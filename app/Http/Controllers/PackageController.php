@@ -18,9 +18,9 @@ class PackageController extends Controller
         return $this->listing(null);
     }
 
-    public function hajj(): View
+    public function category(string $category): View
     {
-        return $this->listing('hajj');
+        return $this->listing($category);
     }
 
     private function listing(?string $category): View

@@ -28,6 +28,7 @@ class Package extends Model
         'map_embed',
         'rating',
         'is_featured',
+        'thumbnail',
         'status',
         'meta_title',
         'meta_description',
