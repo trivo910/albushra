@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\HeroSlideController;
 use App\Http\Controllers\Admin\PackageController;
 use App\Http\Controllers\Admin\PackageImageController;
 use App\Http\Controllers\Admin\PageController;
+use App\Http\Controllers\Admin\ReviewController;
 use App\Http\Controllers\Admin\SettingController;
 use Illuminate\Support\Facades\Route;
 
@@ -44,6 +45,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::post('faqs/{faq}/move-down', [FaqController::class, 'moveDown'])->name('faqs.move-down');
 
         Route::resource('enquiries', EnquiryController::class)->only(['index', 'show', 'update']);
+
+        Route::resource('reviews', ReviewController::class)->only(['index', 'destroy']);
+        Route::post('reviews/bulk-destroy', [ReviewController::class, 'bulkDestroy'])->name('reviews.bulk-destroy');
 
         Route::get('gallery', [GalleryController::class, 'index'])->name('gallery.index');
         Route::post('gallery', [GalleryController::class, 'store'])->name('gallery.store');
