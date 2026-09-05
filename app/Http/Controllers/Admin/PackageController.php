@@ -88,11 +88,6 @@ class PackageController extends Controller
         $data['excluded'] = array_values(array_filter($data['excluded'] ?? [], fn ($v) => trim((string) $v) !== ''));
         $data['is_featured'] = (bool) ($data['is_featured'] ?? false);
 
-        // rating is NOT NULL in the DB — default to 0 when missing or null
-        if (! isset($data['rating']) || $data['rating'] === null || $data['rating'] === '') {
-            $data['rating'] = 0;
-        }
-
         unset($data['images'], $data['thumbnail']);
 
         return $data;

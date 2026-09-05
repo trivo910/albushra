@@ -33,6 +33,7 @@
                         ],
                         'Operations' => [
                             ['route' => 'admin.enquiries.index', 'pattern' => 'admin.enquiries.*', 'label' => 'Enquiries'],
+                            ['route' => 'admin.reviews.index', 'pattern' => 'admin.reviews.*', 'label' => 'Reviews'],
                         ],
                         'Settings' => [
                             ['route' => 'admin.settings.edit', 'pattern' => 'admin.settings.*', 'label' => 'General Settings'],
