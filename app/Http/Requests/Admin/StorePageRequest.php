@@ -20,6 +20,7 @@ class StorePageRequest extends FormRequest
             'featured_image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:4096'],
             'meta_title' => ['nullable', 'string', 'max:255'],
             'meta_description' => ['nullable', 'string', 'max:255'],
+            'focus_keyword' => ['nullable', 'string', 'max:255'],
         ];
     }
 }
