@@ -16,7 +16,6 @@
         <a href="{{ route('home') }}" class="shrink-0 inline-flex items-center" aria-label="{{ $__settings->site_name ?? config('app.name') }}">
             @if ($__hasLogo)
                 <img src="{{ $__logoUrl }}" alt="{{ $__settings->site_name ?? config('app.name') }}" class="h-20 w-auto">
-                <span class="sr-only">{{ $__settings->site_name ?? config('app.name') }}</span>
             @else
                 <span class="font-poppins text-xl font-bold" style="color: var(--p-navy);">
                     {{ $__settings->site_name ?? config('app.name') }}
