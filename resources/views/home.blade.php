@@ -343,36 +343,65 @@
     </div>
 </section>
 
-    {{-- FAQ accordion --}}
-    <section class="py-16 sm:py-20">
-        <div class="container-p max-w-3xl mx-auto">
-            <div class="text-center mb-10">
-                <p class="eyebrow">Have Questions?</p>
-                <h2 class="section-title">FAQs</h2>
+    {{-- FAQ Accordion --}}
+
+<section class="faq-section">
+
+    <div class="faq-container">
+
+        {{-- Heading --}}
+        <div class="faq-heading">
+
+            <!-- <p class="faq-eyebrow">
+                Have Questions?
+            </p> -->
+
+            <h2 class="faq-title">
+                FAQs
+            </h2>
+
+        </div>
+
+
+        @if ($faqs->isEmpty())
+
+            <p class="faq-empty">
+                FAQs will appear here once added from the admin panel.
+            </p>
+
+        @else
+
+            <div class="faq-list">
+
+    @foreach ($faqs as $faq)
+
+        <details class="faq-item">
+
+            <summary class="faq-question">
+
+                <span>
+                    {{ $faq->question }}
+                </span>
+
+                <span class="faq-icon">+</span>
+
+            </summary>
+
+            <div class="faq-answer">
+                {{ $faq->answer }}
             </div>
 
-            @if ($faqs->isEmpty())
-                <p class="text-center" style="color: var(--p-grey);">FAQs will appear here once added from the admin panel.</p>
-            @else
-                <div class="divide-y" style="border-color: var(--p-light-grey);">
-                    @foreach ($faqs as $faq)
-                        <details class="accordion-p" style="border-bottom: 1px solid var(--p-light-grey);">
-                            <summary>
-                                <span>{{ $faq->question }}</span>
-                                <span class="accordion-icon">
-                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--p-primary)" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
-                                </span>
-                            </summary>
-                            <p class="pb-4 text-sm leading-relaxed" style="color: var(--p-grey);">{{ $faq->answer }}</p>
-                        </details>
-                    @endforeach
-                </div>
-                <div class="text-center mt-8">
-                    <a href="{{ route('faqs.index') }}" class="btn-brand-outline">View All FAQs</a>
-                </div>
-            @endif
-        </div>
-    </section>
+        </details>
+
+    @endforeach
+
+</div>
+
+        @endif
+
+    </div>
+
+</section>
 @endsection
 
 
@@ -1470,6 +1499,302 @@ color: #36BCA1;
         height: 300px;
     }
 }
-</style>
+
+/* =========================================
+   FAQ SECTION
+========================================= */
+
+.faq-section {
+    width: 100%;
+    background: #ffffff;
+    padding: 55px 0 70px;
+}
+
+.faq-container {
+    width: 100%;
+    max-width: 1000px;
+
+    margin: 0 auto;
+
+    padding-left: 25px;
+    padding-right: 25px;
+}
+
+
+/* =========================================
+   FAQ HEADING
+========================================= */
+
+.faq-heading {
+    width: 100%;
+
+    text-align: center;
+
+    margin: 0 auto 30px;
+}
+
+.faq-eyebrow {
+    color: #24b8a8;
+
+    font-size: 18px;
+    font-weight: 600;
+
+    margin: 0 0 5px;
+}
+
+.faq-title {
+    color: #172f52;
+
+    font-size: 34px;
+    line-height: 1.2;
+    font-weight: 700;
+
+    margin: 0;
+
+    text-align: center;
+}
+
+
+/* =========================================
+   FAQ LIST
+========================================= */
+
+.faq-list {
+    width: 100%;
+}
+
+
+/* =========================================
+   FAQ ITEM
+========================================= */
+
+.faq-item {
+    width: 100%;
+
+    margin-bottom: 14px;
+
+    border: none;
+
+    border-radius: 14px;
+
+    overflow: hidden;
+
+    background: transparent;
+}
+
+
+/* =========================================
+   QUESTION
+========================================= */
+
+.faq-question {
+    width: 100%;
+    min-height: 62px;
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    background: #4b126d;
+    color: #ffffff;
+    border-radius: 14px;
+    cursor: pointer;
+    list-style: none;
+    font-size: 16px;
+    font-weight: 600;
+
+    transition:
+        background-color 0.3s ease,
+        border-radius 0.3s ease;
+}
+
+
+/* Remove default arrow */
+
+.faq-question::-webkit-details-marker {
+    display: none;
+}
+
+.faq-question::marker {
+    display: none;
+}
+
+
+/* Question text */
+
+.faq-question > span:first-child {
+    flex: 1;
+    text-align: center;
+    line-height: 1.4;
+    font-size: 18px;
+}
+
+
+/* =========================================
+   PLUS ICON
+========================================= */
+
+.faq-icon {
+    width: 28px;
+    height: 28px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 24px;
+    font-weight: 400;
+
+    color: #ffffff;
+
+    transition: transform 0.3s ease;
+}
+
+
+/* =========================================
+   OPEN FAQ
+========================================= */
+
+.faq-item[open] .faq-question {
+    border-radius: 14px 14px 14px 14px;
+}
+
+.faq-item[open] .faq-icon {
+    transform: rotate(45deg);
+}
+
+
+/* =========================================
+   ANSWER
+========================================= */
+
+.faq-answer {
+    width: 100%;
+
+    background: #ffffff;
+
+    color: #000000;
+    margin: 20px 0 0;
+    padding: 18px 22px 20px;
+
+    font-size: 16px;
+
+    line-height: 1.55;
+
+    border-radius: 14px 14px 14px 14px;
+
+    /* border-left: 1px solid #eeeeee; */
+    border-right: 5px solid #d9dcdf;
+    border-bottom: 5px solid #d9dcdf;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================
+   HOVER
+========================================= */
+
+@media (hover: hover) and (pointer: fine) {
+
+    .faq-question:hover {
+        background: #5a197d;
+    }
+
+}
+
+
+/* =========================================
+   EMPTY MESSAGE
+========================================= */
+
+.faq-empty {
+    text-align: center;
+
+    color: var(--p-grey);
+
+    font-size: 15px;
+
+    margin: 30px auto;
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 600px) {
+
+    .faq-section {
+        padding: 45px 0 55px;
+    }
+
+    .faq-container {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    .faq-heading {
+        margin-bottom: 25px;
+    }
+
+    .faq-eyebrow {
+        font-size: 17px;
+    }
+
+    .faq-title {
+        font-size: 29px;
+    }
+
+    .faq-question {
+        min-height: 58px;
+
+        padding: 14px 16px;
+
+        font-size: 14px;
+
+        gap: 10px;
+    }
+
+    .faq-question > span:first-child {
+        text-align: center;
+    }
+
+    .faq-icon {
+        width: 24px;
+        height: 24px;
+
+        font-size: 22px;
+    }
+
+    .faq-answer {
+        padding: 16px;
+
+        font-size: 14px;
+
+        line-height: 1.55;
+    }
+
+}
+
+
+/* =========================================
+   SMALL MOBILE
+========================================= */
+
+@media (max-width: 400px) {
+
+    .faq-question {
+        font-size: 13px;
+        padding: 13px 14px;
+    }
+
+    .faq-answer {
+        font-size: 13px;
+    }
+
+}
 
 </style>
