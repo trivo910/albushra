@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Models\Enquiry;
+use App\Observers\EnquiryObserver;
 use App\Support\MailConfigurator;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Http\Request;
@@ -58,5 +60,7 @@ class AppServiceProvider extends ServiceProvider
         });
 
         MailConfigurator::apply();
+
+        Enquiry::observe(EnquiryObserver::class);
     }
 }

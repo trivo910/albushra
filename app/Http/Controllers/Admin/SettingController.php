@@ -11,6 +11,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\View\View;
 use Throwable;
 
@@ -52,7 +53,20 @@ class SettingController extends Controller
     {
         $validated = $request->validate([
             'test_email' => ['required', 'email', 'max:255'],
+            'test_cc' => ['nullable', 'string', 'max:1000'],
         ]);
+
+        $ccEmails = $this->splitEmailList($validated['test_cc'] ?? null);
+
+        $ccValidator = Validator::make(['cc' => $ccEmails], [
+            'cc.*' => ['email:rfc'],
+        ]);
+
+        if ($ccValidator->fails()) {
+            return redirect()->route('admin.settings.edit')
+                ->withErrors($ccValidator)
+                ->with('error', 'One or more CC email addresses are invalid.');
+        }
 
         $setting = Setting::current();
 
@@ -64,13 +78,32 @@ class SettingController extends Controller
         try {
             MailConfigurator::apply();
 
-            Mail::to($validated['test_email'])->send(new TestSmtpMail($setting->site_name ?: config('app.name')));
+            Mail::to($validated['test_email'])
+                ->cc($ccEmails)
+                ->send(new TestSmtpMail($setting->site_name ?: config('app.name')));
         } catch (Throwable $e) {
             return redirect()->route('admin.settings.edit')
                 ->with('error', 'Could not send the test email: '.$e->getMessage());
         }
 
+        $recipients = implode(', ', array_merge([$validated['test_email']], $ccEmails));
+
         return redirect()->route('admin.settings.edit')
-            ->with('success', "Test email sent to {$validated['test_email']}.");
+            ->with('success', "Test email sent to {$recipients}.");
+    }
+
+    /**
+     * Split a comma-separated email list into a clean array of addresses.
+     *
+     * @return array<int, string>
+     */
+    private function splitEmailList(?string $value): array
+    {
+        return collect(explode(',', (string) $value))
+            ->map(fn (string $email) => trim($email))
+            ->filter()
+            ->unique()
+            ->values()
+            ->all();
     }
 }

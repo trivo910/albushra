@@ -196,9 +196,14 @@
                 <label class="field-label">Send to</label>
                 <input type="email" name="test_email" value="{{ old('test_email', $setting->email) }}" required class="field-input">
             </div>
+            <div class="flex-1 w-full">
+                <label class="field-label">CC (optional)</label>
+                <input type="text" name="test_cc" value="{{ old('test_cc') }}" placeholder="cc1@example.com, cc2@example.com" class="field-input">
+            </div>
             <button type="submit" class="btn btn-secondary">
                 Send test email
             </button>
         </form>
+        <div class="field-hint mt-2">Separate multiple CC addresses with commas.</div>
     </div>
 @endsection
