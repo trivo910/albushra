@@ -157,11 +157,11 @@
 
     <div class="form-section">
         <div class="form-section-title">Itinerary Overview</div>
-        <p class="field-hint mb-3">Add each leg of the journey. <strong>Days</strong> is a short label like "5 Days" or "9/10 Days". <strong>Description</strong> can include multiple lines.</p>
+        <p class="field-hint mb-3">Each card below is <strong>one itinerary entry</strong> (e.g. one leg of the trip). Fill in the <strong>Days</strong> label and the <strong>Description</strong> within the same card. Use <strong>+ Add itinerary</strong> to add another entry.</p>
 
         <div data-repeatable-list data-name="itineraries" data-complex="1">
-            <div data-repeatable-rows class="space-y-2"></div>
-            <button type="button" data-add-row class="btn-link-muted mt-2">+ Add itinerary</button>
+            <div data-repeatable-rows class="space-y-3"></div>
+            <button type="button" data-add-row class="btn-link-muted mt-3">+ Add itinerary</button>
         </div>
     </div>
 
@@ -202,20 +202,36 @@
                 return String(value ?? '').replace(/"/g, '&quot;');
             }
 
+            function renumber() {
+                if (!isComplex) return;
+                rowsWrapper.querySelectorAll('[data-row-index]').forEach((el, idx) => {
+                    el.textContent = 'Item ' + (idx + 1);
+                });
+            }
+
             function addRow(value) {
                 const row = document.createElement('div');
                 row.className = isComplex
-                    ? 'rounded-lg border p-3 space-y-2'
+                    ? 'relative rounded-lg border p-4 pl-5 space-y-3'
                     : 'flex gap-2';
 
                 if (isComplex) {
                     const v = (typeof value === 'object' && value !== null) ? value : { days: '', description: '' };
+                    row.style.borderLeft = '4px solid #2f9e5c';
+                    row.style.background = '#f9fafb';
                     row.innerHTML = `
-                        <div class="flex gap-2">
-                            <input type="text" name="${name}[][days]" value="${escape(v.days)}" placeholder="e.g. 5 Days" class="field-input" style="max-width: 200px;">
-                            <button type="button" data-remove-row class="btn-link-danger px-2 self-start">&times;</button>
+                        <div class="flex items-center justify-between gap-2">
+                            <span data-row-index class="text-xs font-semibold uppercase tracking-wide" style="color: #2f9e5c;"></span>
+                            <button type="button" data-remove-row class="btn-link-danger px-2" aria-label="Remove this itinerary">&times;</button>
                         </div>
-                        <textarea name="${name}[][description]" rows="2" placeholder="Description (one line per location is fine)" class="field-input">${escape(v.description)}</textarea>
+                        <div>
+                            <label class="field-label" style="font-size: 0.75rem;">Days label</label>
+                            <input type="text" name="${name}[][days]" value="${escape(v.days)}" placeholder="e.g. 5 Days" class="field-input" style="max-width: 200px;">
+                        </div>
+                        <div>
+                            <label class="field-label" style="font-size: 0.75rem;">Description</label>
+                            <textarea name="${name}[][description]" rows="2" placeholder="e.g. Aziz Hotel Stay (one line per location is fine)" class="field-input">${escape(v.description)}</textarea>
+                        </div>
                     `;
                 } else {
                     row.innerHTML = `
@@ -224,8 +240,12 @@
                     `;
                 }
 
-                row.querySelector('[data-remove-row]').addEventListener('click', () => row.remove());
+                row.querySelector('[data-remove-row]').addEventListener('click', () => {
+                    row.remove();
+                    renumber();
+                });
                 rowsWrapper.appendChild(row);
+                renumber();
             }
 
             addButton.addEventListener('click', () => addRow());
