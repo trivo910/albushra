@@ -71,6 +71,28 @@
                     </div>
                 </div>
 
+                {{-- Itinerary Overview --}}
+                @if ($package->itineraries->isNotEmpty())
+                    <div class="mb-10">
+                        <h2 class="section-title !text-xl">Itinerary Overview</h2>
+                        <div class="space-y-3">
+                            @foreach ($package->itineraries as $itinerary)
+                                <div class="flex items-stretch rounded-xl overflow-hidden border" style="border-color: var(--p-light-grey);">
+                                    <div class="hidden sm:block w-2 shrink-0" style="background: var(--p-light-grey);"></div>
+                                    <div class="flex-1 p-4 bg-white">
+                                        @if (! empty($itinerary->days))
+                                            <div class="font-poppins font-bold text-base mb-1" style="color: #2f9e5c;">{{ $itinerary->days }}</div>
+                                        @endif
+                                        @if (! empty($itinerary->description))
+                                            <div class="text-sm leading-relaxed" style="color: var(--p-navy); white-space: pre-line;">{{ $itinerary->description }}</div>
+                                        @endif
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                @endif
+
                 {{-- Included / Excluded --}}
                 @if (! empty($package->included) || ! empty($package->excluded))
                     <div class="mb-10">

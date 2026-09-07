@@ -44,6 +44,7 @@ class PackageController extends Controller
 
         $this->storeThumbnail($request, $package);
         $this->storeImages($request, $package);
+        $this->syncItineraries($request, $package);
 
         return redirect()->route('admin.packages.index')->with('success', 'Package created successfully.');
     }
@@ -51,7 +52,7 @@ class PackageController extends Controller
     public function edit(Package $package): View
     {
         return view('admin.packages.edit', [
-            'package' => $package->load('images'),
+            'package' => $package->load(['images', 'itineraries']),
         ]);
     }
 
@@ -63,6 +64,7 @@ class PackageController extends Controller
 
         $this->storeThumbnail($request, $package);
         $this->storeImages($request, $package);
+        $this->syncItineraries($request, $package);
 
         return redirect()->route('admin.packages.index')->with('success', 'Package updated successfully.');
     }
@@ -88,9 +90,31 @@ class PackageController extends Controller
         $data['excluded'] = array_values(array_filter($data['excluded'] ?? [], fn ($v) => trim((string) $v) !== ''));
         $data['is_featured'] = (bool) ($data['is_featured'] ?? false);
 
-        unset($data['images'], $data['thumbnail']);
+        unset($data['images'], $data['thumbnail'], $data['itineraries']);
 
         return $data;
+    }
+
+    private function syncItineraries(StorePackageRequest|UpdatePackageRequest $request, Package $package): void
+    {
+        $rows = $request->input('itineraries', []);
+
+        // Drop empty rows (no days AND no description)
+        $rows = array_values(array_filter($rows, function ($row) {
+            return trim((string) ($row['days'] ?? '')) !== ''
+                || trim((string) ($row['description'] ?? '')) !== '';
+        }));
+
+        // Replace the package's itineraries atomically
+        $package->itineraries()->delete();
+
+        foreach ($rows as $i => $row) {
+            $package->itineraries()->create([
+                'days' => trim((string) ($row['days'] ?? '')) ?: null,
+                'description' => trim((string) ($row['description'] ?? '')) ?: null,
+                'sort_order' => $i,
+            ]);
+        }
     }
 
     private function storeImages(StorePackageRequest|UpdatePackageRequest $request, Package $package): void

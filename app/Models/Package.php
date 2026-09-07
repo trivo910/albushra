@@ -75,6 +75,11 @@ class Package extends Model
         return $this->hasMany(PackageImage::class)->orderBy('sort_order');
     }
 
+    public function itineraries(): HasMany
+    {
+        return $this->hasMany(Itinerary::class)->orderBy('sort_order');
+    }
+
     public function enquiries(): HasMany
     {
         return $this->hasMany(Enquiry::class);
