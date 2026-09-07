@@ -92,6 +92,12 @@
                     </div>
                 @endif
 
+                @if (session('error'))
+                    <div class="alert-error rounded px-4 py-2.5 text-sm mb-5" style="border-radius: var(--radius-sm);">
+                        {{ session('error') }}
+                    </div>
+                @endif
+
                 @if ($errors->any())
                     <div class="alert-error rounded px-4 py-3 text-sm mb-5" style="border-radius: var(--radius-sm);">
                         <ul class="list-disc list-inside space-y-0.5">

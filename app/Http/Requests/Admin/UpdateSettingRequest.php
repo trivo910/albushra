@@ -18,8 +18,11 @@ class UpdateSettingRequest extends FormRequest
             'site_logo' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp,svg', 'max:2048'],
             'phone' => ['nullable', 'string', 'max:50'],
             'phone_secondary' => ['nullable', 'string', 'max:50'],
+            'landline_1' => ['nullable', 'string', 'max:50'],
+            'landline_2' => ['nullable', 'string', 'max:50'],
             'email' => ['nullable', 'email', 'max:255'],
             'address' => ['nullable', 'string'],
+            'branch_address' => ['nullable', 'string'],
             'facebook_url' => ['nullable', 'url', 'max:255'],
             'instagram_url' => ['nullable', 'url', 'max:255'],
             'twitter_url' => ['nullable', 'url', 'max:255'],
@@ -32,6 +35,14 @@ class UpdateSettingRequest extends FormRequest
             'meta_title' => ['nullable', 'string', 'max:255'],
             'meta_description' => ['nullable', 'string', 'max:255'],
             'map_embed' => ['nullable', 'string'],
+            'mail_mailer' => ['nullable', 'string', 'in:smtp,sendmail,log'],
+            'mail_host' => ['nullable', 'string', 'max:255'],
+            'mail_port' => ['nullable', 'numeric', 'digits_between:1,5'],
+            'mail_username' => ['nullable', 'string', 'max:255'],
+            'mail_password' => ['nullable', 'string', 'max:255'],
+            'mail_encryption' => ['nullable', 'string', 'in:tls,ssl'],
+            'mail_from_address' => ['nullable', 'email', 'max:255'],
+            'mail_from_name' => ['nullable', 'string', 'max:255'],
         ];
     }
 }

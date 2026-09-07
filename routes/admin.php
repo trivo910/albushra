@@ -26,6 +26,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         Route::get('settings', [SettingController::class, 'edit'])->name('settings.edit');
         Route::put('settings', [SettingController::class, 'update'])->name('settings.update');
+        Route::post('settings/test-email', [SettingController::class, 'sendTestEmail'])->name('settings.test-email');
 
         Route::get('hero-slides', [HeroSlideController::class, 'index'])->name('hero-slides.index');
         Route::post('hero-slides', [HeroSlideController::class, 'store'])->name('hero-slides.store');

@@ -134,9 +134,71 @@
         </div>
 
         <div class="form-section">
+            <div class="form-section-title">Outgoing email (SMTP)</div>
+            <div class="field-hint mb-3">Used to send emails from the site (e.g. enquiry notifications). Leave the password blank to keep the one already saved.</div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                    <label class="field-label">Mailer</label>
+                    <select name="mail_mailer" class="field-input">
+                        @foreach (['smtp' => 'SMTP', 'sendmail' => 'Sendmail', 'log' => 'Log (testing only)'] as $value => $label)
+                            <option value="{{ $value }}" @selected(old('mail_mailer', $setting->mail_mailer) === $value)>{{ $label }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div>
+                    <label class="field-label">Encryption</label>
+                    <select name="mail_encryption" class="field-input">
+                        <option value="" @selected(old('mail_encryption', $setting->mail_encryption) === null || old('mail_encryption', $setting->mail_encryption) === '')>None</option>
+                        <option value="tls" @selected(old('mail_encryption', $setting->mail_encryption) === 'tls')>TLS</option>
+                        <option value="ssl" @selected(old('mail_encryption', $setting->mail_encryption) === 'ssl')>SSL</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="field-label">SMTP host</label>
+                    <input type="text" name="mail_host" value="{{ old('mail_host', $setting->mail_host) }}" placeholder="smtp.example.com" class="field-input">
+                </div>
+                <div>
+                    <label class="field-label">SMTP port</label>
+                    <input type="text" name="mail_port" value="{{ old('mail_port', $setting->mail_port) }}" placeholder="587" class="field-input">
+                </div>
+                <div>
+                    <label class="field-label">SMTP username</label>
+                    <input type="text" name="mail_username" value="{{ old('mail_username', $setting->mail_username) }}" autocomplete="off" class="field-input">
+                </div>
+                <div>
+                    <label class="field-label">SMTP password</label>
+                    <input type="password" name="mail_password" value="" autocomplete="new-password" placeholder="{{ $setting->mail_password ? '••••••••' : '' }}" class="field-input">
+                </div>
+                <div>
+                    <label class="field-label">From address</label>
+                    <input type="email" name="mail_from_address" value="{{ old('mail_from_address', $setting->mail_from_address) }}" class="field-input">
+                </div>
+                <div>
+                    <label class="field-label">From name</label>
+                    <input type="text" name="mail_from_name" value="{{ old('mail_from_name', $setting->mail_from_name) }}" class="field-input">
+                </div>
+            </div>
+        </div>
+
+        <div class="form-section">
             <button type="submit" class="btn btn-primary">
                 Save settings
             </button>
         </div>
     </form>
+
+    <div class="panel p-6 max-w-3xl mt-6">
+        <div class="form-section-title">Send a test email</div>
+        <div class="field-hint mb-3">Sends a test message using the SMTP settings saved above, so you can confirm they work.</div>
+        <form method="POST" action="{{ route('admin.settings.test-email') }}" class="flex flex-col sm:flex-row items-start sm:items-end gap-3">
+            @csrf
+            <div class="flex-1 w-full">
+                <label class="field-label">Send to</label>
+                <input type="email" name="test_email" value="{{ old('test_email', $setting->email) }}" required class="field-input">
+            </div>
+            <button type="submit" class="btn btn-secondary">
+                Send test email
+            </button>
+        </form>
+    </div>
 @endsection

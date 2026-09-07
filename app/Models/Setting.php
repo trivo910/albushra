@@ -29,7 +29,22 @@ class Setting extends Model
         'meta_title',
         'meta_description',
         'map_embed',
+        'mail_mailer',
+        'mail_host',
+        'mail_port',
+        'mail_username',
+        'mail_password',
+        'mail_encryption',
+        'mail_from_address',
+        'mail_from_name',
     ];
+
+    protected function casts(): array
+    {
+        return [
+            'mail_password' => 'encrypted',
+        ];
+    }
 
     public static function current(): self
     {

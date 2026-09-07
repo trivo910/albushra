@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Support\MailConfigurator;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\RateLimiter;
@@ -55,5 +56,7 @@ class AppServiceProvider extends ServiceProvider
         RateLimiter::for('public-form', function (Request $request) {
             return Limit::perMinute(4)->by($request->ip());
         });
+
+        MailConfigurator::apply();
     }
 }
