@@ -39,9 +39,21 @@
                     <label class="field-label">Phone (secondary)</label>
                     <input type="text" name="phone_secondary" value="{{ old('phone_secondary', $setting->phone_secondary) }}" class="field-input">
                 </div>
+                <div>
+                    <label class="field-label">Landline 1</label>
+                    <input type="text" name="landline_1" value="{{ old('landline_1', $setting->landline_1) }}" class="field-input">
+                </div>
+                <div>
+                    <label class="field-label">Landline 2</label>
+                    <input type="text" name="landline_2" value="{{ old('landline_2', $setting->landline_2) }}" class="field-input">
+                </div>
                 <div class="sm:col-span-2">
-                    <label class="field-label">Address</label>
+                    <label class="field-label">Address (Head Office)</label>
                     <textarea name="address" rows="2" class="field-input">{{ old('address', $setting->address) }}</textarea>
+                </div>
+                <div class="sm:col-span-2">
+                    <label class="field-label">Address (Branch Office)</label>
+                    <textarea name="branch_address" rows="2" class="field-input">{{ old('branch_address', $setting->branch_address) }}</textarea>
                 </div>
             </div>
         </div>

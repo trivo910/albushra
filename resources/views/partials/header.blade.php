@@ -24,26 +24,26 @@
         </a>
 
         <nav class="hidden lg:flex items-center gap-10 font-poppins text-[15px] font-medium uppercase tracking-wide" style="color: var(--p-navy);">
-            <a href="{{ route('home') }}" class="hover:opacity-70" style="{{ request()->routeIs('home') ? 'color: var(--p-primary);' : '' }}">Home</a>
-            <a href="{{ route('pages.show', 'about-us') }}" class="hover:opacity-70">About Us</a>
+            <a href="{{ route('home') }}" class="nav-link {{ request()->routeIs('home') ? 'is-active' : '' }}">Home</a>
+            <a href="{{ route('pages.show', 'about-us') }}" class="nav-link {{ request()->routeIs('pages.show') && request()->route('about-us') ? 'is-active' : '' }}">About Us</a>
             <div class="relative group" data-dropdown>
-                <button type="button" data-dropdown-toggle class="flex items-center gap-1 hover:opacity-70">
+                <button type="button" data-dropdown-toggle class="nav-link flex items-center gap-1 uppercase">
                     Packages
                     <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M1 3l4 4 4-4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
                 </button>
                 <div class="absolute left-0 top-full pt-2 hidden group-hover:block min-w-[180px]">
                     <div class="bg-white rounded-lg py-2" style="box-shadow: 0 10px 30px -10px rgba(26,43,72,0.3); border: 1px solid var(--p-light-grey);">
-                        <a href="{{ route('packages.index') }}" class="block px-4 py-2 hover:opacity-70 font-semibold" style="color: var(--p-navy);">All Packages</a>
+                        <a href="{{ route('packages.index') }}" class="block px-4 py-2 nav-link font-semibold uppercase">All Packages</a>
                         @foreach ($__packageCategories as $__cat)
-                            <a href="{{ route('packages.category', $__cat) }}" class="block px-4 py-2 hover:opacity-70 font-semibold" style="color: var(--p-navy);">{{ ucfirst($__cat) }}</a>
+                            <a href="{{ route('packages.category', $__cat) }}" class="block px-4 py-2 nav-link font-semibold uppercase">{{ ucfirst($__cat) }}</a>
                         @endforeach
                     </div>
                 </div>
             </div>
-            <a href="{{ route('faqs.index') }}" class="hover:opacity-70">FAQs</a>
-            <a href="{{ route('blog.index') }}" class="hover:opacity-70">Blog</a>
-            <a href="{{ route('gallery.index') }}" class="hover:opacity-70">Gallery</a>
-            <a href="{{ route('contact.index') }}" class="hover:opacity-70">Contact Us</a>
+            <a href="{{ route('faqs.index') }}" class="nav-link {{ request()->routeIs('faqs.index') ? 'is-active' : '' }}">FAQs</a>
+            <a href="{{ route('blog.index') }}" class="nav-link {{ request()->routeIs('blog.index') ? 'is-active' : '' }}">Blog</a>
+            <a href="{{ route('gallery.index') }}" class="nav-link {{ request()->routeIs('gallery.index') ? 'is-active' : '' }}">Gallery</a>
+            <a href="{{ route('contact.index') }}" class="nav-link {{ request()->routeIs('contact.index') ? 'is-active' : '' }}">Contact Us</a>
         </nav>
 
         <div class="hidden lg:flex items-center gap-6 font-poppins text-[15px] font-medium shrink-0 tracking-wide">
@@ -51,11 +51,11 @@
                 <span style="color: var(--p-grey);">Hi, {{ Str::before(auth()->user()->name, ' ') }}</span>
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
-                    <button type="submit" class="hover:opacity-70" style="color: var(--p-navy);">Log out</button>
+                    <button type="submit" class="nav-link">Log out</button>
                 </form>
             @else
-                <a href="{{ route('login') }}" class="hover:opacity-70" style="color: var(--p-navy);">Login</a>
-                <a href="{{ route('register') }}" class="hover:opacity-70" style="color: var(--p-navy);">Sign Up</a>
+                <a href="{{ route('login') }}" class="nav-link">Login</a>
+                <a href="{{ route('register') }}" class="nav-link">Sign Up</a>
             @endauth
         </div>
 
@@ -66,25 +66,25 @@
 
     <nav data-nav-menu class="hidden lg:hidden border-t font-poppins text-[15px] font-medium uppercase tracking-wide" style="border-color: var(--p-light-grey);">
         <div class="container-p py-3 flex flex-col gap-1">
-            <a href="{{ route('home') }}" class="py-2">Home</a>
-            <a href="{{ route('pages.show', 'about-us') }}" class="py-2">About Us</a>
-            <a href="{{ route('packages.index') }}" class="py-2">Packages</a>
+            <a href="{{ route('home') }}" class="nav-link py-2 {{ request()->routeIs('home') ? 'is-active' : '' }}">Home</a>
+            <a href="{{ route('pages.show', 'about-us') }}" class="nav-link py-2 {{ request()->routeIs('pages.show') && request()->route('about-us') ? 'is-active' : '' }}">About Us</a>
+            <a href="{{ route('packages.index') }}" class="nav-link py-2 {{ request()->routeIs('packages.index') ? 'is-active' : '' }}">Packages</a>
             @foreach ($__packageCategories as $__cat)
-                <a href="{{ route('packages.category', $__cat) }}" class="py-2 pl-4 font-semibold normal-case" style="color: var(--p-navy);">— {{ ucfirst($__cat) }}</a>
+                <a href="{{ route('packages.category', $__cat) }}" class="nav-link py-2 pl-4 font-semibold">— {{ ucfirst($__cat) }}</a>
             @endforeach
-            <a href="{{ route('faqs.index') }}" class="py-2">FAQs</a>
-            <a href="{{ route('blog.index') }}" class="py-2">Blog</a>
-            <a href="{{ route('gallery.index') }}" class="py-2">Gallery</a>
-            <a href="{{ route('contact.index') }}" class="py-2">Contact Us</a>
+            <a href="{{ route('faqs.index') }}" class="nav-link py-2 {{ request()->routeIs('faqs.index') ? 'is-active' : '' }}">FAQs</a>
+            <a href="{{ route('blog.index') }}" class="nav-link py-2 {{ request()->routeIs('blog.index') ? 'is-active' : '' }}">Blog</a>
+            <a href="{{ route('gallery.index') }}" class="nav-link py-2 {{ request()->routeIs('gallery.index') ? 'is-active' : '' }}">Gallery</a>
+            <a href="{{ route('contact.index') }}" class="nav-link py-2 {{ request()->routeIs('contact.index') ? 'is-active' : '' }}">Contact Us</a>
             <div class="flex items-center gap-6 pt-3 mt-2 border-t normal-case" style="border-color: var(--p-light-grey);">
                 @auth
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
-                        <button type="submit">Log out</button>
+                        <button type="submit" class="nav-link">Log out</button>
                     </form>
                 @else
-                    <a href="{{ route('login') }}">Login</a>
-                    <a href="{{ route('register') }}">Sign Up</a>
+                    <a href="{{ route('login') }}" class="nav-link">Login</a>
+                    <a href="{{ route('register') }}" class="nav-link">Sign Up</a>
                 @endauth
             </div>
         </div>

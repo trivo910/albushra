@@ -73,7 +73,21 @@
             <div class="text-white font-semibold mb-4">Contact Information</div>
             <ul class="space-y-3 text-sm" style="color: #93a0b3;">
                 @if ($__settings->address)
-                    <li>{{ $__settings->address }}</li>
+                    @php
+                        $__addressText = trim(preg_replace('/\s+/', ' ', $__settings->address));
+                        $__mapsUrl = 'https://www.google.com/maps/search/?api=1&query=' . urlencode($__addressText);
+                    @endphp
+                    <li>
+                        <a href="{{ $__mapsUrl }}" target="_blank" rel="noopener"
+                           aria-label="Open address in Google Maps"
+                           class="inline-flex items-start gap-2 hover:text-white">
+                            <svg class="shrink-0 mt-0.5" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M12 21s7-6.5 7-12a7 7 0 10-14 0c0 5.5 7 12 7 12z"/>
+                                <circle cx="12" cy="9" r="2.5"/>
+                            </svg>
+                            <span class="whitespace-pre-line">{{ $__settings->address }}</span>
+                        </a>
+                    </li>
                 @endif
                 @if ($__settings->phone)
                     <li><a href="tel:{{ preg_replace('/\s+/', '', $__settings->phone) }}" class="hover:text-white">{{ $__settings->phone }}</a></li>

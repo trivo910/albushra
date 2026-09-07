@@ -127,29 +127,69 @@
     </section>
 
     {{-- Services grid --}}
-    <section class="py-16 sm:py-20">
+    <section class="py-16 sm:py-20 services-section">
         <div class="container-p">
             <div class="text-center max-w-2xl mx-auto mb-12">
                 <p class="eyebrow">Get Special Services</p>
                 <h2 class="section-title">Enjoy The Spiritual Pilgrimage Of A Lifetime</h2>
             </div>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                @foreach ([
-                    ['title' => 'Guided Pilgrimages', 'text' => 'Experienced guides walk you through every ritual, step by step.'],
-                    ['title' => 'Spiritual Guidance', 'text' => 'Scholars and mentors on hand to support your worship.'],
-                    ['title' => 'Cultural Experiences', 'text' => 'Ziyarat tours to historic and sacred sites in Makkah and Madinah.'],
-                    ['title' => 'Custom Itineraries', 'text' => 'Packages tailored to your family, group size and budget.'],
-                    ['title' => 'Exclusive Amenities', 'text' => 'Comfortable transport and hotels chosen for pilgrims.'],
-                    ['title' => 'Accommodation', 'text' => 'Stays close to the Haram for easy access to prayer.'],
-                ] as $service)
-                    <div class="card-p p-6">
-                        <div class="icon-badge mb-4">
-                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M8 12l2.5 2.5L16 9"/></svg>
-                        </div>
-                        <h3 class="font-poppins font-semibold mb-2" style="color: var(--p-navy);">{{ $service['title'] }}</h3>
-                        <p class="text-sm" style="color: var(--p-grey);">{{ $service['text'] }}</p>
+            <div class="services-grid">
+                {{-- 1. Guided Pilgrimages --}}
+                <div class="service-card">
+                    <div class="service-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                            <path d="M2 5.5C2 4.67 2.67 4 3.5 4H8c1.66 0 3 1.34 3 3v12.2c0 .45-.5.7-.87.44C9.2 18.93 7.7 18.5 6 18.5c-1.4 0-2.6.3-3.6.74-.16.07-.4-.05-.4-.23V5.5z"/>
+                            <path d="M22 5.5c0-.83-.67-1.5-1.5-1.5H16c-1.66 0-3 1.34-3 3v12.2c0 .45.5.7.87.44.93-.71 2.43-1.14 4.13-1.14 1.4 0 2.6.3 3.6.74.16.07.4-.05.4-.23V5.5z"/>
+                        </svg>
                     </div>
-                @endforeach
+                    <h3 class="service-title">Guided Pilgrimages</h3>
+                    <p class="service-text">Join our Guided Pilgrimages to experience every moment of your Hajj or Umrah journey with deep spiritual meaning. Our expert team ensures that.</p>
+                </div>
+
+                {{-- 2. Spiritual Guidance --}}
+                <div class="service-card">
+                    <div class="service-icon">
+                        <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z"/></svg>
+                    </div>
+                    <h3 class="service-title">Spiritual Guidance</h3>
+                    <p class="service-text">Our Spiritual Guidance service helps you connect deeply with the sacred journey of Hajj and Umrah. Through expert support, lectures, and faith-based mentoring.</p>
+                </div>
+
+                {{-- 3. Cultural Experiences --}}
+                <div class="service-card">
+                    <div class="service-icon">
+                        <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    </div>
+                    <h3 class="service-title">Cultural Experiences</h3>
+                    <p class="service-text">Explore the rich culture and traditions tied to the Hajj and Umrah pilgrimage. With our Cultural Experience service, you'll enjoy local cuisine, historic.</p>
+                </div>
+
+                {{-- 4. Custom Itineraries --}}
+                <div class="service-card">
+                    <div class="service-icon">
+                        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+                    </div>
+                    <h3 class="service-title">Custom Itineraries</h3>
+                    <p class="service-text">Design your pilgrimage just the way you want it. Our Custom Itineraries allow you to plan your journey based on personal preferences, timing.</p>
+                </div>
+
+                {{-- 5. Exclusive Amenities --}}
+                <div class="service-card">
+                    <div class="service-icon">
+                        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>
+                    </div>
+                    <h3 class="service-title">Exclusive Amenities</h3>
+                    <p class="service-text">Enjoy our premium amenities during your pilgrimage. We provide quality services such as VIP lounge access, fast-track immigration, luxury buses, and welcome kits.</p>
+                </div>
+
+                {{-- 6. Accommodation --}}
+                <div class="service-card">
+                    <div class="service-icon">
+                        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v18"/><path d="M2 22h20"/><path d="M17 22v-4h-2v4"/><path d="M17 8h-3a2 2 0 0 0-2 2v2h5v-2a2 2 0 0 0-2-2z"/></svg>
+                    </div>
+                    <h3 class="service-title">Accommodation</h3>
+                    <p class="service-text">Stay in handpicked hotels near the holy sites. Our accommodation ensures clean, comfortable, and well-located stays for every pilgrim.</p>
+                </div>
             </div>
         </div>
     </section>

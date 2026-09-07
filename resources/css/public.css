@@ -9,6 +9,7 @@
     --p-navy: #1a2b48;
     --p-grey: #5e6d77;
     --p-light-grey: #eaeef3;
+    --p-teal: #36BCA1;
 }
 
 body {
@@ -150,4 +151,103 @@ body {
             display: block;
         }
     }
+}
+
+/* Services grid cards */
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+
+.service-card {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 32px 28px;
+    box-shadow: 0 6px 24px -12px rgba(26, 43, 72, 0.12);
+    border: 1px solid var(--p-light-grey);
+    transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    text-align: center;
+}
+
+.service-card:hover,
+.service-card.is-active {
+    background: var(--p-teal);
+    color: #ffffff;
+    border-color: var(--p-teal);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px -12px rgba(26, 43, 72, 0.2);
+}
+
+.service-card:hover .service-title,
+.service-card.is-active .service-title {
+    color: #ffffff;
+}
+
+.service-card:hover .service-text,
+.service-card.is-active .service-text {
+    color: rgba(255, 255, 255, 0.92);
+}
+
+.service-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 64px;
+    height: 64px;
+    border-radius: 14px;
+    background: #ffe8e8;
+    color: #e03131;
+    margin-bottom: 20px;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.service-card:hover .service-icon,
+.service-card.is-active .service-icon {
+    background: rgba(255, 255, 255, 0.22);
+    color: #ffffff;
+}
+
+.service-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: #1A2B48;
+    margin-bottom: 12px;
+    line-height: 1.3;
+}
+
+.service-text {
+    font-size: 15px;
+    line-height: 1.6;
+    color: #5e6d77;
+}
+
+@media (max-width: 1024px) {
+    .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 640px) {
+    .services-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Header navigation links: consistent hover color across all options */
+.nav-link {
+    color: var(--p-navy);
+    transition: color 0.15s ease-in-out, opacity 0.15s ease-in-out;
+    cursor: pointer;
+}
+.nav-link:hover,
+.nav-link:focus-visible {
+    color: var(--p-primary);
+    opacity: 1;
+    text-decoration: none;
+}
+/* Keep the active/current page link in the brand color */
+.nav-link.is-active {
+    color: var(--p-primary);
 }
