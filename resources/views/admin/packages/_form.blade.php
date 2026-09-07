@@ -156,6 +156,16 @@
     </div>
 
     <div class="form-section">
+        <div class="form-section-title">Itinerary Overview</div>
+        <p class="field-hint mb-3">Add each leg of the journey. <strong>Days</strong> is a short label like "5 Days" or "9/10 Days". <strong>Description</strong> can include multiple lines.</p>
+
+        <div data-repeatable-list data-name="itineraries" data-complex="1">
+            <div data-repeatable-rows class="space-y-2"></div>
+            <button type="button" data-add-row class="btn-link-muted mt-2">+ Add itinerary</button>
+        </div>
+    </div>
+
+    <div class="form-section">
         <div class="form-section-title">SEO</div>
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
@@ -186,14 +196,34 @@
             const name = container.dataset.name;
             const rowsWrapper = container.querySelector('[data-repeatable-rows]');
             const addButton = container.querySelector('[data-add-row]');
+            const isComplex = container.dataset.complex === '1';
 
-            function addRow(value = '') {
+            function escape(value) {
+                return String(value ?? '').replace(/"/g, '&quot;');
+            }
+
+            function addRow(value) {
                 const row = document.createElement('div');
-                row.className = 'flex gap-2';
-                row.innerHTML = `
-                    <input type="text" name="${name}[]" value="${value.replace(/"/g, '&quot;')}" class="field-input">
-                    <button type="button" data-remove-row class="btn-link-danger px-1">&times;</button>
-                `;
+                row.className = isComplex
+                    ? 'rounded-lg border p-3 space-y-2'
+                    : 'flex gap-2';
+
+                if (isComplex) {
+                    const v = (typeof value === 'object' && value !== null) ? value : { days: '', description: '' };
+                    row.innerHTML = `
+                        <div class="flex gap-2">
+                            <input type="text" name="${name}[][days]" value="${escape(v.days)}" placeholder="e.g. 5 Days" class="field-input" style="max-width: 200px;">
+                            <button type="button" data-remove-row class="btn-link-danger px-2 self-start">&times;</button>
+                        </div>
+                        <textarea name="${name}[][description]" rows="2" placeholder="Description (one line per location is fine)" class="field-input">${escape(v.description)}</textarea>
+                    `;
+                } else {
+                    row.innerHTML = `
+                        <input type="text" name="${name}[]" value="${escape(value)}" class="field-input">
+                        <button type="button" data-remove-row class="btn-link-danger px-1">&times;</button>
+                    `;
+                }
+
                 row.querySelector('[data-remove-row]').addEventListener('click', () => row.remove());
                 rowsWrapper.appendChild(row);
             }
@@ -206,12 +236,20 @@
         document.querySelectorAll('[data-repeatable-list]').forEach((container) => {
             const name = container.dataset.name;
             const addRow = initRepeatableList(container);
-            const values = name === 'included' ? @json(old('included', $package->included ?? [])) : @json(old('excluded', $package->excluded ?? []));
 
-            if (values.length) {
+            let values;
+            if (name === 'included') {
+                values = @json(old('included', $package->included ?? []));
+            } else if (name === 'excluded') {
+                values = @json(old('excluded', $package->excluded ?? []));
+            } else if (name === 'itineraries') {
+                values = @json(old('itineraries', $package->itineraries->map(fn ($i) => ['days' => $i->days, 'description' => $i->description]) ?? []));
+            }
+
+            if (values && values.length) {
                 values.forEach((value) => addRow(value));
             } else {
-                addRow();
+                addRow(container.dataset.complex === '1' ? { days: '', description: '' } : '');
             }
         });
     </script>

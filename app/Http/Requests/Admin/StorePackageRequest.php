@@ -35,6 +35,9 @@ class StorePackageRequest extends FormRequest
             'images.*' => ['image', 'mimes:jpg,jpeg,png,webp', 'max:4096'],
             'thumbnail' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:4096'],
             'thumbnail_alt' => ['nullable', 'string', 'max:255'],
+            'itineraries' => ['nullable', 'array'],
+            'itineraries.*.days' => ['nullable', 'string', 'max:50'],
+            'itineraries.*.description' => ['nullable', 'string'],
         ];
     }
 }
