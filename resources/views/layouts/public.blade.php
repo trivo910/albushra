@@ -33,7 +33,7 @@
     @include('partials.header')
 
     <main>
-        @if (session('success'))
+        @if (session('success') && ! request()->routeIs('contact.index'))
             <div class="container-p mt-4">
                 <div class="rounded-lg px-4 py-3 text-sm font-poppins" style="background: #e9f8ee; color: #1e7a46; border: 1px solid #bfe8cd;">
                     {{ session('success') }}

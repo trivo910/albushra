@@ -198,6 +198,16 @@
             </h2>
 
 
+            {{-- Success Message --}}
+            @if (session('success'))
+
+                <div class="contact-form-success">
+                    {{ session('success') }}
+                </div>
+
+            @endif
+
+
             {{-- Validation Errors --}}
             @if ($errors->any())
 
@@ -678,6 +688,25 @@
     color: #fff;
     opacity: 1;
     padding-bottom: 20px;
+}
+
+
+/* =========================================
+   SUCCESS MESSAGE
+========================================= */
+
+.contact-form-success {
+    background: #e9f8ee;
+    color: #1e7a46;
+
+    border-radius: 10px;
+
+    padding: 10px 14px;
+
+    margin-bottom: 12px;
+
+    font-size: 13px;
+    line-height: 1.5;
 }
 
 
