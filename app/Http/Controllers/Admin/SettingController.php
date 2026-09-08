@@ -7,8 +7,10 @@ use App\Http\Requests\Admin\UpdateSettingRequest;
 use App\Mail\TestSmtpMail;
 use App\Models\Setting;
 use App\Support\MailConfigurator;
+use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
@@ -44,7 +46,16 @@ class SettingController extends Controller
             unset($data['mail_password']);
         }
 
-        $setting->update($data);
+        try {
+            $setting->update($data);
+        } catch (DecryptException) {
+            // The previously stored mail_password can't be decrypted with the
+            // current APP_KEY (e.g. after a key rotation). Clear the corrupted
+            // value at the DB level, bypassing the encrypted cast, then retry.
+            DB::table('settings')->where('id', $setting->id)->update(['mail_password' => null]);
+            $setting->refresh();
+            $setting->update($data);
+        }
 
         return redirect()->route('admin.settings.edit')->with('success', 'Settings updated successfully.');
     }
