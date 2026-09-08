@@ -34,7 +34,7 @@ class MailConfigurator
             'host' => $setting->mail_host,
             'port' => $setting->mail_port ?: 587,
             'username' => $setting->mail_username,
-            'password' => '', //$setting->mail_password,
+            'password' => $setting->mail_password,
             'encryption' => $setting->mail_encryption ?: null,
             'timeout' => null,
         ]);
