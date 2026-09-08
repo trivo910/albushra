@@ -27,7 +27,7 @@ class HomeController extends Controller
                 ->latest()
                 ->limit(3)
                 ->get(),
-            'faqs' => Faq::orderBy('sort_order')->limit(8)->get(),
+            'faqs' => Faq::where('show_on_home', true)->orderBy('sort_order')->limit(8)->get(),
         ]);
     }
 }

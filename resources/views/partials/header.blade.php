@@ -47,7 +47,7 @@
         </nav>
 
         <div class="hidden lg:flex items-center gap-6 font-poppins text-[15px] font-medium shrink-0 tracking-wide">
-            @auth
+            <!-- @auth
                 <span style="color: var(--p-grey);">Hi, {{ Str::before(auth()->user()->name, ' ') }}</span>
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
@@ -56,7 +56,7 @@
             @else
                 <a href="{{ route('login') }}" class="nav-link">Login</a>
                 <a href="{{ route('register') }}" class="nav-link">Sign Up</a>
-            @endauth
+            @endauth -->
         </div>
 
         <button type="button" data-nav-toggle aria-expanded="false" class="lg:hidden p-2" aria-label="Toggle menu">

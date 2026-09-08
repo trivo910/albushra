@@ -9,29 +9,9 @@
 
 @section('content')
     
-    {{-- Contact Hero --}}
+    {{-- Page Hero --}}
 
-<section class="contact-hero">
-
-    <img
-        src="{{ \Illuminate\Support\Facades\Storage::url('public/about/5.png') }}"
-        alt="Contact Us"
-        class="contact-hero-image"
-    >
-
-    <div class="contact-hero-content">
-
-        <div class="contact-breadcrumb">
-            <a href="{{ url('/') }}">Home</a>
-            <span>•</span>
-            <span>About Us</span>
-        </div>
-
-        <h1>About Us</h1>
-
-    </div>
-
-</section>
+    <x-page-hero image="public/about/5.png" title="About Us" />
 
 {{-- About Us Intro Section --}}
 
@@ -498,100 +478,6 @@
 @endsection
 
 <style>
-    .contact-hero {
-    position: relative;
-    width: 100%;
-    height: 355px;
-    overflow: hidden;
-}
-
-.contact-hero-image {
-    position: absolute;
-    inset: 0;
-
-    width: 100%;
-    height: 100%;
-
-    display: block;
-
-    object-fit: cover;
-    object-position: center;
-
-    z-index: 1;
-}
-
-.contact-hero-content {
-    position: relative;
-    z-index: 2;
-
-    width: 100%;
-    height: 100%;
-
-    max-width: 1350px;
-    margin: 0 auto;
-}
-
-.contact-breadcrumb {
-    position: absolute;
-
-    top: 28px;
-    left: 50px;
-
-    display: flex;
-    align-items: center;
-    gap: 8px;
-
-    font-size: 14px;
-    color: #172f52;
-}
-
-.contact-breadcrumb a {
-    color: #172f52;
-    text-decoration: none;
-}
-
-.contact-hero-content h1 {
-    position: absolute;
-
-    left: 50px;
-    top: 50%;
-
-    transform: translateY(-50%);
-
-    margin: 0;
-
-    color: #229fe5;
-
-    font-size: 40px;
-    line-height: 1;
-    font-weight: 700;
-}
-
-
-/* Mobile */
-
-@media (max-width: 700px) {
-
-    .contact-hero {
-        height: 280px;
-    }
-
-    .contact-hero-image {
-        object-position: center;
-    }
-
-    .contact-breadcrumb {
-        top: 20px;
-        left: 20px;
-        font-size: 12px;
-    }
-
-    .contact-hero-content h1 {
-        left: 20px;
-        font-size: 30px;
-    }
-}
-
 /* =========================================
    ABOUT US INTRO
 ========================================= */

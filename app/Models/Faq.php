@@ -10,5 +10,10 @@ class Faq extends Model
         'question',
         'answer',
         'sort_order',
+        'show_on_home',
+    ];
+
+    protected $casts = [
+        'show_on_home' => 'boolean',
     ];
 }

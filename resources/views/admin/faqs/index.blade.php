@@ -41,7 +41,12 @@
                                     </div>
                                 </td>
                                 <td>
-                                    <div class="font-medium">{{ $faq->question }}</div>
+                                    <div class="font-medium">
+                                        {{ $faq->question }}
+                                        @if ($faq->show_on_home)
+                                            <span class="badge badge-neutral ml-1">On home page</span>
+                                        @endif
+                                    </div>
                                     <div class="text-xs mt-0.5" style="color: var(--color-text-faint);">{{ Str::limit($faq->answer, 100) }}</div>
                                 </td>
                                 <td class="text-right whitespace-nowrap">

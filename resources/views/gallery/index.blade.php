@@ -6,12 +6,16 @@
 @endphp
 
 @section('content')
-    <section class="py-10 border-b" style="background: var(--p-light-grey); border-color: var(--p-light-grey);">
+    <x-page-hero image="public/contact/5-(2).png" title="Gallery" />
+
+    <!-- <section class="py-10 border-b" style="background: var(--p-light-grey); border-color: var(--p-light-grey);">
         <div class="container-p">
             <p class="eyebrow">Moments</p>
             <h1 class="section-title !mb-0">Gallery</h1>
         </div>
-    </section>
+    </section> -->
+
+
 
     <section class="py-12 sm:py-16">
         <div class="container-p">

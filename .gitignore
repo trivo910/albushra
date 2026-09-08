@@ -22,3 +22,5 @@ yarn-error.log
 /.vscode
 /.zed
 package-lock.json
+app/Console/Commands/ImportWordpressBlogs.php
+config/database.php

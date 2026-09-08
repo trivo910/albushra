@@ -16,6 +16,7 @@ class StoreFaqRequest extends FormRequest
         return [
             'question' => ['required', 'string', 'max:255'],
             'answer' => ['required', 'string'],
+            'show_on_home' => ['boolean'],
         ];
     }
 }
