@@ -167,7 +167,8 @@
                 </div>
                 <div>
                     <label class="field-label">SMTP password</label>
-                    <input type="password" name="mail_password" value="" autocomplete="new-password" placeholder="{{ $setting->mail_password ? '••••••••' : '' }}" class="field-input">
+                    <!-- <input type="password" name="mail_password" value="" autocomplete="new-password" placeholder="{{ $setting->mail_password ? '••••••••' : '' }}" class="field-input"> -->
+                    <input type="password" name="mail_password" value="" autocomplete="new-password" placeholder="" class="field-input">
                 </div>
                 <div>
                     <label class="field-label">From address</label>
