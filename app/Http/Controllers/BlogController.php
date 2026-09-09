@@ -18,17 +18,4 @@ class BlogController extends Controller
         ]);
     }
 
-    public function show(Blog $blog): View
-    {
-        abort_unless($blog->status === 'published', 404);
-
-        return view('blog.show', [
-            'blog' => $blog,
-            'related' => Blog::where('status', 'published')
-                ->where('id', '!=', $blog->id)
-                ->latest('published_at')
-                ->limit(3)
-                ->get(),
-        ]);
-    }
 }

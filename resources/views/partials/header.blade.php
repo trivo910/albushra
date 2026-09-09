@@ -25,7 +25,7 @@
 
         <nav class="hidden lg:flex items-center gap-10 font-poppins text-[15px] font-medium uppercase tracking-wide" style="color: var(--p-navy);">
             <a href="{{ route('home') }}" class="nav-link {{ request()->routeIs('home') ? 'is-active' : '' }}">Home</a>
-            <a href="{{ route('pages.show', 'about-us') }}" class="nav-link {{ request()->routeIs('pages.show') && request()->route('about-us') ? 'is-active' : '' }}">About Us</a>
+            <a href="{{ route('content.show', 'about-us') }}" class="nav-link {{ request()->routeIs('content.show') && request()->route('slug') === 'about-us' ? 'is-active' : '' }}">About Us</a>
             <div class="relative group" data-dropdown>
                 <button type="button" data-dropdown-toggle class="nav-link flex items-center gap-1 uppercase">
                     Packages
@@ -67,7 +67,7 @@
     <nav data-nav-menu class="hidden lg:hidden border-t font-poppins text-[15px] font-medium uppercase tracking-wide max-h-[calc(100vh-4rem)] overflow-y-auto" style="border-color: var(--p-light-grey);">
         <div class="container-p py-3 flex flex-col gap-1">
             <a href="{{ route('home') }}" class="nav-link py-2 {{ request()->routeIs('home') ? 'is-active' : '' }}">Home</a>
-            <a href="{{ route('pages.show', 'about-us') }}" class="nav-link py-2 {{ request()->routeIs('pages.show') && request()->route('about-us') ? 'is-active' : '' }}">About Us</a>
+            <a href="{{ route('content.show', 'about-us') }}" class="nav-link py-2 {{ request()->routeIs('content.show') && request()->route('slug') === 'about-us' ? 'is-active' : '' }}">About Us</a>
             <a href="{{ route('packages.index') }}" class="nav-link py-2 {{ request()->routeIs('packages.index') ? 'is-active' : '' }}">Packages</a>
             @foreach ($__packageCategories as $__cat)
                 <a href="{{ route('packages.category', $__cat) }}" class="nav-link py-2 pl-4 font-semibold">— {{ ucfirst($__cat) }}</a>

@@ -5,7 +5,7 @@
     $seoTitle = $blog->meta_title ?: $blog->title.' | '.($settings->site_name ?? config('app.name'));
     $seoDescription = $blog->meta_description ?: \Illuminate\Support\Str::limit(strip_tags($blog->content ?? ''), 155);
     $ogImage = $blog->featured_image ? \Illuminate\Support\Facades\Storage::url($blog->featured_image) : null;
-    $shareUrl = urlencode(route('blog.show', $blog));
+    $shareUrl = urlencode(route('content.show', $blog));
     $shareTitle = urlencode($blog->title);
 @endphp
 
@@ -53,7 +53,7 @@
                 <h2 class="section-title !text-xl">Related Posts</h2>
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
                     @foreach ($related as $item)
-                        <a href="{{ route('blog.show', $item) }}" class="card-p group">
+                        <a href="{{ route('content.show', $item) }}" class="card-p group">
                             <div class="h-32 overflow-hidden" style="background: var(--p-light-grey);">
                                 @if ($item->featured_image)
                                     <img src="{{ \Illuminate\Support\Facades\Storage::url($item->featured_image) }}" alt="{{ $item->featured_image_alt ?: $item->title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">

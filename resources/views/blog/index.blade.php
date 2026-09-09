@@ -25,7 +25,7 @@
             @else
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
                     @foreach ($blogs as $blog)
-                        <a href="{{ route('blog.show', $blog) }}" class="card-p flex flex-col group">
+                        <a href="{{ route('content.show', $blog) }}" class="card-p flex flex-col group">
                             <div class="h-48 overflow-hidden shrink-0" style="background: var(--p-light-grey);">
                                 @if ($blog->featured_image)
                                     <img src="{{ \Illuminate\Support\Facades\Storage::url($blog->featured_image) }}" alt="{{ $blog->featured_image_alt ?: $blog->title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">

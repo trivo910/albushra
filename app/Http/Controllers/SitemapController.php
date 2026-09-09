@@ -27,11 +27,11 @@ class SitemapController extends Controller
         });
 
         Blog::where('status', 'published')->get(['slug', 'updated_at'])->each(function ($blog) use ($urls) {
-            $urls->push(['loc' => route('blog.show', $blog), 'lastmod' => $blog->updated_at]);
+            $urls->push(['loc' => route('content.show', $blog), 'lastmod' => $blog->updated_at]);
         });
 
         Page::all(['slug', 'updated_at'])->each(function ($page) use ($urls) {
-            $urls->push(['loc' => route('pages.show', $page), 'lastmod' => $page->updated_at]);
+            $urls->push(['loc' => route('content.show', $page), 'lastmod' => $page->updated_at]);
         });
 
         $xml = view('sitemap', ['urls' => $urls])->render();

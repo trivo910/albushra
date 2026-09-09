@@ -2,11 +2,11 @@
 
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\ContentController;
 use App\Http\Controllers\FaqController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PackageController;
-use App\Http\Controllers\PageController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\SitemapController;
 use Illuminate\Support\Facades\Response;
@@ -23,7 +23,9 @@ Route::post('/st-tour/{package:slug}/enquire', [PackageController::class, 'enqui
 Route::post('/st-tour/{package:slug}/review', [ReviewController::class, 'store'])->name('packages.review.store')->middleware('throttle:public-form');
 
 Route::get('/blog', [BlogController::class, 'index'])->name('blog.index');
-Route::get('/blog/{blog:slug}', [BlogController::class, 'show'])->name('blog.show');
+Route::get('/blog/{slug}', function (string $slug) {
+    return redirect()->route('content.show', $slug, 301);
+})->where('slug', '[^/]+');
 
 Route::get('/faqs', [FaqController::class, 'index'])->name('faqs.index');
 Route::get('/gallery', [GalleryController::class, 'index'])->name('gallery.index');
@@ -44,4 +46,4 @@ Route::get('/robots.txt', function () {
     return Response::make(implode("\n", $lines), 200)->header('Content-Type', 'text/plain');
 })->name('robots');
 
-Route::get('/{page:slug}', [PageController::class, 'show'])->name('pages.show');
+Route::get('/{slug}', [ContentController::class, 'show'])->name('content.show');

@@ -50,11 +50,11 @@
         <div>
             <div class="text-white font-semibold mb-4">Quick Links</div>
             <ul class="space-y-2.5 text-sm" style="color: #93a0b3;">
-                <li><a href="{{ route('pages.show', 'about-us') }}" class="hover:text-white">About Us</a></li>
+                <li><a href="{{ route('content.show', 'about-us') }}" class="hover:text-white">About Us</a></li>
                 <li><a href="{{ route('blog.index') }}" class="hover:text-white">Blog</a></li>
                 <li><a href="{{ route('contact.index') }}" class="hover:text-white">Contact Us</a></li>
                 <li><a href="{{ route('gallery.index') }}" class="hover:text-white">Gallery</a></li>
-                <li><a href="{{ route('pages.show', 'privacy-policy') }}" class="hover:text-white">Privacy Policy</a></li>
+                <li><a href="{{ route('content.show', 'privacy-policy') }}" class="hover:text-white">Privacy Policy</a></li>
             </ul>
         </div>
 

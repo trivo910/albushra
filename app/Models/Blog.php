@@ -60,7 +60,7 @@ class Blog extends Model
         $original = $slug;
         $i = 1;
 
-        while (static::where('slug', $slug)->exists()) {
+        while (static::where('slug', $slug)->exists() || Page::where('slug', $slug)->exists()) {
             $slug = "{$original}-{$i}";
             $i++;
         }
