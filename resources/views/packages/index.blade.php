@@ -17,7 +17,9 @@
             <h1 class="section-title !mb-0">{{ $category === 'hajj' ? 'Our Hajj Packages' : 'Our Hajj & Umrah Packages' }}</h1>
         </div>
     </section> -->
-
+    <h2 class="packages-info-title">
+        Packages
+    </h2>
     <section class="py-12 sm:py-16">
         <div class="container-p">
             @if ($packages->isEmpty())
@@ -36,3 +38,18 @@
         </div>
     </section>
 @endsection
+
+<style>
+    .packages-info-title {
+        font-family: "Poppins", Sans-serif;
+        font-size: 36px;
+        font-weight: 600;
+        line-height: 0px;
+        letter-spacing: -0.8px;
+        color: #1A2B48;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        padding-top: 50px;
+    }
+</style>

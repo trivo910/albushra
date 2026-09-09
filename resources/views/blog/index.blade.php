@@ -6,13 +6,11 @@
 @endphp
 
 @section('content')
-    <!-- <section class="py-10 border-b" style="background: var(--p-light-grey); border-color: var(--p-light-grey);">
-        <div class="container-p">
-            <p class="eyebrow">Blog</p>
-            <h1 class="section-title !mb-0">Travel Guides &amp; Updates</h1>
-        </div>
-    </section> -->
     <x-page-hero image="public/banner/6.png" title="Blog" />
+
+        <h2 class="blog-info-title">
+            Blog
+        </h2>
 
 
     <section class="py-12 sm:py-16">
@@ -44,3 +42,20 @@
         </div>
     </section>
 @endsection
+
+<style>
+
+    .blog-info-title {
+        font-family: "Poppins", Sans-serif;
+        font-size: 36px;
+        font-weight: 600;
+        line-height: 0px;
+        letter-spacing: -0.8px;
+        color: #1A2B48;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        padding-top: 50px;
+    }
+
+</style>
