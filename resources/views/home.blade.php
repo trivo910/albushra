@@ -395,9 +395,9 @@ $settings = \App\Models\Setting::current();
         grid-template-columns: 1.15fr 1fr;
         /* align-items: center; */
         /* gap: 40px; */
-        max-width: 1400px;
+        max-width: 1200px;
         margin: 0 auto;
-        padding: 70px 30px;
+        padding: 70px 24px;
     }
 
     /* ================================
@@ -608,9 +608,9 @@ $settings = \App\Models\Setting::current();
 
     .why-choose-container {
         width: 100%;
-        max-width: 1450px;
+        max-width: 1200px;
         margin: 0 auto;
-        padding: 0 36px;
+        padding: 0 24px;
 
         display: grid;
         grid-template-columns: 1fr 1fr;
@@ -896,9 +896,9 @@ $settings = \App\Models\Setting::current();
 
     .featured-hajj-packages .container-p {
         width: 100%;
-        max-width: 1250px;
+        max-width: 1200px;
         margin: 0 auto;
-        padding: 0 25px;
+        padding: 0 24px;
         text-align: center;
     }
 
@@ -1059,10 +1059,10 @@ $settings = \App\Models\Setting::current();
 
     .services-section .container-p {
         width: 100%;
-        max-width: 1400px;
+        max-width: 1200px;
         margin: 0 auto;
-        padding-left: 35px;
-        padding-right: 35px;
+        padding-left: 24px;
+        padding-right: 24px;
         padding-top: 50px;
         padding-bottom: 50px;
     }
@@ -1349,7 +1349,7 @@ $settings = \App\Models\Setting::current();
         width: 100%;
         max-width: 1200px;
         margin: 0 auto;
-        padding: 0 20px;
+        padding: 0 24px;
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 32px;
@@ -1495,12 +1495,12 @@ $settings = \App\Models\Setting::current();
 
     .faq-container {
         width: 100%;
-        max-width: 1000px;
+        max-width: 1200px;
 
         margin: 0 auto;
 
-        padding-left: 25px;
-        padding-right: 25px;
+        padding-left: 24px;
+        padding-right: 24px;
     }
 
 
