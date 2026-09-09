@@ -7,11 +7,11 @@
     $__hasLogo = !empty($__logoUrl);
 @endphp
 <footer class="font-poppins" style="background: var(--p-navy); color: #c7d0dc;">
-    <div class="container-p py-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+  <div class="container-p py-10 sm:py-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10">
         <div>
             <a href="{{ route('home') }}" class="inline-flex items-center mb-3" aria-label="{{ $__settings->site_name ?? config('app.name') }}">
                 @if ($__hasLogo)
-                    <img src="{{ $__logoUrl }}" alt="{{ $__settings->site_name ?? config('app.name') }}" class="h-20 w-auto" style="filter: brightness(0) invert(1);">
+                    <img src="{{ $__logoUrl }}" alt="{{ $__settings->site_name ?? config('app.name') }}" class="h-14 sm:h-20 w-auto" style="filter: brightness(0) invert(1);">
                 @else
                     <div class="text-lg font-bold text-white">{{ $__settings->site_name ?? config('app.name') }}</div>
                 @endif
@@ -85,7 +85,7 @@
                                 <path d="M12 21s7-6.5 7-12a7 7 0 10-14 0c0 5.5 7 12 7 12z"/>
                                 <circle cx="12" cy="9" r="2.5"/>
                             </svg>
-                            <span class="whitespace-pre-line">{{ $__settings->address }}</span>
+                            <span class="whitespace-pre-line break-words">{{ $__settings->address }}</span>
                         </a>
                     </li>
                 @endif
@@ -96,7 +96,7 @@
                     <li><a href="tel:{{ preg_replace('/\s+/', '', $__settings->phone_secondary) }}" class="hover:text-white">{{ $__settings->phone_secondary }}</a></li>
                 @endif
                 @if ($__settings->email)
-                    <li><a href="mailto:{{ $__settings->email }}" class="hover:text-white">{{ $__settings->email }}</a></li>
+                    <li><a href="mailto:{{ $__settings->email }}" class="hover:text-white break-all">{{ $__settings->email }}</a></li>
                 @endif
             </ul>
         </div>

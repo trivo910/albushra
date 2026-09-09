@@ -312,6 +312,7 @@ body {
     position: absolute;
 
     left: 50px;
+    right: 50px;
     top: 50%;
 
     transform: translateY(-50%);
@@ -321,8 +322,9 @@ body {
     color: #229fe5;
 
     font-size: 40px;
-    line-height: 1;
+    line-height: 1.15;
     font-weight: 700;
+    overflow-wrap: break-word;
 }
 
 @media (max-width: 700px) {
@@ -343,6 +345,18 @@ body {
 
     .page-hero-content h1 {
         left: 20px;
+        right: 20px;
         font-size: 30px;
+    }
+}
+
+@media (max-width: 400px) {
+
+    .page-hero {
+        height: 220px;
+    }
+
+    .page-hero-content h1 {
+        font-size: 24px;
     }
 }

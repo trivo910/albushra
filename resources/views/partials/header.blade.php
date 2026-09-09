@@ -12,10 +12,10 @@
     $__hasLogo = !empty($__logoUrl);
 @endphp
 <header class="sticky top-0 z-40 bg-white" style="box-shadow: 0 2px 12px rgba(26,43,72,0.06);">
-    <div class="container-p flex items-center justify-between h-20 gap-10">
+    <div class="container-p flex items-center justify-between h-16 sm:h-20 gap-4 sm:gap-10">
         <a href="{{ route('home') }}" class="shrink-0 inline-flex items-center" aria-label="{{ $__settings->site_name ?? config('app.name') }}">
             @if ($__hasLogo)
-                <img src="{{ $__logoUrl }}" alt="{{ $__settings->site_name ?? config('app.name') }}" class="h-20 w-auto">
+                <img src="{{ $__logoUrl }}" alt="{{ $__settings->site_name ?? config('app.name') }}" class="h-14 sm:h-20 w-auto">
             @else
                 <span class="font-poppins text-xl font-bold" style="color: var(--p-navy);">
                     {{ $__settings->site_name ?? config('app.name') }}
@@ -64,7 +64,7 @@
         </button>
     </div>
 
-    <nav data-nav-menu class="hidden lg:hidden border-t font-poppins text-[15px] font-medium uppercase tracking-wide" style="border-color: var(--p-light-grey);">
+    <nav data-nav-menu class="hidden lg:hidden border-t font-poppins text-[15px] font-medium uppercase tracking-wide max-h-[calc(100vh-4rem)] overflow-y-auto" style="border-color: var(--p-light-grey);">
         <div class="container-p py-3 flex flex-col gap-1">
             <a href="{{ route('home') }}" class="nav-link py-2 {{ request()->routeIs('home') ? 'is-active' : '' }}">Home</a>
             <a href="{{ route('pages.show', 'about-us') }}" class="nav-link py-2 {{ request()->routeIs('pages.show') && request()->route('about-us') ? 'is-active' : '' }}">About Us</a>

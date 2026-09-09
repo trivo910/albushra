@@ -996,4 +996,26 @@
     border-radius: 12px;
 }
 
+@media (max-width: 900px) {
+    .contact-map {
+        width: calc(100% - 40px) !important;
+        margin: 0 20px 60px !important;
+    }
+
+    .contact-map iframe {
+        height: 350px !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .contact-map {
+        width: calc(100% - 24px) !important;
+        margin: 0 12px 40px !important;
+    }
+
+    .contact-map iframe {
+        height: 260px !important;
+    }
+}
+
 </style>

@@ -841,6 +841,26 @@
         margin-bottom: 9px;
     }
 
+}
+
+@media (max-width: 380px) {
+
+    .about-feature-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .about-feature-card {
+        min-height: auto;
+    }
+
+    .about-feature-card h3 {
+        font-size: 16px;
+    }
+
+    .about-feature-card p {
+        font-size: 13px;
+    }
+
 
     .about-intro-image {
         height: 300px;
@@ -1492,6 +1512,7 @@
         gap: 12px;
 
         max-width: 600px;
+        padding: 0 16px;
     }
 
     /* Reset desktop positioning */
@@ -1519,6 +1540,17 @@
 
     .team-info p {
         font-size: 10px;
+    }
+}
+
+@media (max-width: 380px) {
+    .team-grid {
+        grid-template-columns: 1fr;
+        max-width: 280px;
+    }
+
+    .team-image {
+        height: 260px;
     }
 }
 
