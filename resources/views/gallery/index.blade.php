@@ -6,7 +6,7 @@
 @endphp
 
 @section('content')
-    <x-page-hero image="public/contact/5-(2).png" title="Gallery" />
+    <x-page-hero image="public/banner/7.png" title="Gallery" />
 
     <!-- <section class="py-10 border-b" style="background: var(--p-light-grey); border-color: var(--p-light-grey);">
         <div class="container-p">

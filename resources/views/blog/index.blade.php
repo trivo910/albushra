@@ -12,7 +12,7 @@
             <h1 class="section-title !mb-0">Travel Guides &amp; Updates</h1>
         </div>
     </section> -->
-    <x-page-hero image="public/contact/5-(2).png" title="Blog" />
+    <x-page-hero image="public/banner/6.png" title="Blog" />
 
 
     <section class="py-12 sm:py-16">

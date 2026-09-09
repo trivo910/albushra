@@ -11,7 +11,7 @@
     
     {{-- Page Hero --}}
 
-    <x-page-hero image="public/about/5.png" title="About Us" />
+    <x-page-hero image="public/banner/5.png" title="About Us" />
 
 {{-- About Us Intro Section --}}
 

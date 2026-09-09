@@ -10,7 +10,7 @@
 @endphp
 
 @section('content')
-    <x-page-hero image="public/contact/5-(2).png" title="Packages" />
+    <x-page-hero image="public/banner/3.png" title="Packages" />
     <!-- <section class="py-10 border-b" style="background: var(--p-light-grey); border-color: var(--p-light-grey);">
         <div class="container-p">
             <p class="eyebrow">{{ $category === 'hajj' ? 'Hajj' : 'Packages' }}</p>

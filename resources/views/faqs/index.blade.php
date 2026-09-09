@@ -6,7 +6,7 @@
 @endphp
 
 @section('content')
-    <x-page-hero image="public/contact/5-(2).png" title="FAQs" />
+    <x-page-hero image="public/banner/5.png" title="FAQs" />
 
     <section class="faqs-section">
 

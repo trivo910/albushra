@@ -10,7 +10,7 @@
 
     {{-- Page Hero --}}
 
-    <x-page-hero image="public/contact/5-(2).png" title="Contact Us" />
+    <x-page-hero image="public/banner/8.png" title="Contact Us" />
 
     {{-- Contact Information --}}
 
