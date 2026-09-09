@@ -334,7 +334,9 @@ body {
     }
 
     .page-hero-image {
+        object-fit: contain;
         object-position: center;
+        background: #fff;
     }
 
     .page-hero-breadcrumb {

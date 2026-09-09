@@ -6,11 +6,11 @@ $settings = \App\Models\Setting::current();
 @endphp
 
 {{-- Hero --}}
-<section class="relative overflow-hidden" style="background: var(--p-light-grey);">
+<section class="relative overflow-hidden" style="background: #fff;">
     <div class="relative h-[340px] sm:h-[440px] lg:h-[520px]" data-carousel>
         @forelse ($heroSlides as $i => $slide)
         <div data-slide class="absolute inset-0 transition-opacity duration-700 {{ $i === 0 ? 'opacity-100' : 'opacity-0' }}">
-            <img src="{{ \Illuminate\Support\Facades\Storage::url($slide->image_path) }}" alt="{{ $slide->caption ?: ($settings->site_name ?? config('app.name')) }}" class="w-full h-full object-cover">
+            <img src="{{ \Illuminate\Support\Facades\Storage::url($slide->image_path) }}" alt="{{ $slide->caption ?: ($settings->site_name ?? config('app.name')) }}" class="w-full h-full object-contain sm:object-cover">
         </div>
         @empty
         <div data-slide class="absolute inset-0 opacity-100" style="background: linear-gradient(135deg, var(--p-navy), #2c4267);"></div>
