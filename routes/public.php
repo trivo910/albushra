@@ -15,7 +15,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', HomeController::class)->name('home');
 
 Route::get('/packages', [PackageController::class, 'index'])->name('packages.index');
-Route::get('/packages/{category}', [PackageController::class, 'category'])
+// Route::get('/packages/{category}', [PackageController::class, 'category'])
+Route::get('{category}', [PackageController::class, 'category'])
     ->where('category', 'hajj|umrah')
     ->name('packages.category');
 Route::get('/st-tour/{package:slug}', [PackageController::class, 'show'])->name('packages.show');
