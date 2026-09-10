@@ -37,6 +37,9 @@
                                         @if ($package->is_featured)
                                             <span class="badge badge-neutral ml-1">Featured</span>
                                         @endif
+                                        @if ($package->is_trending)
+                                            <span class="badge badge-neutral ml-1">Trending</span>
+                                        @endif
                                     </div>
                                     <div class="text-xs" style="color: var(--color-text-faint);">/{{ $package->slug }}</div>
                                 </td>

@@ -1,6 +1,6 @@
 @php
     $__settings = \App\Models\Setting::current();
-    $__trending = \App\Models\Package::where('status', 'published')->latest()->limit(6)->get();
+    $__trending = \App\Models\Package::where('status', 'published')->where('is_trending', true)->latest()->limit(6)->get();
     $__logoUrl = $__settings->site_logo
         ? \Illuminate\Support\Facades\Storage::url($__settings->site_logo)
         : (file_exists(public_path('images/al-bushra-logo.png')) ? asset('images/al-bushra-logo.png') : null);

@@ -89,6 +89,7 @@ class PackageController extends Controller
         $data['included'] = array_values(array_filter($data['included'] ?? [], fn ($v) => trim((string) $v) !== ''));
         $data['excluded'] = array_values(array_filter($data['excluded'] ?? [], fn ($v) => trim((string) $v) !== ''));
         $data['is_featured'] = (bool) ($data['is_featured'] ?? false);
+        $data['is_trending'] = (bool) ($data['is_trending'] ?? false);
 
         unset($data['images'], $data['thumbnail'], $data['itineraries']);
 

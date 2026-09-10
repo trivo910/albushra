@@ -48,6 +48,14 @@
                 Feature this package
             </label>
         </div>
+        <div class="mt-4">
+            <label class="flex items-center gap-2 text-sm" style="color: var(--color-text-muted);">
+                <input type="hidden" name="is_trending" value="0">
+                <input type="checkbox" name="is_trending" value="1" style="border-color: var(--color-border-strong);"
+                       @checked(old('is_trending', $package->is_trending))>
+                Show in "Trending Packages" (footer)
+            </label>
+        </div>
     </div>
 
     <div class="form-section">

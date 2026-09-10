@@ -28,6 +28,7 @@ class StorePackageRequest extends FormRequest
             'excluded.*' => ['nullable', 'string', 'max:255'],
             'map_embed' => ['nullable', 'string'],
             'is_featured' => ['nullable', 'boolean'],
+            'is_trending' => ['nullable', 'boolean'],
             'status' => ['required', 'in:draft,published'],
             'meta_title' => ['nullable', 'string', 'max:255'],
             'meta_description' => ['nullable', 'string', 'max:255'],
