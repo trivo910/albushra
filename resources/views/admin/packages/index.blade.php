@@ -9,6 +9,13 @@
         </a>
     </div>
 
+    @if ($packages->isNotEmpty())
+        <div class="mb-4 flex items-center justify-between gap-4 text-sm" style="color: var(--color-text-muted);">
+            <p>Drag packages into the order you want them to appear publicly.</p>
+            <span id="package-order-status" aria-live="polite"></span>
+        </div>
+    @endif
+
     <div class="panel overflow-hidden">
         @if ($packages->isEmpty())
             <div class="empty-state">
@@ -20,6 +27,7 @@
                 <table class="data-table">
                     <thead>
                         <tr>
+                            <th>Order</th>
                             @include('admin.partials.sortable-th', ['field' => 'title', 'label' => 'Title'])
                             @include('admin.partials.sortable-th', ['field' => 'category', 'label' => 'Category'])
                             @include('admin.partials.sortable-th', ['field' => 'price', 'label' => 'Price'])
@@ -28,9 +36,14 @@
                             <th class="text-right">Actions</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="package-order-list" data-reorder-url="{{ route('admin.packages.reorder') }}">
                         @foreach ($packages as $package)
-                            <tr>
+                            <tr draggable="{{ $isManualOrder ? 'true' : 'false' }}" data-package-id="{{ $package->id }}" class="package-order-row">
+                                <td>
+                                    <button type="button" class="package-drag-handle" title="Drag to reorder" aria-label="Drag {{ $package->title }} to reorder" {{ $isManualOrder ? '' : 'disabled' }}>
+                                        <span aria-hidden="true">⋮⋮</span>
+                                    </button>
+                                </td>
                                 <td>
                                     <div class="font-medium">
                                         {{ $package->title }}
@@ -80,7 +93,64 @@
         @endif
     </div>
 
-    <div class="mt-4">
-        {{ $packages->links() }}
-    </div>
 @endsection
+
+@push('scripts')
+    @if ($isManualOrder && $packages->count() > 1)
+        <script nonce="{{ request()->attributes->get('cspNonce') }}">
+        (() => {
+            const list = document.querySelector('#package-order-list');
+            const status = document.querySelector('#package-order-status');
+            let draggedRow = null;
+
+            list?.querySelectorAll('.package-order-row').forEach((row) => {
+                row.addEventListener('dragstart', () => {
+                    draggedRow = row;
+                    row.classList.add('is-dragging');
+                });
+
+                row.addEventListener('dragend', () => {
+                    row.classList.remove('is-dragging');
+                    draggedRow = null;
+                });
+
+                row.addEventListener('dragover', (event) => {
+                    event.preventDefault();
+                    if (!draggedRow || draggedRow === row) return;
+
+                    const rect = row.getBoundingClientRect();
+                    const insertAfter = event.clientY > rect.top + rect.height / 2;
+                    list.insertBefore(draggedRow, insertAfter ? row.nextSibling : row);
+                });
+            });
+
+            list?.addEventListener('drop', async (event) => {
+                event.preventDefault();
+                const order = [...list.querySelectorAll('[data-package-id]')].map((row) => row.dataset.packageId);
+                status.textContent = 'Saving...';
+
+                try {
+                    const response = await fetch(list.dataset.reorderUrl, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/json',
+                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+                        },
+                        body: JSON.stringify({ order }),
+                    });
+
+                    if (!response.ok) {
+                        const error = await response.json().catch(() => ({}));
+                        throw new Error(error.message || 'Unable to save order');
+                    }
+                    status.textContent = 'Order saved';
+                    setTimeout(() => { status.textContent = ''; }, 2000);
+                } catch (error) {
+                    status.textContent = error.message || 'Could not save order. Refresh and try again.';
+                }
+            });
+        })();
+        </script>
+    @endif
+@endpush

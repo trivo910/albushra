@@ -9,6 +9,8 @@ use App\Http\Requests\Admin\UpdatePackageRequest;
 use App\Models\Package;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
@@ -20,13 +22,40 @@ class PackageController extends Controller
     {
         $query = Package::query();
 
-        $sortState = $this->applySort($query, $request, ['title', 'category', 'price', 'rating', 'status'], 'created_at');
+        if ($request->filled('sort')) {
+            $sortState = $this->applySort($query, $request, ['title', 'category', 'price', 'rating', 'status'], 'sort_order', 'asc');
+        } else {
+            $query->orderBy('sort_order')->orderBy('id');
+            $sortState = ['sort' => 'sort_order', 'direction' => 'asc'];
+        }
 
         return view('admin.packages.index', [
-            'packages' => $query->paginate(15)->withQueryString(),
+            'packages' => $query->get(),
             'sort' => $sortState['sort'],
             'direction' => $sortState['direction'],
+            'isManualOrder' => ! $request->filled('sort'),
         ]);
+    }
+
+    public function reorder(Request $request): JsonResponse
+    {
+        $validated = $request->validate([
+            'order' => ['required', 'array'],
+            'order.*' => ['integer', 'distinct', 'exists:packages,id'],
+        ]);
+
+        $packageIds = Package::query()->pluck('id')->map(fn ($id) => (int) $id)->sort()->values()->all();
+        $submittedIds = collect($validated['order'])->map(fn ($id) => (int) $id)->sort()->values()->all();
+
+        abort_unless($packageIds === $submittedIds, 422, 'The package order is incomplete. Refresh and try again.');
+
+        DB::transaction(function () use ($validated): void {
+            foreach ($validated['order'] as $position => $packageId) {
+                Package::whereKey($packageId)->update(['sort_order' => $position]);
+            }
+        });
+
+        return response()->json(['message' => 'Package order saved.']);
     }
 
     public function create(): View

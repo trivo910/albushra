@@ -33,6 +33,7 @@ class Package extends Model
         'thumbnail',
         'thumbnail_alt',
         'status',
+        'sort_order',
         'meta_title',
         'meta_description',
     ];
@@ -54,6 +55,10 @@ class Package extends Model
         static::creating(function (Package $package) {
             if (empty($package->slug)) {
                 $package->slug = static::generateUniqueSlug($package->title);
+            }
+
+            if ($package->sort_order === null) {
+                $package->sort_order = (int) static::max('sort_order') + 1;
             }
         });
     }

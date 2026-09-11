@@ -32,7 +32,7 @@ class PackageController extends Controller
         }
 
         return view('packages.index', [
-            'packages' => $query->orderByDesc('is_featured')->latest()->paginate(9)->withQueryString(),
+            'packages' => $query->orderBy('sort_order')->orderBy('id')->paginate(9)->withQueryString(),
             'category' => $category,
         ]);
     }
@@ -46,7 +46,8 @@ class PackageController extends Controller
             'related' => Package::with('images')->where('status', 'published')
                 ->where('category', $package->category)
                 ->where('id', '!=', $package->id)
-                ->latest()
+                ->orderBy('sort_order')
+                ->orderBy('id')
                 ->limit(4)
                 ->get(),
         ]);

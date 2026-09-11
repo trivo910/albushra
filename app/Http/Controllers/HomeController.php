@@ -16,15 +16,15 @@ class HomeController extends Controller
             'hajjPackages' => Package::with('images')
                 ->where('status', 'published')
                 ->where('category', 'hajj')
-                ->orderByDesc('is_featured')
-                ->latest()
+                ->orderBy('sort_order')
+                ->orderBy('id')
                 ->limit(3)
                 ->get(),
             'umrahPackages' => Package::with('images')
                 ->where('status', 'published')
                 ->where('category', 'umrah')
-                ->orderByDesc('is_featured')
-                ->latest()
+                ->orderBy('sort_order')
+                ->orderBy('id')
                 ->limit(3)
                 ->get(),
             'faqs' => Faq::where('show_on_home', true)->orderBy('sort_order')->limit(8)->get(),

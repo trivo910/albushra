@@ -37,6 +37,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::post('blogs/seo-preview', [BlogController::class, 'seoPreview'])->name('blogs.seo-preview');
         Route::resource('blogs', BlogController::class)->except(['show']);
 
+        Route::post('packages/reorder', [PackageController::class, 'reorder'])->name('packages.reorder');
         Route::resource('packages', PackageController::class)->except(['show']);
         Route::delete('package-images/{image}', [PackageImageController::class, 'destroy'])->name('package-images.destroy');
 
