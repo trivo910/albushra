@@ -52,7 +52,8 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://localhost'),
+    // The web server should point directly to /public, so /public is not part of public URLs.
+    'url' => rtrim((string) preg_replace('#/public/?$#i', '', env('APP_URL', 'http://localhost')), '/'),
 
     /*
     |--------------------------------------------------------------------------

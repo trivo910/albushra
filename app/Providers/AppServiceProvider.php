@@ -27,6 +27,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        $configuredUrl = (string) env('APP_URL', '');
+
+        if (preg_match('#/public/?$#i', $configuredUrl)) {
+            URL::forceRootUrl(config('app.url'));
+        }
+
         Password::defaults(function () {
             return Password::min(8)->mixedCase()->numbers();
         });
