@@ -6,30 +6,68 @@ $settings = \App\Models\Setting::current();
 @endphp
 
 {{-- Hero --}}
-<section class="relative overflow-hidden" style="background: #fff;">
-    <div class="relative h-[340px] sm:h-[440px] lg:h-[520px]" data-carousel>
-        @forelse ($heroSlides as $i => $slide)
-        <div data-slide class="absolute inset-0 transition-opacity duration-700 {{ $i === 0 ? 'opacity-100' : 'opacity-0' }}">
-            <img src="{{ \Illuminate\Support\Facades\Storage::url($slide->image_path) }}" alt="{{ $slide->caption ?: ($settings->site_name ?? config('app.name')) }}" class="w-full h-full object-contain sm:object-cover">
-        </div>
-        @empty
-        <div data-slide class="absolute inset-0 opacity-100" style="background: linear-gradient(135deg, var(--p-navy), #2c4267);"></div>
-        @endforelse
 
-        <div class="absolute inset-0 flex items-center">
-            <div class="container-p">
-                <!-- <p class="eyebrow text-white" style="color: #fbd0c4;">Welcome to {{ $settings->site_name ?? config('app.name') }}</p> -->
-                <!-- <h1 class="font-poppins text-3xl sm:text-5xl font-bold text-white max-w-xl leading-tight mb-6">
-                        Our Hajj and Umrah Packages Are The Perfect Journey of Faith
-                    </h1> -->
+<section class="hero-section">
+
+    <div class="hero-carousel" data-carousel>
+
+        @forelse ($heroSlides as $i => $slide)
+
+            <div
+                data-slide
+                class="hero-slide {{ $i === 0 ? 'active' : '' }}"
+            >
+
+                <img
+                    src="{{ \Illuminate\Support\Facades\Storage::url($slide->image_path) }}"
+                    alt="{{ $slide->caption ?? ($settings->site_name ?? config('app.name')) }}"
+                    class="hero-slide-image"
+                >
 
             </div>
+
+        @empty
+
+            <div
+                data-slide
+                class="hero-slide active hero-fallback"
+            ></div>
+
+        @endforelse
+
+
+        {{-- Hero Content --}}
+        <div class="hero-content">
+
+            <div class="container-p">
+
+                {{-- 
+                <p class="eyebrow">
+                    Welcome to {{ $settings->site_name ?? config('app.name') }}
+                </p>
+
+                <h1>
+                    Our Hajj and Umrah Packages Are The Perfect Journey of Faith
+                </h1>
+                --}}
+
+            </div>
+
         </div>
 
+
+        {{-- Carousel Dots --}}
         @if ($heroSlides->count() > 1)
-        <div data-carousel-dots class="absolute bottom-5 left-1/2 -translate-x-1/2 flex items-center gap-2"></div>
+
+            <div
+                data-carousel-dots
+                class="hero-dots"
+            ></div>
+
         @endif
+
     </div>
+
 </section>
 
 {{-- Intro --}}
@@ -1779,4 +1817,251 @@ $settings = \App\Models\Setting::current();
         }
 
     }
+
+    /* =========================================
+   HERO SECTION
+========================================= */
+
+.hero-section {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background: #ffffff;
+}
+
+
+/* =========================================
+   CAROUSEL
+========================================= */
+
+.hero-carousel {
+    position: relative;
+
+    width: 100%;
+    height: 520px;
+
+    overflow: hidden;
+}
+
+
+/* =========================================
+   SLIDE
+========================================= */
+
+.hero-slide {
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    opacity: 0;
+
+    transition: opacity 0.7s ease;
+
+    z-index: 1;
+}
+
+.hero-slide.active {
+    opacity: 1;
+}
+
+
+/* =========================================
+   HERO IMAGE
+========================================= */
+
+.hero-slide-image {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+    object-position: center;
+}
+
+
+/* =========================================
+   FALLBACK
+========================================= */
+
+.hero-fallback {
+    background: linear-gradient(
+        135deg,
+        var(--p-navy),
+        #2c4267
+    );
+}
+
+
+/* =========================================
+   HERO CONTENT
+========================================= */
+
+.hero-content {
+    position: absolute;
+
+    inset: 0;
+
+    display: flex;
+    align-items: center;
+
+    z-index: 5;
+
+    pointer-events: none;
+}
+
+
+/* =========================================
+   CAROUSEL DOTS
+========================================= */
+
+.hero-dots {
+    position: absolute;
+
+    left: 50%;
+    bottom: 20px;
+
+    transform: translateX(-50%);
+
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
+
+    z-index: 10;
+}
+
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 900px) {
+
+    .hero-carousel {
+        height: 440px;
+    }
+
+    .hero-slide-image {
+        object-fit: cover;
+    }
+
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 640px) {
+
+    .hero-section {
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+
+    /*
+       IMPORTANT:
+       Mobile par fixed height nahi rakhenge.
+       Isse image crop nahi hogi.
+    */
+
+    .hero-carousel {
+        height: auto !important;
+
+        min-height: 0 !important;
+
+        overflow: hidden;
+
+        background: #ffffff;
+    }
+
+
+    .hero-slide {
+        position: absolute;
+
+        inset: 0;
+
+        width: 100%;
+
+        height: auto;
+
+        min-height: 0;
+    }
+
+
+    /*
+       First slide normal flow mein rahega
+       taaki carousel ki height image ke
+       according calculate ho.
+    */
+
+    .hero-slide:first-child {
+        position: relative;
+
+        inset: auto;
+
+        height: auto;
+    }
+
+
+    .hero-slide-image {
+        display: block;
+
+        width: 100%;
+
+        height: auto;
+
+        max-width: 100%;
+
+        object-fit: contain;
+
+        object-position: center;
+
+        margin: 0;
+    }
+
+
+    .hero-content {
+        position: absolute;
+
+        inset: 0;
+
+        pointer-events: none;
+    }
+
+
+    .hero-dots {
+        bottom: 10px;
+
+        gap: 6px;
+    }
+
+}
+
+
+/* =========================================
+   SMALL MOBILE
+========================================= */
+
+@media (max-width: 480px) {
+
+    .hero-carousel {
+        width: 100%;
+    }
+
+    .hero-slide-image {
+        width: 100%;
+        height: auto;
+
+        object-fit: contain;
+    }
+
+}
+
 </style>
