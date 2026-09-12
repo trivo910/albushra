@@ -228,7 +228,7 @@
 
             {{-- Sidebar --}}
             <div>
-                <div class="card-p p-6 mb-6 sticky top-24">
+                <div class="card-p p-6 mb-6">
                     <div class="flex items-center justify-between mb-5 pb-5" style="border-bottom: 1px solid var(--p-light-grey);">
                         <div>
                             <div class="text-xs" style="color: var(--p-grey);">From</div>

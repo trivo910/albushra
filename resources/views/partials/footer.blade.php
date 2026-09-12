@@ -6,7 +6,7 @@
         : (file_exists(public_path('images/al-bushra-logo.png')) ? asset('images/al-bushra-logo.png') : null);
     $__hasLogo = !empty($__logoUrl);
 @endphp
-<footer class="font-poppins" style="background: var(--p-navy); color: #c7d0dc;">
+<footer class="font-poppins" style="background: #441461; color: #c7d0dc;">
   <div class="container-p py-10 sm:py-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10">
         <div>
             <a href="{{ route('home') }}" class="inline-flex items-center mb-3" aria-label="{{ $__settings->site_name ?? config('app.name') }}">
@@ -16,7 +16,7 @@
                     <div class="text-lg font-bold text-white">{{ $__settings->site_name ?? config('app.name') }}</div>
                 @endif
             </a>
-            <p class="text-sm leading-relaxed mb-5" style="color: #93a0b3;">
+            <p class="text-sm leading-relaxed mb-5" style="color: #e4e5e7;">
                 Your trusted companion on the most sacred journeys of your life — Hajj and Umrah, handled with sincerity and care.
             </p>
             <div class="flex items-center gap-3">
@@ -67,6 +67,9 @@
                     <li>No packages yet</li>
                 @endforelse
             </ul>
+            <a href="{{ route('hajj-packages.bangalore-2027') }}" class="inline-block mt-4 text-sm hover:text-white">
+                Hajj packages from Bangalore 2027
+            </a>
         </div>
 
         <div>

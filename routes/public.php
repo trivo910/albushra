@@ -35,6 +35,8 @@ Route::get('/contact', [ContactController::class, 'index'])->name('contact.index
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store')->middleware('throttle:public-form');
 
 Route::view('/about-us', 'about.index')->name('about');
+Route::view('/hajj-packages-from-bangalore-2027', 'pages.hajj-packages-from-bangalore-2027')
+    ->name('hajj-packages.bangalore-2027');
 
 Route::get('/sitemap.xml', [SitemapController::class, 'index'])->name('sitemap');
 Route::get('/robots.txt', function () {

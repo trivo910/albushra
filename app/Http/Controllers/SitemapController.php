@@ -20,6 +20,7 @@ class SitemapController extends Controller
             ['loc' => route('faqs.index'), 'lastmod' => now()],
             ['loc' => route('gallery.index'), 'lastmod' => now()],
             ['loc' => route('contact.index'), 'lastmod' => now()],
+            ['loc' => route('hajj-packages.bangalore-2027'), 'lastmod' => now()],
         ]);
 
         Package::where('status', 'published')->get(['slug', 'updated_at'])->each(function ($package) use ($urls) {
