@@ -366,7 +366,7 @@
 
                 <div class="team-image">
                     <img
-                        src="{{ \Illuminate\Support\Facades\Storage::url('public/about/al-bushra-tours-2.png') }}"
+                        src="{{ \Illuminate\Support\Facades\Storage::url('public/about/WhatsApp Image 2026-09-18 at 6.15.59 PM.jpeg') }}"
                         alt="Mohammed Rafi Set"
                     >
                 </div>
@@ -402,14 +402,14 @@
 
                 <div class="team-image">
                     <img
-                        src="{{ \Illuminate\Support\Facades\Storage::url('public/about/8.png') }}"
+                        src="{{ \Illuminate\Support\Facades\Storage::url('public/about/WhatsApp Image 2026-09-18 at 5.08.20 PM.jpeg') }}"
                         alt="Shahrukh Hussain"
                     >
                 </div>
 
                 <div class="team-info">
                     <h3>Shahrukh Hussain</h3>
-                    <p>Sales Executive</p>
+                    <p>Senior marketing executive</p>
                 </div>
 
             </div>
@@ -433,40 +433,40 @@
             </div>
 
 
-            {{-- Alia Safina --}}
+            {{-- Rizwana Akram shaik --}}
             <div class="team-card">
 
                 <div class="team-image">
                     <img
-                        src="{{ \Illuminate\Support\Facades\Storage::url('public/about/9.png') }}"
-                        alt="Alia Safina"
+                        src="{{ \Illuminate\Support\Facades\Storage::url('public/about/WhatsApp Image 2026-09-18 at 5.20.32 PM.jpeg') }}"
+                        alt="Rizwana Akram shaik"
                     >
                 </div>
 
                 <div class="team-info">
-                    <h3>Alia Safina</h3>
-                    <p>Team Lead</p>
+                    <h3>Rizwana Akram shaik</h3>
+                    <p>Backend Admin</p>
                 </div>
 
             </div>
 
 
-            {{-- Mehruz --}}
+            {{-- Sayeda Ayra --}}
             <div class="team-card">
 
                 <div class="team-image">
                     <img
-                        src="{{ \Illuminate\Support\Facades\Storage::url('public/about/mahruz.png ') }}"
+                        src="{{ \Illuminate\Support\Facades\Storage::url('public/about/WhatsApp Image 2026-09-18 at 6.23.25 PM.jpeg ') }}"
                         alt="Mehruz"
                     >
                 </div>
 
                 <div class="team-info">
-                    <h3>Mehruz</h3>
-                    <p>Sales Executive</p>
+                    <h3>Sayeda Ayra</h3>
+                    <p>Marketing  Executive</p>
                 </div>
 
-            </div>
+            </div> 
 
         </div>
 
@@ -1371,7 +1371,7 @@
 .team-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 8px;
+    gap: 10px;
 
     width: 100%;
     /* max-width: 950px; */

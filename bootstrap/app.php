@@ -11,6 +11,7 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
+        $middleware->append(\App\Http\Middleware\CanonicalUrl::class);
         $middleware->alias([
             'admin.auth' => \App\Http\Middleware\AdminAuthenticate::class,
             'admin.guest' => \App\Http\Middleware\RedirectIfAdminAuthenticated::class,
