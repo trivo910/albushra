@@ -11,7 +11,7 @@
 
     # Keep old links working after removing /public from the application URL.
     RewriteCond %{REQUEST_URI} ^/public(?:/(.*))?$ [NC]
-    RewriteRule ^public(?:/(.*))?$ /$1 [R=301,L,NE]
+    RewriteRule ^ /%1 [R=301,L,NE]
 
     # Handle Authorization Header
     RewriteCond %{HTTP:Authorization} .
