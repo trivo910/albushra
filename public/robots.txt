@@ -1,0 +1,9 @@
+User-agent: *
+
+Disallow: /wp-admin/
+
+Sitemap: https://albushratnt.in/sitemap_index.xml
+
+Disallow:/public/
+
+Disallow:/wa.me/

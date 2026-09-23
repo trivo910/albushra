@@ -3,10 +3,14 @@
 @php
     $seoTitle = $category === 'hajj'
         ? 'Hajj Packages | '.(\App\Models\Setting::current()->site_name ?? config('app.name'))
-        : 'Hajj & Umrah Packages | '.(\App\Models\Setting::current()->site_name ?? config('app.name'));
+        : ($category === 'umrah'
+            ? 'Umrah Packages | Al Bushra Travel'
+            : 'Hajj & Umrah Packages | '.(\App\Models\Setting::current()->site_name ?? config('app.name')));
     $seoDescription = $category === 'hajj'
         ? 'Browse our Hajj packages with visa, flights, hotels and guided services included.'
-        : 'Browse our full range of Hajj and Umrah packages with visa, flights, hotels and guided services included.';
+        : ($category === 'umrah'
+            ? 'Browse our full range of Umrah packages with visa, flights, hotels and guided services included.'
+            : 'Browse our full range of Hajj and Umrah packages with visa, flights, hotels and guided services included.');
 @endphp
 
 @section('content')
