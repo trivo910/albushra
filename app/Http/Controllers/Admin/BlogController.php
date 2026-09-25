@@ -34,13 +34,20 @@ class BlogController extends Controller
     public function create(): View
     {
         return view('admin.blogs.create', [
-            'blog' => new Blog(),
+            'blog' => new Blog([
+                'status' => 'published',
+                'published_at' => now(),
+            ]),
         ]);
     }
 
     public function store(StoreBlogRequest $request): RedirectResponse
     {
         $data = $request->validated();
+
+        if ($data['status'] === 'published' && empty($data['published_at'])) {
+            $data['published_at'] = now();
+        }
 
         if ($request->hasFile('featured_image')) {
             $data['featured_image'] = $request->file('featured_image')->store('blogs', 'public');
@@ -61,6 +68,10 @@ class BlogController extends Controller
     public function update(UpdateBlogRequest $request, Blog $blog): RedirectResponse
     {
         $data = $request->validated();
+
+        if ($data['status'] === 'published' && empty($data['published_at'])) {
+            $data['published_at'] = now();
+        }
 
         if ($request->hasFile('featured_image')) {
             if ($blog->featured_image) {
