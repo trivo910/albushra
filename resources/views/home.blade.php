@@ -266,7 +266,7 @@ $settings = \App\Models\Setting::current();
                 @csrf
                 <input type="hidden" name="_hajj_2027_enquiry" value="1">
                 <input type="hidden" name="message" value="Enquiry about Hajj 2027">
-                <div class="absolute -left-[9999px] h-0 w-0 overflow-hidden" aria-hidden="true">
+                <div style="position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden;" aria-hidden="true">
                     <label for="hajj-2027-website">Leave this field blank</label>
                     <input type="text" id="hajj-2027-website" name="website" tabindex="-1" autocomplete="off">
                 </div>

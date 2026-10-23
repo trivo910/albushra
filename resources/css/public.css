@@ -17,6 +17,10 @@ body {
     color: var(--p-navy);
 }
 
+#quote-modal::backdrop {
+    background: rgba(0, 0, 0, 0.6);
+}
+
 @layer components {
     .container-p {
         @apply mx-auto w-full max-w-[1200px] px-4 sm:px-6;
