@@ -11,7 +11,18 @@
         : (file_exists(public_path('images/al-bushra-logo.png')) ? asset('images/al-bushra-logo.png') : null);
     $__hasLogo = !empty($__logoUrl);
 @endphp
-<header class="sticky top-0 z-40 bg-white" style="box-shadow: 0 2px 12px rgba(26,43,72,0.06);">
+<header class="sticky top-0 z-40 bg-white" style="box-shadow: 0 2px 12px rgba(26, 43, 72, 0.06);">
+    <div class="font-poppins text-sm" style="background: #0b2e7f; color: #fff;">
+        <div class="container-p flex min-h-11 items-center justify-between gap-3 py-2">
+            <a href="tel:+919998707032" class="inline-flex items-center gap-2 text-xs font-medium sm:text-sm" aria-label="Call +91 9998707032">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a15 15 0 0 0 5 5L15 13l5 2v4c0 1.1-.9 2-2 2C9.7 21 3 14.3 3 6c0-1.1.9-2 2-2Z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span>+91 9998707032</span>
+            </a>
+            <button type="button" data-quote-open class="shrink-0 rounded-md px-2 py-1.5 text-[11px] font-semibold sm:px-4 sm:text-sm" style="background: var(--p-primary); color: #030303;">
+                Get Umrah Package Quote
+            </button>
+        </div>
+    </div>
     <div class="container-p flex items-center justify-between h-16 sm:h-20 gap-4 sm:gap-10">
         <a href="{{ route('home') }}" class="shrink-0 inline-flex items-center" aria-label="{{ $__settings->site_name ?? config('app.name') }}">
             @if ($__hasLogo)
@@ -89,4 +100,48 @@
             </div>
         </div>
     </nav>
+
+    <dialog data-quote-modal aria-labelledby="quote-modal-title" @if (old('_quote_form')) open @endif class="m-auto w-[calc(100%-2rem)] max-w-lg rounded-2xl border-0 p-0 shadow-2xl backdrop:bg-black/60">
+        <div class="relative max-h-[90vh] overflow-y-auto p-6 sm:p-8">
+            <button type="button" data-quote-close aria-label="Close quote form" class="absolute right-4 top-4 rounded-full p-2 hover:bg-slate-100">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+            </button>
+            <h2 id="quote-modal-title" class="pr-8 font-poppins text-2xl font-semibold" style="color: var(--p-navy);">Get Umrah Package Quote</h2>
+            <p class="mt-2 text-sm" style="color: var(--p-grey);">Share your details and our team will get in touch with you.</p>
+
+            @if (old('_quote_form') && $errors->any())
+                <div class="mt-4 rounded-lg px-4 py-3 text-sm" style="background: #fff1f0; color: #b42318;">
+                    @foreach ($errors->all() as $__quoteError)
+                        <p>{{ $__quoteError }}</p>
+                    @endforeach
+                </div>
+            @endif
+
+            <form method="POST" action="{{ route('contact.store') }}" class="mt-5 space-y-4">
+                @csrf
+                <input type="hidden" name="_quote_form" value="1">
+                <div class="absolute -left-[9999px] h-0 w-0 overflow-hidden" aria-hidden="true">
+                    <label for="quote-website">Leave this field blank</label>
+                    <input type="text" id="quote-website" name="website" tabindex="-1" autocomplete="off">
+                </div>
+                <div>
+                    <label for="quote-name" class="field-label-p">Your name</label>
+                    <input id="quote-name" name="name" type="text" value="{{ old('_quote_form') ? old('name') : '' }}" required maxlength="255" autocomplete="name" class="field-input-p">
+                </div>
+                <div>
+                    <label for="quote-phone" class="field-label-p">Phone number</label>
+                    <input id="quote-phone" name="phone" type="tel" value="{{ old('_quote_form') ? old('phone') : '' }}" required maxlength="50" autocomplete="tel" class="field-input-p">
+                </div>
+                <div>
+                    <label for="quote-email" class="field-label-p">Email address</label>
+                    <input id="quote-email" name="email" type="email" value="{{ old('_quote_form') ? old('email') : '' }}" required maxlength="255" autocomplete="email" class="field-input-p">
+                </div>
+                <div>
+                    <label for="quote-message" class="field-label-p">Message</label>
+                    <textarea id="quote-message" name="message" rows="3" maxlength="2000" class="field-input-p">{{ old('_quote_form') ? old('message', 'I would like to get an Umrah package quote.') : 'I would like to get an Umrah package quote.' }}</textarea>
+                </div>
+                <button type="submit" class="btn-brand w-full">Request a Quote</button>
+            </form>
+        </div>
+    </dialog>
 </header>
