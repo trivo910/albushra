@@ -245,8 +245,42 @@ $settings = \App\Models\Setting::current();
 
 </section>
 
+{{-- Hajj 2027 enquiry --}}
+<section class="py-5 sm:py-7" aria-labelledby="hajj-2027-enquiry-title">
+    <div class="container-p">
+        <div class="rounded-xl border px-4 py-4 sm:px-6" style="border-color: var(--p-light-grey); background: var(--p-primary-soft);">
+            <div class="mb-3 text-center sm:mb-4">
+                <h2 id="hajj-2027-enquiry-title" class="font-poppins text-lg font-semibold sm:text-xl" style="color: var(--p-navy);">Enquire About Hajj 2027</h2>
+                <p class="mt-1 text-xs sm:text-sm" style="color: var(--p-grey);">Leave your details and our team will contact you.</p>
+            </div>
+
+            @if (old('_hajj_2027_enquiry') && $errors->any())
+                <div class="mb-3 rounded-lg px-3 py-2 text-sm" style="background: #fff1f0; color: #b42318;" role="alert">
+                    @foreach ($errors->all() as $__hajjError)
+                        <p>{{ $__hajjError }}</p>
+                    @endforeach
+                </div>
+            @endif
+
+            <form method="POST" action="{{ route('contact.store') }}" class="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-4">
+                @csrf
+                <input type="hidden" name="_hajj_2027_enquiry" value="1">
+                <input type="hidden" name="message" value="Enquiry about Hajj 2027">
+                <div class="absolute -left-[9999px] h-0 w-0 overflow-hidden" aria-hidden="true">
+                    <label for="hajj-2027-website">Leave this field blank</label>
+                    <input type="text" id="hajj-2027-website" name="website" tabindex="-1" autocomplete="off">
+                </div>
+                <input type="text" name="name" value="{{ old('_hajj_2027_enquiry') ? old('name') : '' }}" required maxlength="255" autocomplete="name" aria-label="Your name" placeholder="Your name" class="field-input-p">
+                <input type="tel" name="phone" value="{{ old('_hajj_2027_enquiry') ? old('phone') : '' }}" required maxlength="50" autocomplete="tel" aria-label="Phone number" placeholder="Phone number" class="field-input-p">
+                <input type="email" name="email" value="{{ old('_hajj_2027_enquiry') ? old('email') : '' }}" required maxlength="255" autocomplete="email" aria-label="Email address" placeholder="Email address" class="field-input-p">
+                <button type="submit" class="btn-brand rounded-lg py-2.5">Request a Call</button>
+            </form>
+        </div>
+    </div>
+</section>
+
 {{-- Services grid --}}
-<section class="py-16 sm:py-20 services-section">
+<section class="py-16 sm:py-10 services-section">
     <div class="container-p">
         <div class="text-center max-w-2xl mx-auto mb-12">
             <p class="eyebrow">Get Special Services</p>
@@ -1101,7 +1135,7 @@ $settings = \App\Models\Setting::current();
         margin: 0 auto;
         padding-left: 24px;
         padding-right: 24px;
-        padding-top: 50px;
+        padding-top: 10px;
         padding-bottom: 50px;
     }
 

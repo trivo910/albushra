@@ -1,5 +1,27 @@
 // Mobile nav toggle
 document.addEventListener('DOMContentLoaded', () => {
+    const quoteModal = document.querySelector('[data-quote-modal]');
+    if (quoteModal instanceof HTMLDialogElement) {
+        const quoteForm = quoteModal.querySelector('input[name="name"]');
+        const closeQuoteModal = () => quoteModal.close();
+
+        if (quoteModal.hasAttribute('open')) {
+            quoteModal.removeAttribute('open');
+            quoteModal.showModal();
+        }
+
+        document.querySelectorAll('[data-quote-open]').forEach((button) => {
+            button.addEventListener('click', () => {
+                quoteModal.showModal();
+                quoteForm?.focus();
+            });
+        });
+        quoteModal.querySelector('[data-quote-close]')?.addEventListener('click', closeQuoteModal);
+        quoteModal.addEventListener('click', (event) => {
+            if (event.target === quoteModal) closeQuoteModal();
+        });
+    }
+
     const toggle = document.querySelector('[data-nav-toggle]');
     const menu = document.querySelector('[data-nav-menu]');
     if (toggle && menu) {
