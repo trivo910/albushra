@@ -16,7 +16,7 @@
         <div class="container-p flex min-h-11 items-center justify-between gap-3 py-2">
             <a href="tel:+919998707032" class="inline-flex items-center gap-2 text-xs font-medium sm:text-sm" aria-label="Call +91 9998707032">
                 <svg width="28" height="28" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a15 15 0 0 0 5 5L15 13l5 2v4c0 1.1-.9 2-2 2C9.7 21 3 14.3 3 6c0-1.1.9-2 2-2Z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                <span>+91 9998707032</span>
+                <span style="font-size: 16px; font-weight: 400;">+91 9998707032</span>
             </a>
             <button type="button" popovertarget="quote-modal" class="shrink-0 rounded-md px-2 py-1.5 text-[11px] font-semibold sm:px-4 sm:text-sm" style="background: var(--p-primary); color: #030303;">
                 Get Umrah Package Quote
