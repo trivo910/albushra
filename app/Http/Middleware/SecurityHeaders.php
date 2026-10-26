@@ -32,7 +32,7 @@ class SecurityHeaders
             "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
             "font-src 'self' https://fonts.gstatic.com",
             "img-src 'self' data: https:",
-            "frame-src 'self' https://www.google.com https://maps.google.com",
+            "frame-src 'self' https://www.google.com https://maps.google.com https://www.googletagmanager.com",
             "connect-src 'self' https://www.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com",
             "object-src 'none'",
             "base-uri 'self'",
