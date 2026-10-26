@@ -33,7 +33,7 @@ class SecurityHeaders
             "font-src 'self' https://fonts.gstatic.com",
             "img-src 'self' data: https:",
             "frame-src 'self' https://www.google.com https://maps.google.com",
-            "connect-src 'self' https://www.google-analytics.com",
+            "connect-src 'self' https://www.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com",
             "object-src 'none'",
             "base-uri 'self'",
             "form-action 'self'",

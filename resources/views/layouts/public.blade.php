@@ -9,13 +9,14 @@
     <!-- <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet"> -->
     @vite(['resources/css/public.css', 'resources/js/public.js'])
     @php($__settings = \App\Models\Setting::current())
-    @if ($__settings->ga_code)
-        <script async src="https://www.googletagmanager.com/gtag/js?id={{ $__settings->ga_code }}"></script>
+    @php($__gaCode = $__settings->ga_code ?: 'G-JWT8SV2Z1H')
+    @if ($__gaCode)
+        <script async src="https://www.googletagmanager.com/gtag/js?id={{ $__gaCode }}"></script>
         <script nonce="{{ request()->attributes->get('cspNonce') }}">
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-            gtag('config', '{{ $__settings->ga_code }}');
+            gtag('config', @json($__gaCode));
         </script>
     @endif
     @if ($__settings->gtm_code)
@@ -24,24 +25,6 @@
         </script>
     @endif
     @stack('head')
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-JWT8SV2Z1H"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-JWT8SV2Z1H');
-</script>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-JWT8SV2Z1H"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-JWT8SV2Z1H');
-</script>
 </head>
 <body class="antialiased bg-white">
     @if ($__settings->gtm_code)
