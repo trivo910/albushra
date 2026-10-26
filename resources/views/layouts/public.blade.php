@@ -17,6 +17,7 @@
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
             gtag('config', @json($__gaCode));
+            gtag('config', 'AW-18521381824');
         </script>
     @endif
     @if ($__settings->gtm_code)
