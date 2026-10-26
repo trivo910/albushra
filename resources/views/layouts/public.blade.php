@@ -24,6 +24,15 @@
         </script>
     @endif
     @stack('head')
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-JWT8SV2Z1H"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-JWT8SV2Z1H');
+</script>
 </head>
 <body class="antialiased bg-white">
     @if ($__settings->gtm_code)
