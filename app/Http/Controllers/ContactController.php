@@ -26,6 +26,12 @@ class ContactController extends Controller
             ]);
         }
 
+        if ($request->boolean('_hajj_2027_enquiry')) {
+            return back()
+                ->with('success', 'Thank you! Our team will contact you about Hajj 2027 shortly.')
+                ->with('hajj_2027_enquiry_success', true);
+        }
+
         return back()->with('success', 'Thank you for reaching out! We will get back to you shortly.');
     }
 }

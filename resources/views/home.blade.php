@@ -254,6 +254,12 @@ $settings = \App\Models\Setting::current();
                 <p class="mt-1 text-xs sm:text-sm" style="color: var(--p-grey);">Leave your details and our team will contact you.</p>
             </div>
 
+            @if (session('hajj_2027_enquiry_success'))
+                <div class="hajj-2027-form-success mb-3 rounded-lg px-3 py-2 text-sm" role="status" aria-live="polite">
+                    {{ session('success') }}
+                </div>
+            @endif
+
             @if (old('_hajj_2027_enquiry') && $errors->any())
                 <div class="mb-3 rounded-lg px-3 py-2 text-sm" style="background: #fff1f0; color: #b42318;" role="alert">
                     @foreach ($errors->all() as $__hajjError)

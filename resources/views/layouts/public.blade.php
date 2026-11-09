@@ -32,9 +32,9 @@
     @include('partials.header')
 
     <main>
-        @if (session('success') && ! request()->routeIs('contact.index'))
+        @if (session('success') && ! request()->routeIs('contact.index') && ! session('hajj_2027_enquiry_success'))
             <div class="container-p mt-4">
-                <div class="rounded-lg px-4 py-3 text-sm font-poppins" style="background: #e9f8ee; color: #1e7a46; border: 1px solid #bfe8cd;">
+                <div class="header-form-success rounded-lg px-4 py-3 text-sm font-poppins" role="status" aria-live="polite">
                     {{ session('success') }}
                 </div>
             </div>

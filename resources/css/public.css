@@ -103,6 +103,13 @@ body {
         box-shadow: 0 0 0 3px var(--p-primary-soft);
     }
 
+    .header-form-success,
+    .hajj-2027-form-success {
+        background: #e9f8ee;
+        color: #1e7a46;
+        border: 1px solid #bfe8cd;
+    }
+
     .star-rating {
         @apply inline-flex items-center gap-0.5;
         color: #f5a623;
