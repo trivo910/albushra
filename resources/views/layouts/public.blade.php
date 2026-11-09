@@ -32,7 +32,7 @@
     @include('partials.header')
 
     @if (session('header_form_success') || (session('success') && ! request()->routeIs('contact.index') && ! session('hajj_2027_enquiry_success')))
-        <div class="header-form-success fixed right-4 top-4 z-[70] w-[calc(100%-2rem)] max-w-sm rounded-lg px-4 py-3 text-sm font-poppins shadow-lg transition duration-200" role="status" aria-live="polite" data-dismiss-after="3000">
+        <div class="header-form-success" role="status" aria-live="polite" data-dismiss-after="3000" style="position: fixed; top: 50%; right: 1rem; z-index: 99999; width: min(24rem, calc(100% - 2rem)); box-sizing: border-box; padding: 0.75rem 1rem; border: 1px solid #bfe8cd; border-radius: 0.5rem; background: #e9f8ee; color: #1e7a46; box-shadow: 0 10px 25px rgba(26, 43, 72, 0.2); font-family: Poppins, sans-serif; font-size: 0.875rem; line-height: 1.5; transform: translateY(-50%); transition: opacity 200ms ease, transform 200ms ease;">
             {{ session('header_form_success') ?? session('success') }}
         </div>
     @endif

@@ -5,7 +5,8 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!Number.isFinite(dismissAfter) || dismissAfter <= 0) return;
 
         setTimeout(() => {
-            message.classList.add('translate-y-2', 'opacity-0');
+            message.style.opacity = '0';
+            message.style.transform = 'translateY(calc(-50% + 0.5rem))';
             setTimeout(() => message.remove(), 200);
         }, dismissAfter);
     });
