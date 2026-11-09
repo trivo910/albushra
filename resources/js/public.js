@@ -1,5 +1,15 @@
 // Mobile nav toggle
 document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('[data-dismiss-after]').forEach((message) => {
+        const dismissAfter = Number(message.dataset.dismissAfter);
+        if (!Number.isFinite(dismissAfter) || dismissAfter <= 0) return;
+
+        setTimeout(() => {
+            message.classList.add('translate-y-2', 'opacity-0');
+            setTimeout(() => message.remove(), 200);
+        }, dismissAfter);
+    });
+
     const toggle = document.querySelector('[data-nav-toggle]');
     const menu = document.querySelector('[data-nav-menu]');
     if (toggle && menu) {

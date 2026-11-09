@@ -33,10 +33,8 @@
 
     <main>
         @if (session('success') && ! request()->routeIs('contact.index') && ! session('hajj_2027_enquiry_success'))
-            <div class="container-p mt-4">
-                <div class="header-form-success rounded-lg px-4 py-3 text-sm font-poppins" role="status" aria-live="polite">
-                    {{ session('success') }}
-                </div>
+            <div class="header-form-success fixed right-4 top-4 z-[70] w-[calc(100%-2rem)] max-w-sm rounded-lg px-4 py-3 text-sm font-poppins shadow-lg transition duration-200" role="status" aria-live="polite" data-dismiss-after="3000">
+                {{ session('success') }}
             </div>
         @endif
 
