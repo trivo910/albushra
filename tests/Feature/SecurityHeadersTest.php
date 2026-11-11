@@ -18,5 +18,7 @@ class SecurityHeadersTest extends TestCase
         $this->assertStringContainsString('https://www.google-analytics.com', $csp);
         $this->assertStringContainsString('https://*.google-analytics.com', $csp);
         $this->assertStringContainsString('https://analytics.google.com', $csp);
+        $this->assertStringContainsString('https://www.google.com/recaptcha/', $csp);
+        $this->assertStringContainsString('https://www.gstatic.com/recaptcha/', $csp);
     }
 }

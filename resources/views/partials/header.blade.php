@@ -123,6 +123,7 @@
             <form method="POST" action="{{ route('contact.store') }}" class="mt-5 space-y-4">
                 @csrf
                 <input type="hidden" name="_quote_form" value="1">
+                @include('partials.recaptcha', ['action' => 'contact'])
                 <div style="position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden;" aria-hidden="true">
                     <label for="quote-website">Leave this field blank</label>
                     <input type="text" id="quote-website" name="website" tabindex="-1" autocomplete="off">

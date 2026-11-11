@@ -184,6 +184,7 @@
                         <form action="{{ route('packages.review.store', $package) }}" method="POST" class="space-y-4 p-6 rounded-xl" style="background: var(--p-light-grey);">
                             @csrf
                             @include('partials.honeypot')
+                            @include('partials.recaptcha', ['action' => 'review'])
                             <h3 class="font-poppins font-semibold text-base" style="color: var(--p-navy);">Share Your Experience</h3>
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                 <div>
@@ -257,6 +258,7 @@
                     <form method="POST" action="{{ route('packages.enquire', $package) }}" class="space-y-3">
                         @csrf
                         @include('partials.honeypot')
+                        @include('partials.recaptcha', ['action' => 'package_enquiry'])
                         <div>
                             <input type="text" name="name" value="{{ old('name') }}" placeholder="Your Name*" required class="field-input-p">
                         </div>

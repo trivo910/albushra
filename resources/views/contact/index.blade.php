@@ -215,6 +215,7 @@
                 @csrf
 
                 @include('partials.honeypot')
+                @include('partials.recaptcha', ['action' => 'contact'])
 
 
                 {{-- Name --}}

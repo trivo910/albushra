@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Concerns;
 
+use App\Services\RecaptchaVerifier;
 use Illuminate\Http\Request;
 
 trait GuardsAgainstSpamBots
@@ -14,5 +15,13 @@ trait GuardsAgainstSpamBots
     private function isSpamSubmission(Request $request): bool
     {
         return $request->filled('website');
+    }
+
+    private function hasValidRecaptcha(Request $request, string $action): bool
+    {
+        return app(RecaptchaVerifier::class)->verify(
+            $request->input('recaptcha_token'),
+            $action,
+        );
     }
 }

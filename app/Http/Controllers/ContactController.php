@@ -19,13 +19,24 @@ class ContactController extends Controller
 
     public function store(StoreEnquiryRequest $request): RedirectResponse
     {
-        if (! $this->isSpamSubmission($request)) {
-            Enquiry::create($request->validated() + [
-                'type' => 'contact',
-                'status' => 'new',
-            ]);
+        if ($this->isSpamSubmission($request)) {
+            return $this->successRedirect($request);
         }
 
+        if (! $this->hasValidRecaptcha($request, 'contact')) {
+            return back()->withErrors(['recaptcha' => 'Please verify your submission and try again.'])->withInput();
+        }
+
+        Enquiry::create($request->validated() + [
+            'type' => 'contact',
+            'status' => 'new',
+        ]);
+
+        return $this->successRedirect($request);
+    }
+
+    private function successRedirect(StoreEnquiryRequest $request): RedirectResponse
+    {
         if ($request->boolean('_hajj_2027_enquiry')) {
             return back()
                 ->with('success', 'Thank you! Our team will contact you about Hajj 2027 shortly.')

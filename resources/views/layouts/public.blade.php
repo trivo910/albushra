@@ -4,6 +4,49 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     @include('partials.seo')
+    @if (config('services.recaptcha.enabled') && config('services.recaptcha.site_key'))
+        <script src="https://www.google.com/recaptcha/api.js?render={{ urlencode(config('services.recaptcha.site_key')) }}" async defer></script>
+        <script nonce="{{ request()->attributes->get('cspNonce') }}">
+            document.querySelectorAll('input[name="recaptcha_token"]').forEach((tokenInput) => {
+                const form = tokenInput.form;
+
+                if (!form) {
+                    return;
+                }
+
+                form.addEventListener('submit', async (event) => {
+                    if (form.dataset.recaptchaSubmitting === 'true') {
+                        delete form.dataset.recaptchaSubmitting;
+                        return;
+                    }
+
+                    event.preventDefault();
+                    const error = form.querySelector('[data-recaptcha-error]');
+                    if (error) error.hidden = true;
+
+                    try {
+                        if (!window.grecaptcha) {
+                            throw new Error('reCAPTCHA is not available');
+                        }
+
+                        const action = tokenInput.dataset.recaptchaAction;
+                        const token = await new Promise((resolve, reject) => {
+                            window.grecaptcha.ready(() => {
+                                window.grecaptcha.execute(@json(config('services.recaptcha.site_key')), { action })
+                                    .then(resolve, reject);
+                            });
+                        });
+
+                        tokenInput.value = token;
+                        form.dataset.recaptchaSubmitting = 'true';
+                        form.requestSubmit(event.submitter || undefined);
+                    } catch {
+                        if (error) error.hidden = false;
+                    }
+                });
+            });
+        </script>
+    @endif
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <!-- <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet"> -->

@@ -18,6 +18,10 @@ class ReviewController extends Controller
             return back();
         }
 
+        if (! $this->hasValidRecaptcha($request, 'review')) {
+            return back()->withErrors(['recaptcha' => 'Please verify your submission and try again.'])->withInput();
+        }
+
         // Auto-approve: every customer review is published immediately. The
         // Review model's 'created' event will recalculate the package's
         // rating/rating_count automatically.

@@ -55,13 +55,19 @@ class PackageController extends Controller
 
     public function enquire(StoreEnquiryRequest $request, Package $package): RedirectResponse
     {
-        if (! $this->isSpamSubmission($request)) {
-            Enquiry::create($request->validated() + [
-                'package_id' => $package->id,
-                'type' => 'booking',
-                'status' => 'new',
-            ]);
+        if ($this->isSpamSubmission($request)) {
+            return back()->with('success', 'Thank you! Your enquiry has been received — our team will contact you shortly.');
         }
+
+        if (! $this->hasValidRecaptcha($request, 'package_enquiry')) {
+            return back()->withErrors(['recaptcha' => 'Please verify your submission and try again.'])->withInput();
+        }
+
+        Enquiry::create($request->validated() + [
+            'package_id' => $package->id,
+            'type' => 'booking',
+            'status' => 'new',
+        ]);
 
         return back()->with('success', 'Thank you! Your enquiry has been received — our team will contact you shortly.');
     }
