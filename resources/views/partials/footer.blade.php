@@ -6,7 +6,7 @@
         : (file_exists(public_path('images/al-bushra-logo.png')) ? asset('images/al-bushra-logo.png') : null);
     $__hasLogo = !empty($__logoUrl);
 @endphp
-<footer class="font-poppins" style="background: #441461; color: #c7d0dc;">
+<footer class="font-poppins" style="background: #002372; color: #c7d0dc;">
   <div class="container-p py-10 sm:py-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10">
         <div>
             <a href="{{ route('home') }}" class="inline-flex items-center mb-3" aria-label="{{ $__settings->site_name ?? config('app.name') }}">
@@ -16,7 +16,7 @@
                     <div class="text-lg font-bold text-white">{{ $__settings->site_name ?? config('app.name') }}</div>
                 @endif
             </a>
-            <p class="text-sm leading-relaxed mb-5" style="color: #e4e5e7;">
+            <p class="text-sm leading-relaxed mb-5" style="color: #e4e5e7; font-size: 16px;">
                 Your trusted companion on the most sacred journeys of your life — Hajj and Umrah, handled with sincerity and care.
             </p>
             <div class="flex items-center gap-3">
@@ -49,7 +49,7 @@
 
         <div>
             <div class="text-white font-semibold mb-4">Quick Links</div>
-            <ul class="space-y-2.5 text-sm" style="color: #93a0b3;">
+            <ul class="space-y-2.5 text-sm" style="color: #93a0b3; font-size: 16px;">
                 <li><a href="{{ route('content.show', 'about-us') }}" class="hover:text-white">About Us</a></li>
                 <li><a href="{{ route('blog.index') }}" class="hover:text-white">Blog</a></li>
                 <li><a href="{{ route('contact.index') }}" class="hover:text-white">Contact Us</a></li>
@@ -60,21 +60,21 @@
 
         <div>
             <div class="text-white font-semibold mb-4">Trending Packages</div>
-            <ul class="space-y-2.5 text-sm" style="color: #93a0b3;">
+            <ul class="space-y-2.5 text-sm" style="color: #93a0b3; font-size: 16px;">
                 @forelse ($__trending as $trend)
                     <li><a href="{{ route('packages.show', $trend) }}" class="hover:text-white">{{ $trend->title }}</a></li>
                 @empty
                     <li>No packages yet</li>
                 @endforelse
             </ul>
-            <a href="{{ route('hajj-packages.bangalore-2027') }}" class="inline-block mt-4 text-sm hover:text-white">
+            <a href="{{ route('hajj-packages.bangalore-2027') }}" class="inline-block mt-4 text-sm hover:text-white" style="color: #93a0b3; font-size: 16px;">
                 Hajj packages from Bangalore 2027
             </a>
         </div>
 
         <div>
             <div class="text-white font-semibold mb-4">Contact Information</div>
-            <ul class="space-y-3 text-sm" style="color: #93a0b3;">
+            <ul class="space-y-3 text-sm" style="color: #93a0b3; font-size: 16px;">
                 @if ($__settings->address)
                     @php
                         $__addressText = trim(preg_replace('/\s+/', ' ', $__settings->address));
@@ -106,8 +106,8 @@
     </div>
 
     <div style="border-top: 1px solid rgba(255,255,255,0.1);">
-        <div class="container-p py-5 text-xs text-center sm:text-left" style="color: #7c879a;">
-            {{ $__settings->site_name ?? config('app.name') }} &copy; All Rights Reserved {{ date('Y') }}
+        <div class="container-p py-5 text-xs text-center sm:text-left" style="color: #ffffff; font-size: 16px;">
+            © 2026 · Design By <a href="https://www.trivo.in/" target="_blank" rel="noopener">Trivo</a> · All Right Reserved.
         </div>
     </div>
 </footer>
